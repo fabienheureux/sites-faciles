@@ -1,3 +1,6 @@
+from content_manager.abstract import SitesFacilesBasePage
+from content_manager.constants import LIMITED_RICHTEXTFIELD_FEATURES
+from content_manager.models import Tag
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -27,9 +30,6 @@ from wagtail.snippets.models import register_snippet
 
 from blog.blocks import COLOPHON_BLOCKS
 from blog.managers import CategoryManager
-from content_manager.abstract import SitesFacilesBasePage
-from content_manager.constants import LIMITED_RICHTEXTFIELD_FEATURES
-from content_manager.models import Tag
 
 User = get_user_model()
 

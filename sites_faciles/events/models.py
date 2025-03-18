@@ -1,3 +1,6 @@
+from blog.models import Category, CategorySerializer, Organization, Person, PersonSerializer
+from content_manager.abstract import SitesFacilesBasePage
+from content_manager.models import CmsDsfrConfig, Tag
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -16,9 +19,6 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.models.i18n import Locale
 from wagtail.search import index
 
-from blog.models import Category, CategorySerializer, Organization, Person, PersonSerializer
-from content_manager.abstract import SitesFacilesBasePage
-from content_manager.models import CmsDsfrConfig, Tag
 from events.forms import EventSearchForm
 
 

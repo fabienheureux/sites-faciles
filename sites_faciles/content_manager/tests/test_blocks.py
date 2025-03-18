@@ -1,13 +1,13 @@
+from blog.models import BlogEntryPage, BlogIndexPage
 from django.contrib.auth import get_user_model
 from django.test import override_settings
+from events.models import EventEntryPage, EventsIndexPage
 from wagtail.models import Page
 from wagtail.rich_text import RichText
 from wagtail.test.utils import WagtailPageTestCase
 
-from blog.models import BlogEntryPage, BlogIndexPage
 from content_manager.models import ContentPage
 from content_manager.utils import import_image
-from events.models import EventEntryPage, EventsIndexPage
 
 # Tests for blocks that have a value_class
 
