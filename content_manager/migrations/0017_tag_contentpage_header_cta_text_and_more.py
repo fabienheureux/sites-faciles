@@ -527,7 +527,7 @@ class Migration(migrations.Migration):
                     modelcluster.fields.ParentalKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="contentpage_tags",
-                        to="content_manager.contentpage",
+                        to="sites_faciles_content_manager.contentpage",
                     ),
                 ),
                 (
@@ -549,7 +549,7 @@ class Migration(migrations.Migration):
             field=modelcluster.contrib.taggit.ClusterTaggableManager(
                 blank=True,
                 help_text="A comma-separated list of tags.",
-                through="content_manager.TagContentPage",
+                through="sites_faciles_content_manager.TagContentPage",
                 to="taggit.Tag",
                 verbose_name="Tags",
             ),

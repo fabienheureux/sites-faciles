@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                     modelcluster.fields.ParentalKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="categories",
-                        to="content_manager.megamenu",
+                        to="sites_faciles_content_manager.megamenu",
                     ),
                 ),
             ],

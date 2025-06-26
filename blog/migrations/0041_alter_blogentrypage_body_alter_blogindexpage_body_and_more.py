@@ -301,7 +301,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    31: ("content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
+                    31: ("sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     32: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -694,7 +694,7 @@ class Migration(migrations.Migration):
                     ),
                     85: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     86: (
-                        "content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -715,7 +715,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     91: (
-                        "content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -854,7 +854,7 @@ class Migration(migrations.Migration):
                     112: (
                         "wagtail.blocks.PageChooserBlock",
                         (),
-                        {"label": "Blog", "page_type": ["blog.BlogIndexPage"]},
+                        {"label": "Blog", "page_type": ["sites_faciles_blog.BlogIndexPage"]},
                     ),
                     113: (
                         "wagtail.blocks.IntegerBlock",
@@ -916,7 +916,7 @@ class Migration(migrations.Migration):
                     120: (
                         "wagtail.blocks.PageChooserBlock",
                         (),
-                        {"label": "Event calendar", "page_type": ["events.EventsIndexPage"]},
+                        {"label": "Event calendar", "page_type": ["sites_faciles_events.EventsIndexPage"]},
                     ),
                     121: (
                         "wagtail.blocks.StructBlock",
@@ -1724,7 +1724,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    31: ("content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
+                    31: ("sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     32: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -2117,7 +2117,7 @@ class Migration(migrations.Migration):
                     ),
                     85: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     86: (
-                        "content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -2138,7 +2138,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     91: (
-                        "content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -2277,7 +2277,7 @@ class Migration(migrations.Migration):
                     112: (
                         "wagtail.blocks.PageChooserBlock",
                         (),
-                        {"label": "Blog", "page_type": ["blog.BlogIndexPage"]},
+                        {"label": "Blog", "page_type": ["sites_faciles_blog.BlogIndexPage"]},
                     ),
                     113: (
                         "wagtail.blocks.IntegerBlock",
@@ -2339,7 +2339,7 @@ class Migration(migrations.Migration):
                     120: (
                         "wagtail.blocks.PageChooserBlock",
                         (),
-                        {"label": "Event calendar", "page_type": ["events.EventsIndexPage"]},
+                        {"label": "Event calendar", "page_type": ["sites_faciles_events.EventsIndexPage"]},
                     ),
                     121: (
                         "wagtail.blocks.StructBlock",
@@ -3228,7 +3228,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    42: ("content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
+                    42: ("sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     43: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -3601,7 +3601,7 @@ class Migration(migrations.Migration):
                     95: (
                         "wagtail.blocks.PageChooserBlock",
                         (),
-                        {"label": "Blog", "page_type": ["blog.BlogIndexPage"]},
+                        {"label": "Blog", "page_type": ["sites_faciles_blog.BlogIndexPage"]},
                     ),
                     96: (
                         "wagtail.blocks.IntegerBlock",
@@ -3663,7 +3663,7 @@ class Migration(migrations.Migration):
                     103: (
                         "wagtail.blocks.PageChooserBlock",
                         (),
-                        {"label": "Event calendar", "page_type": ["events.EventsIndexPage"]},
+                        {"label": "Event calendar", "page_type": ["sites_faciles_events.EventsIndexPage"]},
                     ),
                     104: (
                         "wagtail.blocks.StructBlock",
@@ -3788,7 +3788,7 @@ class Migration(migrations.Migration):
                     ),
                     124: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     125: (
-                        "content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -3802,7 +3802,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     127: (
-                        "content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
