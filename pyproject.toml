@@ -19,10 +19,10 @@ dependencies = [
     "django-dsfr>=2.4.0",
     "django>=5.2.3",
     "wagtail>=7.0.1",
-    "psycopg2-binary>=2.9.10",
+    # "psycopg2-binary>=2.9.10",
     "python-dotenv>=1.1.0",
-    "dj-database-url>=3.0.0",
-    "gunicorn>=23.0.0",
+    # "dj-database-url>=3.0.0",
+    # "gunicorn>=23.0.0",
     "dj-static>=0.0.6",
     "wagtailmenus>=4.0.3",
     "wagtail-modeladmin>=2.2.0",
@@ -34,8 +34,8 @@ dependencies = [
     "django-taggit>=6.1.0",
     "wagtail-localize>=1.12.1",
     "icalendar>=6.3.1",
-    "faker>=37.4.0",
-    "rust-just>=1.40.0",
+    # "faker>=37.4.0",
+    # "rust-just>=1.40.0",
     "mozilla-django-oidc>=4.0.1",
     "wagtail-honeypot @ git+https://github.com/Luzzzi/wagtail-honeypot@feature/i18n-required-honeypot",
 ]
@@ -129,3 +129,9 @@ ignore = ["E203", "E266"]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
+
+[tool.flit.module]
+name = "sites_faciles"
+
+[tool.flit.sdist]
+exclude = ["**/tests", "**/tests.py"]
