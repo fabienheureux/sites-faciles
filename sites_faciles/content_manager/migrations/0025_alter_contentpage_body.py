@@ -440,7 +440,9 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "top_detail_icon",
-                                    content_manager.blocks.IconPickerBlock(label="Top detail: icon", required=False),
+                                    sites_faciles.content_manager.blocks.IconPickerBlock(
+                                        label="Top detail: icon", required=False
+                                    ),
                                 ),
                                 (
                                     "top_detail_badges_tags",
@@ -585,7 +587,7 @@ class Migration(migrations.Migration):
                                                                     ),
                                                                     (
                                                                         "icon_class",
-                                                                        content_manager.blocks.IconPickerBlock(
+                                                                        sites_faciles.content_manager.blocks.IconPickerBlock(
                                                                             label="Icon", required=False
                                                                         ),
                                                                     ),
@@ -636,7 +638,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "bottom_detail_icon",
-                                    content_manager.blocks.IconPickerBlock(
+                                    sites_faciles.content_manager.blocks.IconPickerBlock(
                                         label="Bottom detail: icon", required=False
                                     ),
                                 ),
@@ -856,7 +858,9 @@ class Migration(migrations.Migration):
                                             ),
                                             (
                                                 "icon_class",
-                                                content_manager.blocks.IconPickerBlock(label="Icon", required=False),
+                                                sites_faciles.content_manager.blocks.IconPickerBlock(
+                                                    label="Icon", required=False
+                                                ),
                                             ),
                                             (
                                                 "link",
@@ -1362,7 +1366,7 @@ class Migration(migrations.Migration):
                                                         ),
                                                         (
                                                             "top_detail_icon",
-                                                            content_manager.blocks.IconPickerBlock(
+                                                            sites_faciles.content_manager.blocks.IconPickerBlock(
                                                                 label="Top detail: icon", required=False
                                                             ),
                                                         ),
@@ -1616,7 +1620,7 @@ class Migration(migrations.Migration):
                                                                                             ),
                                                                                             (
                                                                                                 "icon_class",
-                                                                                                content_manager.blocks.IconPickerBlock(
+                                                                                                sites_faciles.content_manager.blocks.IconPickerBlock(
                                                                                                     label="Icon",
                                                                                                     required=False,
                                                                                                 ),
@@ -1668,7 +1672,7 @@ class Migration(migrations.Migration):
                                                         ),
                                                         (
                                                             "bottom_detail_icon",
-                                                            content_manager.blocks.IconPickerBlock(
+                                                            sites_faciles.content_manager.blocks.IconPickerBlock(
                                                                 label="Bottom detail: icon", required=False
                                                             ),
                                                         ),
@@ -2326,7 +2330,7 @@ class Migration(migrations.Migration):
                                                         ),
                                                         (
                                                             "top_detail_icon",
-                                                            content_manager.blocks.IconPickerBlock(
+                                                            sites_faciles.content_manager.blocks.IconPickerBlock(
                                                                 label="Top detail: icon", required=False
                                                             ),
                                                         ),
@@ -2580,7 +2584,7 @@ class Migration(migrations.Migration):
                                                                                             ),
                                                                                             (
                                                                                                 "icon_class",
-                                                                                                content_manager.blocks.IconPickerBlock(
+                                                                                                sites_faciles.content_manager.blocks.IconPickerBlock(
                                                                                                     label="Icon",
                                                                                                     required=False,
                                                                                                 ),
@@ -2632,7 +2636,7 @@ class Migration(migrations.Migration):
                                                         ),
                                                         (
                                                             "bottom_detail_icon",
-                                                            content_manager.blocks.IconPickerBlock(
+                                                            sites_faciles.content_manager.blocks.IconPickerBlock(
                                                                 label="Bottom detail: icon", required=False
                                                             ),
                                                         ),
