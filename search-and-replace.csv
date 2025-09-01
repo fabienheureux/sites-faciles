@@ -42,19 +42,15 @@ import content_manager,import sites_faciles.content_manager,**/migrations
 import blog,import sites_faciles.blog,**/migrations
 
 content_manager.blocks.IconPickerBlock,sites_faciles.content_manager.blocks.IconPickerBlock,**/migrations
-content_manager.models.MonospaceField,sites_faciles_content_manager.models.MonospaceField,*
+content_manager.models.sites_faciles.content_manager,sites_faciles_content_manager.models.sites_faciles.content_manager,*
 
 "content_manager\.MegaMenu,"sites_faciles_content_manager.MegaMenu,*
 "blog.Person","sites_faciles_blog.Person",*
 "blog.Category","sites_faciles_blog.Category",*
 "blog.BlogEntryPage","sites_faciles_blog.BlogEntryPage",*
 "blog.BlogIndexPage","sites_faciles_blog.BlogIndexPage",*
+"events.EventEntryPage,"sites_faciles_events.EventEntryPage,*
 
 "events.EventsIndexPage,"sites_faciles_events.EventsIndexPage,*
 
 "content_manager.ContentPage,"sites_faciles_content_manager.ContentPage,*
-
-subpage_types = \["blog,subpage_types = \["sites_faciles_blog,*
-subpage_types = \["content_manager.,subpage_types = \["sites_faciles_content_manager.,*
-subpage_types = \["events,subpage_types = \["sites_faciles_events,*
-parent_page_types = \["events,parent_page_types = \["sites_faciles_events,*
