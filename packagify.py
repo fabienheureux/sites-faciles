@@ -11,7 +11,6 @@ from __future__ import annotations
 import argparse
 import concurrent.futures
 import logging
-import pathlib
 import re
 import shutil
 import subprocess
@@ -20,7 +19,6 @@ from pathlib import Path
 from typing import Any
 
 import yaml
-
 
 # -- Helpers ------------------------------------------------------------------
 
@@ -99,9 +97,7 @@ def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
         else:
             expanded.append(rule)
 
-    logging.info(
-        "🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded)
-    )
+    logging.info("🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded))
     return expanded
 
 
@@ -257,15 +253,11 @@ def main() -> None:
             else:
                 scope_name: str | None = rule.get("scope")
                 if not scope_name:
-                    logging.warning(
-                        "Rule missing both 'path_glob' and 'scope'; skipping: %s", rule
-                    )
+                    logging.warning("Rule missing both 'path_glob' and 'scope'; skipping: %s", rule)
                     continue
                 file_glob = scopes.get(scope_name)
                 if not file_glob:
-                    logging.warning(
-                        "Unknown scope %r in rule; skipping: %s", scope_name, rule
-                    )
+                    logging.warning("Unknown scope %r in rule; skipping: %s", scope_name, rule)
                     continue
                 files = git_ls_files(file_glob)
 
@@ -274,11 +266,7 @@ def main() -> None:
                 if not is_text_file(path, text_exts):
                     continue
                 scanned_files += 1
-                futures.append(
-                    executor.submit(
-                        apply_rule_to_file, path, rule, args.dry_run or False
-                    )
-                )
+                futures.append(executor.submit(apply_rule_to_file, path, rule, args.dry_run or False))
 
         for future in concurrent.futures.as_completed(futures):
             try:
