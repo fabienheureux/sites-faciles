@@ -41,7 +41,7 @@ template="forms\/,to="sites_faciles/forms/,**/templates
 import content_manager,import sites_faciles.content_manager,**/migrations
 import blog,import sites_faciles.blog,**/migrations
 
-content_manager.blocks.IconPickerBlock,sites_faciles_content_manager.blocks.IconPickerBlock,**/migrations
+content_manager.blocks.IconPickerBlock,sites_faciles.content_manager.blocks.IconPickerBlock,**/migrations
 
 "content_manager\.MegaMenu,"sites_faciles_content_manager.MegaMenu,*
 "blog.Person","sites_faciles_blog.Person",*
