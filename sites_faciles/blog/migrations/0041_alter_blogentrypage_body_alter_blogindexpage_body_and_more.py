@@ -879,7 +879,7 @@ class Migration(migrations.Migration):
                     ),
                     116: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Person",),
+                        ("sites_faciles_blog.Person",),
                         {"label": "Filter by author", "required": False},
                     ),
                     117: (
@@ -1029,7 +1029,7 @@ class Migration(migrations.Migration):
                     ),
                     134: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Person",),
+                        ("sites_faciles_blog.Person",),
                         {
                             "help_text": "Optional, all values can be manually specified or overriden below",
                             "label": "Person",
@@ -2302,7 +2302,7 @@ class Migration(migrations.Migration):
                     ),
                     116: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Person",),
+                        ("sites_faciles_blog.Person",),
                         {"label": "Filter by author", "required": False},
                     ),
                     117: (
@@ -2452,7 +2452,7 @@ class Migration(migrations.Migration):
                     ),
                     134: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Person",),
+                        ("sites_faciles_blog.Person",),
                         {
                             "help_text": "Optional, all values can be manually specified or overriden below",
                             "label": "Person",
@@ -3626,7 +3626,7 @@ class Migration(migrations.Migration):
                     ),
                     99: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Person",),
+                        ("sites_faciles_blog.Person",),
                         {"label": "Filter by author", "required": False},
                     ),
                     100: (
@@ -3877,7 +3877,7 @@ class Migration(migrations.Migration):
                     ),
                     137: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Person",),
+                        ("sites_faciles_blog.Person",),
                         {
                             "help_text": "Optional, all values can be manually specified or overriden below",
                             "label": "Person",

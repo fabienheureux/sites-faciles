@@ -953,7 +953,7 @@ class Migration(migrations.Migration):
                     ),
                     114: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Person",),
+                        ("sites_faciles_blog.Person",),
                         {"label": "Filter by author", "required": False},
                     ),
                     115: (

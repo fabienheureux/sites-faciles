@@ -827,7 +827,7 @@ class VerticalContactCardStructValue(blocks.StructValue):
 
 class VerticalContactCardBlock(blocks.StructBlock):
     contact = SnippetChooserBlock(
-        "blog.Person",
+        "sites_faciles_blog.Person",
         label=_("Person"),
         help_text=_("Optional, all values can be manually specified or overriden below"),
         required=False,
@@ -945,7 +945,7 @@ class BlogRecentEntriesBlock(blocks.StructBlock):
     )
     category_filter = SnippetChooserBlock("blog.Category", label=_("Filter by category"), required=False)
     tag_filter = SnippetChooserBlock("content_manager.Tag", label=_("Filter by tag"), required=False)
-    author_filter = SnippetChooserBlock("blog.Person", label=_("Filter by author"), required=False)
+    author_filter = SnippetChooserBlock("sites_faciles_blog.Person", label=_("Filter by author"), required=False)
     source_filter = SnippetChooserBlock(
         "blog.Organization",
         label=_("Filter by source"),
@@ -975,7 +975,7 @@ class EventsRecentEntriesBlock(blocks.StructBlock):
     )
     category_filter = SnippetChooserBlock("blog.Category", label=_("Filter by category"), required=False)
     tag_filter = SnippetChooserBlock("content_manager.Tag", label=_("Filter by tag"), required=False)
-    author_filter = SnippetChooserBlock("blog.Person", label=_("Filter by author"), required=False)
+    author_filter = SnippetChooserBlock("sites_faciles_blog.Person", label=_("Filter by author"), required=False)
     source_filter = SnippetChooserBlock(
         "blog.Organization",
         label=_("Filter by source"),

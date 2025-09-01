@@ -42,3 +42,10 @@ import content_manager,import sites_faciles.content_manager,**/migrations
 import blog,import sites_faciles.blog,**/migrations
 
 content_manager.blocks.IconPickerBlock,sites_faciles_content_manager.blocks.IconPickerBlock,**/migrations
+
+"content_manager\.MegaMenu,"sites_faciles_content_manager.MegaMenu,*
+"blog.Person","sites_faciles_blog.Person",*
+subpage_types = ["blog,subpage_types = ["sites_faciles_blog,*
+subpage_types = ["content_manager.,subpage_types = ["sites_faciles_content_manager.,*
+subpage_types = ["events,subpage_types = ["sites_faciles_events,*
+parent_page_types = ["events,parent_page_types = ["sites_faciles_events,*

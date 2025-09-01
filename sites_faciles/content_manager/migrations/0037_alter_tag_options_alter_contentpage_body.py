@@ -2925,7 +2925,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "author_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Person", label="Filter by author", required=False
+                                                                "sites_faciles_blog.Person", label="Filter by author", required=False
                                                             ),
                                                         ),
                                                         (
@@ -5075,7 +5075,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "author_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Person",
+                                                                                        "sites_faciles_blog.Person",
                                                                                         label="Filter by author",
                                                                                         required=False,
                                                                                     ),
@@ -7104,7 +7104,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "author_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Person", label="Filter by author", required=False
+                                                                "sites_faciles_blog.Person", label="Filter by author", required=False
                                                             ),
                                                         ),
                                                         (
@@ -8063,7 +8063,7 @@ class Migration(migrations.Migration):
                                 (
                                     "author_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "blog.Person", label="Filter by author", required=False
+                                        "sites_faciles_blog.Person", label="Filter by author", required=False
                                     ),
                                 ),
                                 (
