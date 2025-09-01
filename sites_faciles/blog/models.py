@@ -523,7 +523,7 @@ class BlogEntryPage(SitesFacilesBasePage):
         "sites_faciles_blog.Person", blank=True, help_text=_("Author entries can be created in Snippets > Persons")
     )
 
-    parent_page_types = ["blog.BlogIndexPage"]
+    parent_page_types = ["sites_faciles_blog.BlogIndexPage"]
     subpage_types = []
 
     settings_panels = SitesFacilesBasePage.settings_panels + [

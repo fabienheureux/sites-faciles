@@ -47,6 +47,7 @@ content_manager.blocks.IconPickerBlock,sites_faciles_content_manager.blocks.Icon
 "blog.Person","sites_faciles_blog.Person",*
 "blog.Category","sites_faciles_blog.Category",*
 "blog.BlogEntryPage","sites_faciles_blog.BlogEntryPage",*
+"blog.BlogIndexPage","sites_faciles_blog.BlogIndexPage",*
 
 "events.EventsIndexPage,"sites_faciles_events.EventsIndexPage,*
 
