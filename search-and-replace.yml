@@ -1,0 +1,35 @@
+# Define apps (these will replace {app} in rules)
+apps:
+  - blog
+  - events
+  - forms
+  - content_manager
+  - config
+
+# Define named scopes
+scopes:
+  migrations: "**/migrations/**"
+  templates: "**/templates/**"
+  all: "**/*"
+
+# Rules with {app} placeholders
+rules:
+  - search: 'to="{app}\.'
+    replace: 'to="sites_faciles_{app}.'
+    scope: migrations
+
+  - search: 'through="{app}\.'
+    replace: 'through="sites_faciles_{app}.'
+    scope: migrations
+
+  - search: 'from {app}\.'
+    replace: 'from sites_faciles.{app}.'
+    scope: all
+
+  - search: 'template="{app}/'
+    replace: 'template="sites_faciles/{app}/'
+    scope: templates
+
+  - search: 'import {app}'
+    replace: 'import sites_faciles.{app}'
+    scope: migrations
