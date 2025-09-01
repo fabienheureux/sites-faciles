@@ -50,7 +50,7 @@ class EventsIndexPage(RoutablePageMixin, SitesFacilesBasePage):
         ),
     ]
 
-    subpage_types = ["events.EventEntryPage"]
+    subpage_types = ["sites_faciles_events.EventEntryPage"]
 
     class Meta:
         verbose_name = _("Event calendar index")
@@ -274,7 +274,7 @@ class EventEntryPage(RoutablePageMixin, SitesFacilesBasePage):
     tags = ClusterTaggableManager(through="TagEventEntryPage", blank=True)
 
     event_categories = ParentalManyToManyField(
-        "blog.Category",
+        "sites_faciles_blog.Category",
         through="CategoryEventEntryPage",
         blank=True,
         verbose_name=_("Categories"),
@@ -297,7 +297,7 @@ class EventEntryPage(RoutablePageMixin, SitesFacilesBasePage):
         "sites_faciles_blog.Person", blank=True, help_text=_("Author entries can be created in Snippets > Persons")
     )
 
-    parent_page_types = ["events.EventsIndexPage"]
+    parent_page_types = ["sites_faciles_events.EventsIndexPage"]
     subpage_types = []
 
     search_fields = SitesFacilesBasePage.search_fields + [

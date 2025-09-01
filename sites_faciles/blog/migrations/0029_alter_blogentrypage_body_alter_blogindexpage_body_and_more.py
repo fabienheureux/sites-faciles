@@ -2905,7 +2905,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -2970,7 +2970,7 @@ class Migration(migrations.Migration):
                                                             "index_page",
                                                             wagtail.blocks.PageChooserBlock(
                                                                 label="Event calendar",
-                                                                page_type=["events.EventsIndexPage"],
+                                                                page_type=["sites_faciles_events.EventsIndexPage"],
                                                             ),
                                                         ),
                                                         (
@@ -2986,7 +2986,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -5136,7 +5136,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
@@ -5208,7 +5208,7 @@ class Migration(migrations.Migration):
                                                                                     wagtail.blocks.PageChooserBlock(
                                                                                         label="Event calendar",
                                                                                         page_type=[
-                                                                                            "events.EventsIndexPage"
+                                                                                            "sites_faciles_events.EventsIndexPage"
                                                                                         ],
                                                                                     ),
                                                                                 ),
@@ -5225,7 +5225,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
@@ -7254,7 +7254,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -7319,7 +7319,7 @@ class Migration(migrations.Migration):
                                                             "index_page",
                                                             wagtail.blocks.PageChooserBlock(
                                                                 label="Event calendar",
-                                                                page_type=["events.EventsIndexPage"],
+                                                                page_type=["sites_faciles_events.EventsIndexPage"],
                                                             ),
                                                         ),
                                                         (
@@ -7335,7 +7335,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -8298,7 +8298,7 @@ class Migration(migrations.Migration):
                                 (
                                     "category_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "blog.Category", label="Filter by category", required=False
+                                        "sites_faciles_blog.Category", label="Filter by category", required=False
                                     ),
                                 ),
                                 (
@@ -8353,7 +8353,7 @@ class Migration(migrations.Migration):
                                 (
                                     "index_page",
                                     wagtail.blocks.PageChooserBlock(
-                                        label="Event calendar", page_type=["events.EventsIndexPage"]
+                                        label="Event calendar", page_type=["sites_faciles_events.EventsIndexPage"]
                                     ),
                                 ),
                                 (
@@ -8365,7 +8365,7 @@ class Migration(migrations.Migration):
                                 (
                                     "category_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "blog.Category", label="Filter by category", required=False
+                                        "sites_faciles_blog.Category", label="Filter by category", required=False
                                     ),
                                 ),
                                 (
@@ -11298,7 +11298,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -11363,7 +11363,7 @@ class Migration(migrations.Migration):
                                                             "index_page",
                                                             wagtail.blocks.PageChooserBlock(
                                                                 label="Event calendar",
-                                                                page_type=["events.EventsIndexPage"],
+                                                                page_type=["sites_faciles_events.EventsIndexPage"],
                                                             ),
                                                         ),
                                                         (
@@ -11379,7 +11379,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -13529,7 +13529,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
@@ -13601,7 +13601,7 @@ class Migration(migrations.Migration):
                                                                                     wagtail.blocks.PageChooserBlock(
                                                                                         label="Event calendar",
                                                                                         page_type=[
-                                                                                            "events.EventsIndexPage"
+                                                                                            "sites_faciles_events.EventsIndexPage"
                                                                                         ],
                                                                                     ),
                                                                                 ),
@@ -13618,7 +13618,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
@@ -15647,7 +15647,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -15712,7 +15712,7 @@ class Migration(migrations.Migration):
                                                             "index_page",
                                                             wagtail.blocks.PageChooserBlock(
                                                                 label="Event calendar",
-                                                                page_type=["events.EventsIndexPage"],
+                                                                page_type=["sites_faciles_events.EventsIndexPage"],
                                                             ),
                                                         ),
                                                         (
@@ -15728,7 +15728,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -16691,7 +16691,7 @@ class Migration(migrations.Migration):
                                 (
                                     "category_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "blog.Category", label="Filter by category", required=False
+                                        "sites_faciles_blog.Category", label="Filter by category", required=False
                                     ),
                                 ),
                                 (
@@ -16746,7 +16746,7 @@ class Migration(migrations.Migration):
                                 (
                                     "index_page",
                                     wagtail.blocks.PageChooserBlock(
-                                        label="Event calendar", page_type=["events.EventsIndexPage"]
+                                        label="Event calendar", page_type=["sites_faciles_events.EventsIndexPage"]
                                     ),
                                 ),
                                 (
@@ -16758,7 +16758,7 @@ class Migration(migrations.Migration):
                                 (
                                     "category_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "blog.Category", label="Filter by category", required=False
+                                        "sites_faciles_blog.Category", label="Filter by category", required=False
                                     ),
                                 ),
                                 (
@@ -18180,7 +18180,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -18245,7 +18245,7 @@ class Migration(migrations.Migration):
                                                             "index_page",
                                                             wagtail.blocks.PageChooserBlock(
                                                                 label="Event calendar",
-                                                                page_type=["events.EventsIndexPage"],
+                                                                page_type=["sites_faciles_events.EventsIndexPage"],
                                                             ),
                                                         ),
                                                         (
@@ -18261,7 +18261,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -20411,7 +20411,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
@@ -20483,7 +20483,7 @@ class Migration(migrations.Migration):
                                                                                     wagtail.blocks.PageChooserBlock(
                                                                                         label="Event calendar",
                                                                                         page_type=[
-                                                                                            "events.EventsIndexPage"
+                                                                                            "sites_faciles_events.EventsIndexPage"
                                                                                         ],
                                                                                     ),
                                                                                 ),
@@ -20500,7 +20500,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),

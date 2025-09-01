@@ -922,7 +922,7 @@ class Migration(migrations.Migration):
                     ),
                     121: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Category",),
+                        ("sites_faciles_blog.Category",),
                         {"label": "Filter by category", "required": False},
                     ),
                     122: (
@@ -2451,7 +2451,7 @@ class Migration(migrations.Migration):
                     ),
                     121: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Category",),
+                        ("sites_faciles_blog.Category",),
                         {"label": "Filter by category", "required": False},
                     ),
                     122: (

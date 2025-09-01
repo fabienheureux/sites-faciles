@@ -893,7 +893,7 @@ class Migration(migrations.Migration):
                     ),
                     117: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Category",),
+                        ("sites_faciles_blog.Category",),
                         {"label": "Filter by category", "required": False},
                     ),
                     118: (
@@ -2472,7 +2472,7 @@ class Migration(migrations.Migration):
                     ),
                     117: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Category",),
+                        ("sites_faciles_blog.Category",),
                         {"label": "Filter by category", "required": False},
                     ),
                     118: (
@@ -3977,7 +3977,7 @@ class Migration(migrations.Migration):
                     ),
                     103: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Category",),
+                        ("sites_faciles_blog.Category",),
                         {"label": "Filter by category", "required": False},
                     ),
                     104: (

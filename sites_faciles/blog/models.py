@@ -229,7 +229,7 @@ class BlogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
         ),
     ]
 
-    subpage_types = ["blog.BlogEntryPage"]
+    subpage_types = ["sites_faciles_blog.BlogEntryPage"]
 
     class Meta:
         verbose_name = _("Blog index")

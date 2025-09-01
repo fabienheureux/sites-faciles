@@ -2905,7 +2905,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -5055,7 +5055,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
@@ -7084,7 +7084,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -8047,7 +8047,7 @@ class Migration(migrations.Migration):
                                 (
                                     "category_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "blog.Category", label="Filter by category", required=False
+                                        "sites_faciles_blog.Category", label="Filter by category", required=False
                                     ),
                                 ),
                                 (
@@ -10980,7 +10980,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -13130,7 +13130,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
@@ -15159,7 +15159,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -16122,7 +16122,7 @@ class Migration(migrations.Migration):
                                 (
                                     "category_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "blog.Category", label="Filter by category", required=False
+                                        "sites_faciles_blog.Category", label="Filter by category", required=False
                                     ),
                                 ),
                                 (
@@ -17544,7 +17544,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "category_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "blog.Category",
+                                                                "sites_faciles_blog.Category",
                                                                 label="Filter by category",
                                                                 required=False,
                                                             ),
@@ -19694,7 +19694,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "category_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "blog.Category",
+                                                                                        "sites_faciles_blog.Category",
                                                                                         label="Filter by category",
                                                                                         required=False,
                                                                                     ),
