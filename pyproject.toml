@@ -38,7 +38,6 @@ dependencies = [
     "faker>=37.4.0",
     "rust-just>=1.40.0",
     "mozilla-django-oidc>=4.0.1",
-    "wagtail-honeypot @ git+https://github.com/Luzzzi/wagtail-honeypot@feature/i18n-required-honeypot",
 ]
 
 [dependency-groups]
