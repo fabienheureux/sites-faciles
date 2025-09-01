@@ -6,8 +6,8 @@ from itertools import chain
 
 
 def migrate_obsolete_fields(apps, schema_editor):
-    BlogEntryPage = apps.get_model("blog", "BlogEntryPage")
-    BlogIndexPage = apps.get_model("blog", "BlogIndexPage")
+    BlogEntryPage = apps.get_model("sites_faciles_blog", "BlogEntryPage")
+    BlogIndexPage = apps.get_model("sites_faciles_blog", "BlogIndexPage")
     pages = chain(BlogEntryPage.objects.all(), BlogIndexPage.objects.all())
 
     for page in pages:
@@ -35,7 +35,7 @@ def migrate_obsolete_fields(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("blog", "0045_alter_blogentrypage_body_alter_blogindexpage_body_and_more"),
+        ("sites_faciles_blog", "0045_alter_blogentrypage_body_alter_blogindexpage_body_and_more"),
     ]
 
     operations = [migrations.RunPython(migrate_obsolete_fields)]

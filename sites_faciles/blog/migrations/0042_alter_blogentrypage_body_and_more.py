@@ -7,7 +7,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("blog", "0041_alter_blogentrypage_body_alter_blogindexpage_body_and_more"),
+        ("sites_faciles_blog", "0041_alter_blogentrypage_body_alter_blogindexpage_body_and_more"),
     ]
 
     operations = [
@@ -926,7 +926,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 1),
                                 ("heading_tag", 114),
-                                ("blog", 115),
+                                ("sites_faciles_blog", 115),
                                 ("entries_count", 116),
                                 ("category_filter", 117),
                                 ("tag_filter", 118),
@@ -2505,7 +2505,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 1),
                                 ("heading_tag", 114),
-                                ("blog", 115),
+                                ("sites_faciles_blog", 115),
                                 ("entries_count", 116),
                                 ("category_filter", 117),
                                 ("tag_filter", 118),
@@ -4010,7 +4010,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 24),
                                 ("heading_tag", 100),
-                                ("blog", 101),
+                                ("sites_faciles_blog", 101),
                                 ("entries_count", 102),
                                 ("category_filter", 103),
                                 ("tag_filter", 104),

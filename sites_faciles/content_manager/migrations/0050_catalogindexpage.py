@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content_manager", "0049_alter_contentpage_body"),
+        ("sites_faciles_content_manager", "0049_alter_contentpage_body"),
         ("wagtailcore", "0094_alter_page_locale"),
         ("wagtailimages", "0027_image_description"),
     ]
@@ -1003,7 +1003,7 @@ class Migration(migrations.Migration):
                                     [
                                         ("title", 1),
                                         ("heading_tag", 115),
-                                        ("blog", 116),
+                                        ("sites_faciles_blog", 116),
                                         ("entries_count", 117),
                                         ("category_filter", 118),
                                         ("tag_filter", 119),

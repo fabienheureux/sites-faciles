@@ -6,7 +6,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("content_manager", "0040_cmsdsfrconfig_notice_description_and_more"),
+        ("sites_faciles_content_manager", "0040_cmsdsfrconfig_notice_description_and_more"),
     ]
 
     operations = [
@@ -1008,7 +1008,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 1),
                                 ("heading_tag", 124),
-                                ("blog", 125),
+                                ("sites_faciles_blog", 125),
                                 ("entries_count", 126),
                                 ("category_filter", 127),
                                 ("tag_filter", 128),

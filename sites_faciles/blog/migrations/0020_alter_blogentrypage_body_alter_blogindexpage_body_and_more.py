@@ -12,7 +12,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("blog", "0019_merge_20240618_1446"),
+        ("sites_faciles_blog", "0019_merge_20240618_1446"),
     ]
 
     operations = [

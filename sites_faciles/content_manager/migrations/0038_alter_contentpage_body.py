@@ -13,7 +13,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("content_manager", "0037_alter_tag_options_alter_contentpage_body"),
+        ("sites_faciles_content_manager", "0037_alter_tag_options_alter_contentpage_body"),
     ]
 
     operations = [
@@ -2887,7 +2887,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                         ),
                                                         (
-                                                            "blog",
+                                                            "sites_faciles_blog",
                                                             wagtail.blocks.PageChooserBlock(
                                                                 label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                                             ),
@@ -5115,7 +5115,7 @@ class Migration(migrations.Migration):
                                                                                     ),
                                                                                 ),
                                                                                 (
-                                                                                    "blog",
+                                                                                    "sites_faciles_blog",
                                                                                     wagtail.blocks.PageChooserBlock(
                                                                                         label="Blog",
                                                                                         page_type=[
@@ -7236,7 +7236,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                         ),
                                                         (
-                                                            "blog",
+                                                            "sites_faciles_blog",
                                                             wagtail.blocks.PageChooserBlock(
                                                                 label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                                             ),
@@ -8286,7 +8286,7 @@ class Migration(migrations.Migration):
                                     ),
                                 ),
                                 (
-                                    "blog",
+                                    "sites_faciles_blog",
                                     wagtail.blocks.PageChooserBlock(label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]),
                                 ),
                                 (

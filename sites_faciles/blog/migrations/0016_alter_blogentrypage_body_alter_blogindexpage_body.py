@@ -13,7 +13,7 @@ import sites_faciles.content_manager.blocks
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("blog", "0015_alter_blogentrypage_body_alter_blogindexpage_body"),
+        ("sites_faciles_blog", "0015_alter_blogentrypage_body_alter_blogindexpage_body"),
     ]
 
     operations = [

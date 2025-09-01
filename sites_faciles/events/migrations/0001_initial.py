@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("blog", "0028_alter_blogentrypage_body_alter_blogindexpage_body_and_more"),
+        ("sites_faciles_blog", "0028_alter_blogentrypage_body_alter_blogindexpage_body_and_more"),
         ("taggit", "0006_rename_taggeditem_content_type_object_id_taggit_tagg_content_8fc721_idx"),
         ("wagtailcore", "0093_uploadedfile"),
         ("wagtailimages", "0026_delete_uploadedimage"),
@@ -3155,7 +3155,7 @@ class Migration(migrations.Migration):
                                                                     ),
                                                                 ),
                                                                 (
-                                                                    "blog",
+                                                                    "sites_faciles_blog",
                                                                     wagtail.blocks.PageChooserBlock(
                                                                         label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                                                     ),
@@ -5462,7 +5462,7 @@ class Migration(migrations.Migration):
                                                                                             ),
                                                                                         ),
                                                                                         (
-                                                                                            "blog",
+                                                                                            "sites_faciles_blog",
                                                                                             wagtail.blocks.PageChooserBlock(
                                                                                                 label="Blog",
                                                                                                 page_type=[
@@ -7570,7 +7570,7 @@ class Migration(migrations.Migration):
                                                                     ),
                                                                 ),
                                                                 (
-                                                                    "blog",
+                                                                    "sites_faciles_blog",
                                                                     wagtail.blocks.PageChooserBlock(
                                                                         label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                                                     ),
@@ -8565,7 +8565,7 @@ class Migration(migrations.Migration):
                                             ),
                                         ),
                                         (
-                                            "blog",
+                                            "sites_faciles_blog",
                                             wagtail.blocks.PageChooserBlock(
                                                 label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                             ),
@@ -11939,7 +11939,7 @@ class Migration(migrations.Migration):
                                                                     ),
                                                                 ),
                                                                 (
-                                                                    "blog",
+                                                                    "sites_faciles_blog",
                                                                     wagtail.blocks.PageChooserBlock(
                                                                         label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                                                     ),
@@ -14246,7 +14246,7 @@ class Migration(migrations.Migration):
                                                                                             ),
                                                                                         ),
                                                                                         (
-                                                                                            "blog",
+                                                                                            "sites_faciles_blog",
                                                                                             wagtail.blocks.PageChooserBlock(
                                                                                                 label="Blog",
                                                                                                 page_type=[
@@ -16354,7 +16354,7 @@ class Migration(migrations.Migration):
                                                                     ),
                                                                 ),
                                                                 (
-                                                                    "blog",
+                                                                    "sites_faciles_blog",
                                                                     wagtail.blocks.PageChooserBlock(
                                                                         label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                                                     ),
@@ -17349,7 +17349,7 @@ class Migration(migrations.Migration):
                                             ),
                                         ),
                                         (
-                                            "blog",
+                                            "sites_faciles_blog",
                                             wagtail.blocks.PageChooserBlock(
                                                 label="Blog", page_type=["sites_faciles_blog.BlogIndexPage"]
                                             ),
