@@ -16,7 +16,13 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.models.i18n import Locale
 from wagtail.search import index
 
-from sites_faciles.blog.models import Category, CategorySerializer, Organization, Person, PersonSerializer
+from sites_faciles.blog.models import (
+    Category,
+    CategorySerializer,
+    Organization,
+    Person,
+    PersonSerializer,
+)
 from sites_faciles.content_manager.abstract import SitesFacilesBasePage
 from sites_faciles.content_manager.models import CmsDsfrConfig, Tag
 from sites_faciles.events.forms import EventSearchForm
@@ -34,7 +40,9 @@ class EventsIndexPage(RoutablePageMixin, SitesFacilesBasePage):
     filter_by_tag = models.BooleanField(_("Filter by tag"), default=True)
     filter_by_author = models.BooleanField(_("Filter by author"), default=False)
     filter_by_source = models.BooleanField(
-        _("Filter by source"), help_text=_("The source is the organization of the event author"), default=False
+        _("Filter by source"),
+        help_text=_("The source is the organization of the event author"),
+        default=False,
     )
 
     settings_panels = SitesFacilesBasePage.settings_panels + [
@@ -263,7 +271,10 @@ class EventsIndexPage(RoutablePageMixin, SitesFacilesBasePage):
                 "extra_title": extra_title,
                 "extra_breadcrumbs": extra_breadcrumbs,
                 "posts": past_events,
-                "years": sorted(self.past_events.values_list("event_date_start__year", flat=True), reverse=True),
+                "years": sorted(
+                    self.past_events.values_list("event_date_start__year", flat=True),
+                    reverse=True,
+                ),
                 "current_year": year,
             },
             template="events/events_archive_page.html",

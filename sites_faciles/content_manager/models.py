@@ -11,7 +11,13 @@ from modelcluster.models import ClusterableModel
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import Tag as TaggitTag, TaggedItemBase
 from unidecode import unidecode
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, ObjectList, TabbedInterface
+from wagtail.admin.panels import (
+    FieldPanel,
+    InlinePanel,
+    MultiFieldPanel,
+    ObjectList,
+    TabbedInterface,
+)
 from wagtail.api import APIField
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
@@ -352,7 +358,10 @@ class CmsDsfrConfig(ClusterableModel, BaseSiteSetting):
 
     operator_logo_display = models.CharField(
         _("Logo display"),
-        choices=[("header-footer", _("Header and Footer")), ("header-only", _("Header only"))],
+        choices=[
+            ("header-footer", _("Header and Footer")),
+            ("header-only", _("Header only")),
+        ],
         default="header-footer",
         blank=True,
         max_length=20,
@@ -398,7 +407,8 @@ class CmsDsfrConfig(ClusterableModel, BaseSiteSetting):
         _("Display a Share on Facebook link at the bottom of pages"), default=False
     )
     share_links_twitter = models.BooleanField(
-        _("Display a Share on X (previously Twitter) link at the bottom of pages"), default=False
+        _("Display a Share on X (previously Twitter) link at the bottom of pages"),
+        default=False,
     )
     share_links_linkedin = models.BooleanField(
         _("Display a Share on LinkedIn link at the bottom of pages"), default=False
@@ -497,7 +507,10 @@ class CmsDsfrConfig(ClusterableModel, BaseSiteSetting):
         [
             ObjectList(site_panels, heading=_("Generic")),
             ObjectList(brand_panels, heading=_("Brand block")),
-            ObjectList(newsletter_social_media_panels, heading=_("Newsletter, social media and share links")),
+            ObjectList(
+                newsletter_social_media_panels,
+                heading=_("Newsletter, social media and share links"),
+            ),
         ]
     )
 
@@ -569,11 +582,17 @@ class MegaMenuCategory(Orderable):
 class MegaMenu(ClusterableModel):
     name = models.CharField(_("Name"), max_length=255)
     parent_menu_item = models.ForeignKey(
-        "wagtailmenus.MainMenuItem", on_delete=models.CASCADE, related_name="megamenu_parent_menu_items"
+        "wagtailmenus.MainMenuItem",
+        on_delete=models.CASCADE,
+        related_name="megamenu_parent_menu_items",
     )
     description = models.TextField(_("Description"), blank=True)
     main_link = models.URLField(
-        _("Main link"), help_text=_("Max length: 2000 characters."), max_length=2000, blank=True, null=True
+        _("Main link"),
+        help_text=_("Max length: 2000 characters."),
+        max_length=2000,
+        blank=True,
+        null=True,
     )
 
     panels = [
