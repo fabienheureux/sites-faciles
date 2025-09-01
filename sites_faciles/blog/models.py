@@ -476,7 +476,7 @@ class BlogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
                 "extra_title": extra_title,
                 "extra_breadcrumbs": extra_breadcrumbs,
             },
-            template="blog/categories_list_page.html",
+            template="sites_faciles_blog/categories_list_page.html",
         )
 
     @path("tags/", name="tags_list")
@@ -506,7 +506,7 @@ class BlogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
                 "extra_title": extra_title,
                 "extra_breadcrumbs": extra_breadcrumbs,
             },
-            template="blog/tags_list_page.html",
+            template="sites_faciles_blog/tags_list_page.html",
         )
 
 

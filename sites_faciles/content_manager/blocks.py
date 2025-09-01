@@ -853,7 +853,7 @@ class VerticalContactCardBlock(blocks.StructBlock):
     class Meta:
         icon = "user"
         value_class = VerticalContactCardStructValue
-        template = ("content_manager/blocks/contact_card_vertical.html",)
+        template = ("sites_faciles_content_manager/blocks/contact_card_vertical.html",)
 
 
 ## Other apps-related blocks
@@ -956,7 +956,7 @@ class BlogRecentEntriesBlock(blocks.StructBlock):
 
     class Meta:
         icon = "placeholder"
-        template = ("content_manager/blocks/blog_recent_entries.html",)
+        template = ("sites_faciles_content_manager/blocks/blog_recent_entries.html",)
         value_class = RecentEntriesStructValue
 
 
@@ -986,7 +986,7 @@ class EventsRecentEntriesBlock(blocks.StructBlock):
 
     class Meta:
         icon = "placeholder"
-        template = ("content_manager/blocks/events_recent_entries.html",)
+        template = ("sites_faciles_content_manager/blocks/events_recent_entries.html",)
         value_class = RecentEntriesStructValue
 
 
@@ -1314,7 +1314,7 @@ STREAMFIELD_COMMON_BLOCKS = [
         blocks.StaticBlock(
             label=_("Subpages list"),
             admin_text=_("A simple, alphabetical list of the subpages of the current page."),
-            template="content_manager/blocks/subpages_list.html",
+            template="sites_faciles_content_manager/blocks/subpages_list.html",
             group=_("Website structure"),
         ),
     ),

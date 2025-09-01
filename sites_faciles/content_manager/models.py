@@ -159,7 +159,7 @@ class CatalogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
                 "extra_title": extra_title,
                 "extra_breadcrumbs": extra_breadcrumbs,
             },
-            template="content_manager/tags_list_page.html",
+            template="sites_faciles_content_manager/tags_list_page.html",
         )
 
 

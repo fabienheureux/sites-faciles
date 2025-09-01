@@ -266,7 +266,7 @@ class EventsIndexPage(RoutablePageMixin, SitesFacilesBasePage):
                 "years": sorted(self.past_events.values_list("event_date_start__year", flat=True), reverse=True),
                 "current_year": year,
             },
-            template="events/events_archive_page.html",
+            template="sites_faciles_events/events_archive_page.html",
         )
 
 

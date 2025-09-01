@@ -36,14 +36,14 @@
 {% endblock social_media %}
 
 {% block content %}
-  {% include "content_manager/blocks/heading.html" %}
+  {% include "sites_faciles_content_manager/blocks/heading.html" %}
 
   {% with categories=page.event_categories.all %}
 
     <div class="fr-container fr-mt-6w">
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-12">
-          {% include "content_manager/blocks/breadcrumbs.html" %}
+          {% include "sites_faciles_content_manager/blocks/breadcrumbs.html" %}
           <h1 class="fr-display--sm">{{ page.title }}</h1>
         </div>
       </div>
@@ -70,9 +70,9 @@
       </p>
     </div>
 
-    {% include "content_manager/blocks/messages.html" %}
+    {% include "sites_faciles_content_manager/blocks/messages.html" %}
 
-    {% include "content_manager/blocks/blocks_stream.html" with stream=page.body %}
+    {% include "sites_faciles_content_manager/blocks/blocks_stream.html" with stream=page.body %}
 
     {% with authors=page.authors.all %}
       {% if authors %}
@@ -80,7 +80,7 @@
           <h2>{% translate "Posted by:" %}</h2>
           <div class="fr-grid-row fr-grid-row--gutters">
             {% for author in authors %}
-              {% include "blog/blocks/contact_card.html" with value=author %}
+              {% include "sites_faciles_blog/blocks/contact_card.html" with value=author %}
             {% endfor %}
           </div>
         </div>
@@ -89,7 +89,7 @@
 
     {% if categories %}
       {% for category in categories %}
-        {% include "content_manager/blocks/blocks_stream.html" with stream=category.colophon %}
+        {% include "sites_faciles_content_manager/blocks/blocks_stream.html" with stream=category.colophon %}
       {% endfor %}
     {% endif %}
   {% endwith %}

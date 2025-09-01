@@ -14,7 +14,7 @@ class ContactCardBlock(blocks.StructBlock):
 
     class Meta:
         icon = "user"
-        template = ("blog/blocks/contact_card.html",)
+        template = ("sites_faciles_blog/blocks/contact_card.html",)
 
 
 COLOPHON_BLOCKS = [

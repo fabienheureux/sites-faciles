@@ -67,13 +67,17 @@ rules:
     scope: all
 
   - search: 'template="{app}/'
-    replace: 'template="sites_faciles/{app}/'
-    scope: templates
+    replace: 'template="sites_faciles_{app}/'
+    scope: all
 
+
+  - search: 'include\ "{app}/'
+    replace: 'include "sites_faciles_{app}/'
+    scope: templates
 
   - search: 'template = \("{app}'
     replace: 'template = ("sites_faciles_{app}'
-    scope: templates
+    scope: all
 
   - search: '\ settings.{app}'
     replace: ' settings.sites_faciles_{app}'
