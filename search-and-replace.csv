@@ -56,8 +56,8 @@ import forms,import sites_faciles.forms,**/migrations
 
 
 
-content_manager.blocks.IconPickerBlock,sites_faciles.content_manager.blocks.IconPickerBlock,**/migrations
-content_manager.models.sites_faciles.content_manager,sites_faciles_content_manager.models.sites_faciles.content_manager,*
+\ content_manager.blocks.IconPickerBlock, sites_faciles.content_manager.blocks.IconPickerBlock,**/migrations
+\ content_manager.models.sites_faciles.content_manager, sites_faciles_content_manager.models.sites_faciles.content_manager,*
 
 "blog.Person","sites_faciles_blog.Person",*
 "blog.Category","sites_faciles_blog.Category",*
