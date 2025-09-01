@@ -520,7 +520,9 @@ class BlogEntryPage(SitesFacilesBasePage):
     )
     date = models.DateTimeField(verbose_name=_("Post date"), default=timezone.now)
     authors = ParentalManyToManyField(
-        "blog.Person", blank=True, help_text=_("Author entries can be created in Snippets > Persons")
+        "sites_faciles_blog.Person",
+        blank=True,
+        help_text=_("Author entries can be created in Snippets > Persons"),
     )
 
     parent_page_types = ["blog.BlogIndexPage"]
