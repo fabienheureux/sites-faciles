@@ -37,3 +37,6 @@ template="forms\/,to="sites_faciles/forms/,**/templates
 
 "content_manager\.blocks,"sites_faciles_content_manager.blocks,**/migrations
 "blog\.blocks,"sites_faciles_blog.blocks,**/migrations
+
+import content_manager,import sites_faciles.content_manager,**/migrations
+import blog,import sites_faciles.blog,**/migrations
