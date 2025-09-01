@@ -14,7 +14,7 @@ fi
 
 echo "🔄 Reset the repo to latest commit on the main branch"
 
-git clone git@github.com:numerique-gouv/sites-faciles.git sites_faciles_temp
+git clone --depth 1 --branch v2.0.0 git@github.com:numerique-gouv/sites-faciles.git sites_faciles_temp
 
 echo "🙈 Move into subdirectory"
 cd sites_faciles_temp
