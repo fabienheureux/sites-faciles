@@ -15,12 +15,7 @@ from modelcluster.tags import ClusterTaggableManager
 from rest_framework import serializers
 from taggit.models import TaggedItemBase
 from unidecode import unidecode
-from wagtail.admin.panels import (
-    FieldPanel,
-    FieldRowPanel,
-    MultiFieldPanel,
-    TitleFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel, TitleFieldPanel
 from wagtail.admin.widgets.slug import SlugInput
 from wagtail.api import APIField
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
@@ -74,11 +69,7 @@ class Person(Orderable):
     organization = models.ForeignKey("Organization", null=True, on_delete=models.SET_NULL)
     contact_info = models.CharField(_("Contact info"), max_length=500, blank=True)
     image = models.ForeignKey(
-        "wagtailimages.Image",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
     )
 
     panels = [
@@ -221,9 +212,7 @@ class BlogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
     filter_by_tag = models.BooleanField(_("Filter by tag"), default=True)
     filter_by_author = models.BooleanField(_("Filter by author"), default=False)
     filter_by_source = models.BooleanField(
-        _("Filter by source"),
-        help_text=_("The source is the organization of the post author"),
-        default=False,
+        _("Filter by source"), help_text=_("The source is the organization of the post author"), default=False
     )
 
     settings_panels = SitesFacilesBasePage.settings_panels + [
@@ -240,7 +229,7 @@ class BlogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
         ),
     ]
 
-    subpage_types = ["sites_faciles_blog.BlogEntryPage"]
+    subpage_types = ["blog.BlogEntryPage"]
 
     class Meta:
         verbose_name = _("Blog index")
@@ -531,12 +520,10 @@ class BlogEntryPage(SitesFacilesBasePage):
     )
     date = models.DateTimeField(verbose_name=_("Post date"), default=timezone.now)
     authors = ParentalManyToManyField(
-        "sites_faciles_blog.Person",
-        blank=True,
-        help_text=_("Author entries can be created in Snippets > Persons"),
+        "blog.Person", blank=True, help_text=_("Author entries can be created in Snippets > Persons")
     )
 
-    parent_page_types = ["sites_faciles_blog.BlogIndexPage"]
+    parent_page_types = ["blog.BlogIndexPage"]
     subpage_types = []
 
     settings_panels = SitesFacilesBasePage.settings_panels + [

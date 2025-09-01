@@ -1,6 +1,7 @@
-from proconnect.models import WhitelistedEmailDomain
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
+
+from proconnect.models import WhitelistedEmailDomain
 
 
 class WhitelistedEmailDomainViewSet(SnippetViewSet):

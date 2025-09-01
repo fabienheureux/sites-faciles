@@ -296,11 +296,7 @@ class Migration(migrations.Migration):
                         [[("title", 28), ("accordion", 30)]],
                         {"group": "DSFR components", "label": "Accordions"},
                     ),
-                    32: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    32: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     33: (
                         "wagtail.blocks.RichTextBlock",
                         (),
@@ -644,7 +640,7 @@ class Migration(migrations.Migration):
                     ),
                     77: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     78: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -665,7 +661,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     83: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -1680,11 +1676,7 @@ class Migration(migrations.Migration):
                         [[("title", 28), ("accordion", 30)]],
                         {"group": "DSFR components", "label": "Accordions"},
                     ),
-                    32: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    32: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     33: (
                         "wagtail.blocks.RichTextBlock",
                         (),
@@ -2028,7 +2020,7 @@ class Migration(migrations.Migration):
                     ),
                     77: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     78: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -2049,7 +2041,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     83: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -3154,11 +3146,7 @@ class Migration(migrations.Migration):
                             "label": "Heading level",
                         },
                     ),
-                    46: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    46: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     47: (
                         "wagtail.blocks.RichTextBlock",
                         (),
@@ -3646,7 +3634,7 @@ class Migration(migrations.Migration):
                     ),
                     111: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     112: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -3660,7 +3648,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     114: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),

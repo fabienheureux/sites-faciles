@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 (
                     "head_scripts",
-                    sites_faciles.content_manager.models.MonospaceField(
+                    content_manager.models.MonospaceField(
                         blank=True,
                         help_text="Ajoutez des scripts de suivi entre les balises <head>.",
                         null=True,
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "body_scripts",
-                    sites_faciles.content_manager.models.MonospaceField(
+                    content_manager.models.MonospaceField(
                         blank=True,
                         help_text="Ajoutez des scripts de suivi vers la fermeture de la balise <body>.",
                         null=True,

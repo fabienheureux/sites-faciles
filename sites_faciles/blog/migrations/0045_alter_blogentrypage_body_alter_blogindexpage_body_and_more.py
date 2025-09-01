@@ -7,7 +7,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("sites_faciles_blog", "0044_alter_blogentrypage_source_url_and_more"),
+        ("blog", "0044_alter_blogentrypage_source_url_and_more"),
     ]
 
     operations = [
@@ -336,11 +336,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    36: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    36: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     37: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -763,7 +759,7 @@ class Migration(migrations.Migration):
                     ),
                     93: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     94: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -784,7 +780,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     99: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -1869,11 +1865,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    36: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    36: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     37: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -2296,7 +2288,7 @@ class Migration(migrations.Migration):
                     ),
                     93: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     94: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -2317,7 +2309,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     99: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -3500,11 +3492,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    50: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    50: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     51: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -4094,7 +4082,7 @@ class Migration(migrations.Migration):
                     ),
                     135: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     136: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -4108,7 +4096,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     138: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),

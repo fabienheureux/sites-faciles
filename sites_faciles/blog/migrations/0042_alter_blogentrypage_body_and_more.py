@@ -311,11 +311,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    32: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    32: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     33: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -738,7 +734,7 @@ class Migration(migrations.Migration):
                     ),
                     89: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     90: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -759,7 +755,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     95: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -1557,11 +1553,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    5: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    5: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     6: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -1898,11 +1890,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    32: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    32: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     33: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -2325,7 +2313,7 @@ class Migration(migrations.Migration):
                     ),
                     89: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     90: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -2346,7 +2334,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     95: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -3144,11 +3132,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    5: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    5: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     6: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -3575,11 +3559,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    45: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    45: ("sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     46: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -4169,7 +4149,7 @@ class Migration(migrations.Migration):
                     ),
                     130: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     131: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -4183,7 +4163,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     133: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles_sites_faciles_content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),

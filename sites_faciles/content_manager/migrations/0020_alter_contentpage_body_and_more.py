@@ -592,9 +592,7 @@ class Migration(migrations.Migration):
                                             ),
                                             (
                                                 "icon_class",
-                                                sites_faciles.content_manager.blocks.IconPickerBlock(
-                                                    label="Icon", required=False
-                                                ),
+                                                sites_faciles_content_manager.blocks.IconPickerBlock(label="Icon", required=False),
                                             ),
                                             (
                                                 "link",
