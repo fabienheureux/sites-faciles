@@ -7,11 +7,13 @@ apps:
   - content_manager
   - config
 
+# Named scopes (rules can reference these by name)
 scopes:
   migrations: "**/migrations/**"
   templates: "**/templates/**"
   all: "**/*"
 
+# File extensions considered "text" (configurable)
 text_extensions:
   - .py
   - .html
@@ -33,27 +35,95 @@ text_extensions:
   - .scss
 
 # Rules. Each rule may use:
-#  - scope: referral to a named scope (scopes.<name>)
+#  - scope: reference to a named scope (scopes.<name>)
 #  - path_glob: an explicit git ls-files pattern (overrides scope if present)
-#  - literal: true -> do a literal string replace (no regex); safer for punctuation/quotes
-#  - search & replace are strings (quote as needed)
+#  - literal: true -> do a literal string replace (no regex)
+#  - search & replace are strings
 rules:
+
+  # ---------- Generic patterns (expanded per app) ----------
+  - search: 'to="{app}\.'
+    replace: 'to="sites_faciles_{app}.'
+    scope: migrations
+
+  - search: 'through="{app}\.'
+    replace: 'through="sites_faciles_{app}.'
+    scope: migrations
+
+  - search: '\("{app}"'
+    replace: '("sites_faciles_{app}"'
+    scope: migrations
+
+  - search: '"{app}"'
+    replace: '"sites_faciles_{app}"'
+    scope: migrations
+
+  - search: '"page_type": \["{app}'
+    replace: '"page_type": ["sites_faciles_{app}'
+    scope: migrations
 
   - search: 'from {app}\.'
     replace: 'from sites_faciles.{app}.'
     scope: all
 
-  - search: 'content_manager.MegaMenu'
-    replace: 'sites_faciles_content_manager.MegaMenu'
-    path_glob: '**/models.py'
-    literal: true
+  - search: 'template="{app}/'
+    replace: 'template="sites_faciles/{app}/'
+    scope: templates
+
+  - search: 'template = ("{app}'
+    replace: 'template = ("sites_faciles_{app}'
+    scope: templates
+
+  - search: '"{app}\.blocks'
+    replace: '"sites_faciles_{app}.blocks'
+    scope: migrations
+
+  - search: 'import {app}'
+    replace: 'import sites_faciles.{app}'
+    scope: migrations
+
+  # ---------- Special-case overrides ----------
+  - search: 'content_manager\.models\.MonospaceField'
+    replace: 'sites_faciles.content_manager.models.MonospaceField'
+    scope: migrations
+
+  - search: ' content_manager.blocks.IconPickerBlock'
+    replace: ' sites_faciles.content_manager.blocks.IconPickerBlock'
+    scope: migrations
+
+  - search: 'content_manager.models.sites_faciles.content_manager'
+    replace: 'sites_faciles_content_manager.models.sites_faciles.content_manager'
+    scope: all
+
+  - search: '"blog.Person"'
+    replace: '"sites_faciles_blog.Person"'
+    scope: all
+
+  - search: '"blog.Category"'
+    replace: '"sites_faciles_blog.Category"'
+    scope: all
+
+  - search: '"blog.BlogEntryPage"'
+    replace: '"sites_faciles_blog.BlogEntryPage"'
+    scope: all
+
+  - search: '"blog.BlogIndexPage"'
+    replace: '"sites_faciles_blog.BlogIndexPage"'
+    scope: all
+
+  - search: '"events.EventEntryPage"'
+    replace: '"sites_faciles_events.EventEntryPage"'
+    scope: all
+
+  - search: '"events.EventsIndexPage"'
+    replace: '"sites_faciles_events.EventsIndexPage"'
+    scope: all
 
   - search: '"content_manager.MegaMenu'
     replace: '"sites_faciles_content_manager.MegaMenu'
     path_glob: '**/models.py'
     literal: true
 
-  - search: 'content_manager.MegaMenu,'
-    replace: 'sites_faciles_content_manager.MegaMenu,'
-    path_glob: '**/models.py'
-    literal: true
+  - search: '"content_manager.ContentPage"'
+    replace: '"sites_faciles_content_manager.ContentPage"'
+    scope: all

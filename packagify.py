@@ -15,10 +15,11 @@ Features:
 import argparse
 import logging
 import pathlib
-import subprocess
 import re
-import yaml
+import subprocess
 import sys
+
+import yaml
 
 # -- Helpers ------------------------------------------------------------------
 
@@ -50,9 +51,7 @@ def git_ls_files(pattern: str) -> list:
         logging.error("git ls-files failed: %s", exc)
         return []
     files = [s for s in result.stdout.splitlines() if s]
-    logging.debug(
-        "git ls-files returned %d files for pattern '%s'", len(files), pattern
-    )
+    logging.debug("git ls-files returned %d files for pattern '%s'", len(files), pattern)
     return files
 
 
@@ -80,9 +79,7 @@ def expand_rules(config: dict) -> list:
         search = rule.get("search")
         replace = rule.get("replace")
         if search is None or replace is None:
-            logging.warning(
-                "Skipping invalid rule (missing search or replace): %s", rule
-            )
+            logging.warning("Skipping invalid rule (missing search or replace): %s", rule)
             continue
 
         # if {app} present and apps provided, expand
@@ -95,9 +92,7 @@ def expand_rules(config: dict) -> list:
         else:
             expanded.append(rule)
 
-    logging.info(
-        "🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded)
-    )
+    logging.info("🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded))
     return expanded
 
 
@@ -141,9 +136,7 @@ def apply_rule_to_file(path: pathlib.Path, rule: dict, dry_run: bool) -> bool:
             return False
 
     # Report and write (or dry-run)
-    logging.info(
-        "✏️ %s — %d replacement(s) for rule '%s' → '%s'", path, count, search, replace
-    )
+    logging.info("✏️ %s — %d replacement(s) for rule '%s' → '%s'", path, count, search, replace)
     if dry_run:
         logging.debug("DRY-RUN: not writing changes to %s", path)
     else:
@@ -163,11 +156,12 @@ def apply_rule_to_file(path: pathlib.Path, rule: dict, dry_run: bool) -> bool:
 def main():
     p = argparse.ArgumentParser(description="Refactor a codebase with YAML rules")
     p.add_argument(
-        "-c", "--config", default="search-and-replace.yml", help="Path to YAML config"
+        "-c",
+        "--config",
+        default="../search-and-replace.yml",
+        help="Path to YAML config",
     )
-    p.add_argument(
-        "--dry-run", action="store_true", help="Show changes without modifying files"
-    )
+    p.add_argument("--dry-run", action="store_true", help="Show changes without modifying files")
     p.add_argument(
         "-v",
         "--verbose",
@@ -202,11 +196,7 @@ def main():
         ".css",
         ".scss",
     }
-    text_exts = (
-        set(text_extensions_from_cfg)
-        if text_extensions_from_cfg
-        else DEFAULT_TEXT_EXTENSIONS
-    )
+    text_exts = set(text_extensions_from_cfg) if text_extensions_from_cfg else DEFAULT_TEXT_EXTENSIONS
     logging.debug("Text extensions: %s", sorted(text_exts))
 
     expanded_rules = expand_rules(config)
@@ -223,15 +213,11 @@ def main():
         else:
             scope_name = rule.get("scope")
             if not scope_name:
-                logging.warning(
-                    "Rule missing both 'path_glob' and 'scope'; skipping: %s", rule
-                )
+                logging.warning("Rule missing both 'path_glob' and 'scope'; skipping: %s", rule)
                 continue
             file_glob = scopes.get(scope_name)
             if not file_glob:
-                logging.warning(
-                    "Unknown scope '%s' in rule; skipping: %s", scope_name, rule
-                )
+                logging.warning("Unknown scope '%s' in rule; skipping: %s", scope_name, rule)
                 continue
             files = git_ls_files(file_glob)
             logging.debug(
