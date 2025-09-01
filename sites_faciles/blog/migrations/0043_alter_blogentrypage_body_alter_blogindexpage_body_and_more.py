@@ -336,7 +336,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    36: ("sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
+                    36: ("sites_faciles.content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     37: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -759,7 +759,7 @@ class Migration(migrations.Migration):
                     ),
                     93: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     94: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles.content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -780,7 +780,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     99: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles.content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -1864,7 +1864,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    36: ("sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
+                    36: ("sites_faciles.content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     37: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -2287,7 +2287,7 @@ class Migration(migrations.Migration):
                     ),
                     93: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     94: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles.content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -2308,7 +2308,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     99: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles.content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),
@@ -3481,7 +3481,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    49: ("sites_faciles_content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
+                    49: ("sites_faciles.content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     50: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -4071,7 +4071,7 @@ class Migration(migrations.Migration):
                     ),
                     134: ("wagtail.blocks.CharBlock", (), {"label": "Top detail: text", "required": False}),
                     135: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles.content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Top detail: icon", "required": False},
                     ),
@@ -4085,7 +4085,7 @@ class Migration(migrations.Migration):
                         },
                     ),
                     137: (
-                        "sites_faciles_content_manager.blocks.IconPickerBlock",
+                        "sites_faciles.content_manager.blocks.IconPickerBlock",
                         (),
                         {"label": "Bottom detail: icon", "required": False},
                     ),

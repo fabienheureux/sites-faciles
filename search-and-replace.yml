@@ -75,7 +75,7 @@ rules:
     scope: templates
 
   - search: '"{app}\.blocks'
-    replace: '"sites_faciles_{app}.blocks'
+    replace: '"sites_faciles.{app}.blocks'
     scope: migrations
 
   - search: 'import {app}'
