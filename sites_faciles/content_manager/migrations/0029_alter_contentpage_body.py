@@ -7,7 +7,7 @@ import wagtail.images.blocks
 import wagtailmarkdown.blocks
 from django.db import migrations
 
-import content_manager.blocks
+import sites_faciles_content_manager.blocks
 
 
 class Migration(migrations.Migration):
