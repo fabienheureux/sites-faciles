@@ -2,35 +2,38 @@
 """
 refactor.py
 A safer, more maintainable find-and-replace tool for git-tracked text files.
-
-Features:
- - YAML config with named scopes and app templating
- - per-rule path_glob override (git ls-files pattern)
- - literal vs regex replacements
- - configurable text extensions
- - logging levels (-v / -vv)
- - --dry-run mode
+Now with multithreading for faster file processing.
+Renames template directories after replacements.
 """
 
+from __future__ import annotations
+
 import argparse
+import concurrent.futures
 import logging
 import pathlib
 import re
+import shutil
 import subprocess
 import sys
+from pathlib import Path
+from typing import Any
 
 import yaml
+
 
 # -- Helpers ------------------------------------------------------------------
 
 
-def setup_logger(verbose: int):
-    """Configure logging verbosity."""
-    level = logging.WARNING
-    if verbose == 1:
-        level = logging.INFO
-    elif verbose >= 2:
-        level = logging.DEBUG
+def setup_logger(verbose: int) -> None:
+    """Configure logging verbosity using structural pattern matching."""
+    match verbose:
+        case 0:
+            level = logging.WARNING
+        case 1:
+            level = logging.INFO
+        case _:
+            level = logging.DEBUG
 
     logging.basicConfig(
         format="%(levelname)-8s %(message)s",
@@ -38,27 +41,30 @@ def setup_logger(verbose: int):
     )
 
 
-def git_ls_files(pattern: str) -> list:
-    """
-    Return tracked files matching a git pathspec (pattern).
-    If pattern is empty, return all tracked files.
-    """
-    cmd = ["git", "ls-files", pattern] if pattern else ["git", "ls-files"]
+def git_ls_files(pattern: str | None = None) -> list[str]:
+    """Return tracked files matching a git pathspec (pattern)."""
+    cmd = ["git", "ls-files"] + ([pattern] if pattern else [])
     logging.debug("Running: %s", " ".join(cmd))
+
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        result = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=False,
+        )
     except Exception as exc:
         logging.error("git ls-files failed: %s", exc)
         return []
-    files = [s for s in result.stdout.splitlines() if s]
-    logging.debug("git ls-files returned %d files for pattern '%s'", len(files), pattern)
-    return files
+
+    return [s for s in result.stdout.splitlines() if s]
 
 
-def load_config(path: str = "search-and-replace.yml") -> dict:
+def load_config(path: Path = Path("search-and-replace.yml")) -> dict[str, Any]:
     logging.info("📖 Loading rules from %s", path)
     try:
-        with open(path, "r", encoding="utf-8") as fh:
+        with path.open("r", encoding="utf-8") as fh:
             return yaml.safe_load(fh) or {}
     except FileNotFoundError:
         logging.error("Config file not found: %s", path)
@@ -68,49 +74,51 @@ def load_config(path: str = "search-and-replace.yml") -> dict:
         sys.exit(2)
 
 
-def expand_rules(config: dict) -> list:
+def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
     """Expand {app} placeholders into concrete rules and validate minimal schema."""
-    apps = config.get("apps", [])
-    raw_rules = config.get("rules", []) or []
+    apps: list[str] = config.get("apps", [])
+    raw_rules: list[dict[str, Any]] = config.get("rules", []) or []
 
-    expanded = []
+    expanded: list[dict[str, Any]] = []
     for rule in raw_rules:
-        # ensure required keys
-        search = rule.get("search")
-        replace = rule.get("replace")
-        if search is None or replace is None:
-            logging.warning("Skipping invalid rule (missing search or replace): %s", rule)
+        search: str | None = rule.get("search")
+        replace: str | None = rule.get("replace")
+        if not search or not replace:
+            logging.warning("Skipping invalid rule (missing search/replace): %s", rule)
             continue
 
-        # if {app} present and apps provided, expand
         if "{app}" in (search + replace) and apps:
             for app in apps:
-                r = dict(rule)  # shallow copy
-                r["search"] = search.replace("{app}", app)
-                r["replace"] = replace.replace("{app}", app)
-                expanded.append(r)
+                expanded.append(
+                    {
+                        **rule,
+                        "search": search.replace("{app}", app),
+                        "replace": replace.replace("{app}", app),
+                    }
+                )
         else:
             expanded.append(rule)
 
-    logging.info("🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded))
+    logging.info(
+        "🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded)
+    )
     return expanded
 
 
 # -- File / Replacement logic -----------------------------------------------
 
 
-def is_text_file(path: pathlib.Path, text_exts: set) -> bool:
+def is_text_file(path: Path, text_exts: set[str]) -> bool:
     """Rudimentary check: treat file as text if suffix is in text_exts."""
     return path.suffix in text_exts
 
 
-def apply_rule_to_file(path: pathlib.Path, rule: dict, dry_run: bool) -> bool:
-    """Apply a single rule to a single file. Returns True if file changed (or would change in dry-run)."""
-    search = rule["search"]
-    replace = rule["replace"]
-    literal = bool(rule.get("literal", False))
+def apply_rule_to_file(path: Path, rule: dict[str, Any], dry_run: bool) -> bool:
+    """Apply a single rule to a single file. Returns True if file changed."""
+    search: str = rule["search"]
+    replace: str = rule["replace"]
+    literal: bool = bool(rule.get("literal", False))
 
-    # read file
     try:
         text = path.read_text(encoding="utf-8")
     except Exception as exc:
@@ -120,29 +128,26 @@ def apply_rule_to_file(path: pathlib.Path, rule: dict, dry_run: bool) -> bool:
     if literal:
         count = text.count(search)
         if count <= 0:
-            logging.debug("No literal matches for '%s' in %s", search, path)
+            logging.debug("No literal matches for %r in %s", search, path)
             return False
         new_text = text.replace(search, replace)
     else:
-        # treat 'search' as a regex pattern
         try:
             new_text, count = re.subn(search, replace, text)
         except re.error as exc:
-            logging.error("Invalid regex pattern '%s' in rule: %s", search, exc)
+            logging.error("Invalid regex pattern %r in rule: %s", search, exc)
             return False
-
         if count <= 0:
             logging.debug("No regex matches for /%s/ in %s", search, path)
             return False
 
-    # Report and write (or dry-run)
-    logging.info("✏️ %s — %d replacement(s) for rule '%s' → '%s'", path, count, search, replace)
+    logging.info("✏️ %s — %d replacement(s) for %r → %r", path, count, search, replace)
+
     if dry_run:
         logging.debug("DRY-RUN: not writing changes to %s", path)
     else:
         try:
             path.write_text(new_text, encoding="utf-8")
-            logging.debug("Wrote updated file %s", path)
         except Exception as exc:
             logging.error("Failed to write %s: %s", path, exc)
             return False
@@ -150,33 +155,70 @@ def apply_rule_to_file(path: pathlib.Path, rule: dict, dry_run: bool) -> bool:
     return True
 
 
+# -- Rename -------------------------------------------------------------------
+
+
+def rename_template_dirs(apps: list[str], dry_run: bool = False) -> None:
+    """Move {app}/templates/{app} → {app}/templates/sites_faciles_{app}."""
+    for app in apps:
+        src = Path(app) / "templates" / app
+        dst = Path(app) / "templates" / f"sites_faciles_{app}"
+
+        if not src.exists():
+            logging.debug("⏭️ No template dir to move for app %r: %s", app, src)
+            continue
+
+        if dst.exists():
+            logging.warning("⚠️ Destination already exists, skipping: %s", dst)
+            continue
+
+        if dry_run:
+            logging.info("[DRY-RUN] Would move: %s → %s", src, dst)
+        else:
+            logging.info("📂 Moving: %s → %s", src, dst)
+            shutil.move(str(src), str(dst))
+
+
 # -- Main -------------------------------------------------------------------
 
 
-def main():
-    p = argparse.ArgumentParser(description="Refactor a codebase with YAML rules")
-    p.add_argument(
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Refactor a codebase with YAML rules")
+    parser.add_argument(
         "-c",
         "--config",
-        default="../search-and-replace.yml",
+        type=Path,
+        default=Path("../search-and-replace.yml"),
         help="Path to YAML config",
     )
-    p.add_argument("--dry-run", action="store_true", help="Show changes without modifying files")
-    p.add_argument(
+    parser.add_argument(
+        "--dry-run",
+        action=argparse.BooleanOptionalAction,
+        help="Show changes without modifying files",
+    )
+    parser.add_argument(
         "-v",
         "--verbose",
         action="count",
         default=0,
         help="Increase verbosity (-v, -vv)",
     )
-    args = p.parse_args()
+    parser.add_argument(
+        "-j",
+        "--jobs",
+        type=int,
+        default=None,
+        help="Number of worker threads (default: CPU count)",
+    )
+    args = parser.parse_args()
 
     setup_logger(args.verbose)
 
     config = load_config(args.config)
-    scopes = config.get("scopes", {})
-    text_extensions_from_cfg = config.get("text_extensions", [])
-    DEFAULT_TEXT_EXTENSIONS = {
+    scopes: dict[str, str] = config.get("scopes", {})
+    text_extensions_from_cfg: list[str] = config.get("text_extensions", [])
+
+    DEFAULT_TEXT_EXTENSIONS: set[str] = {
         ".py",
         ".html",
         ".htm",
@@ -196,57 +238,66 @@ def main():
         ".css",
         ".scss",
     }
-    text_exts = set(text_extensions_from_cfg) if text_extensions_from_cfg else DEFAULT_TEXT_EXTENSIONS
+    text_exts = set(text_extensions_from_cfg) or DEFAULT_TEXT_EXTENSIONS
     logging.debug("Text extensions: %s", sorted(text_exts))
 
     expanded_rules = expand_rules(config)
 
+    # -- Multithreaded file processing --
     total_files_changed = 0
     scanned_files = 0
 
-    for rule in expanded_rules:
-        # Choose list of files: path_glob (rule-specific) > scope > skip rule
-        path_glob = rule.get("path_glob")
-        if path_glob:
-            files = git_ls_files(path_glob)
-            logging.debug("Rule has path_glob '%s' → %d files", path_glob, len(files))
-        else:
-            scope_name = rule.get("scope")
-            if not scope_name:
-                logging.warning("Rule missing both 'path_glob' and 'scope'; skipping: %s", rule)
-                continue
-            file_glob = scopes.get(scope_name)
-            if not file_glob:
-                logging.warning("Unknown scope '%s' in rule; skipping: %s", scope_name, rule)
-                continue
-            files = git_ls_files(file_glob)
-            logging.debug(
-                "Using scope '%s' (glob '%s') → %d files",
-                scope_name,
-                file_glob,
-                len(files),
-            )
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
+        futures: list[concurrent.futures.Future[bool]] = []
 
-        if not files:
-            logging.debug("No files found for rule: %s", rule)
-            continue
+        for rule in expanded_rules:
+            path_glob: str | None = rule.get("path_glob")
+            if path_glob:
+                files = git_ls_files(path_glob)
+            else:
+                scope_name: str | None = rule.get("scope")
+                if not scope_name:
+                    logging.warning(
+                        "Rule missing both 'path_glob' and 'scope'; skipping: %s", rule
+                    )
+                    continue
+                file_glob = scopes.get(scope_name)
+                if not file_glob:
+                    logging.warning(
+                        "Unknown scope %r in rule; skipping: %s", scope_name, rule
+                    )
+                    continue
+                files = git_ls_files(file_glob)
 
-        for f in files:
-            scanned_files += 1
-            path = pathlib.Path(f)
-            if not is_text_file(path, text_exts):
-                logging.debug("Skipping non-text file: %s", path)
-                continue
-            changed = apply_rule_to_file(path, rule, args.dry_run)
-            if changed:
-                total_files_changed += 1
+            for f in files:
+                path = Path(f)
+                if not is_text_file(path, text_exts):
+                    continue
+                scanned_files += 1
+                futures.append(
+                    executor.submit(
+                        apply_rule_to_file, path, rule, args.dry_run or False
+                    )
+                )
+
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                if future.result():
+                    total_files_changed += 1
+            except Exception as exc:
+                logging.error("Worker failed: %s", exc)
 
     logging.warning(
-        "🎬 Finished %s: scanned %d files, %d file(s) changed",
+        "🎬 Finished replacements %s: scanned %d files, %d file(s) changed",
         "(dry-run)" if args.dry_run else "",
         scanned_files,
         total_files_changed,
     )
+
+    # 🔥 Always run rename step after replacements
+    apps: list[str] = config.get("apps", [])
+    if apps:
+        rename_template_dirs(apps, args.dry_run or False)
 
 
 if __name__ == "__main__":

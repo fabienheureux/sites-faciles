@@ -70,8 +70,13 @@ rules:
     replace: 'template="sites_faciles/{app}/'
     scope: templates
 
-  - search: 'template = ("{app}'
+
+  - search: 'template = \("{app}'
     replace: 'template = ("sites_faciles_{app}'
+    scope: templates
+
+  - search: '\{\{\ settings.{app}'
+    replace: '{{ settings.sites_faciles_{app}'
     scope: templates
 
   - search: '"{app}\.blocks'

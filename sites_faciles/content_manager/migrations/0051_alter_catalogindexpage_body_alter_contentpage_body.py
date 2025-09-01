@@ -300,11 +300,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    30: (
-                        "sites_faciles.content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    30: ("sites_faciles.content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     31: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
@@ -1701,11 +1697,7 @@ class Migration(migrations.Migration):
                             "required": False,
                         },
                     ),
-                    30: (
-                        "sites_faciles.content_manager.blocks.IconPickerBlock",
-                        (),
-                        {"label": "Icon", "required": False},
-                    ),
+                    30: ("sites_faciles.content_manager.blocks.IconPickerBlock", (), {"label": "Icon", "required": False}),
                     31: (
                         "wagtail.blocks.ChoiceBlock",
                         [],
