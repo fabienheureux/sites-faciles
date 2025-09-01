@@ -1,4 +1,5 @@
-# Define apps (these will replace {app} in rules)
+# search-and-replace.yml
+
 apps:
   - blog
   - events
@@ -6,30 +7,53 @@ apps:
   - content_manager
   - config
 
-# Define named scopes
 scopes:
   migrations: "**/migrations/**"
   templates: "**/templates/**"
   all: "**/*"
 
-# Rules with {app} placeholders
-rules:
-  - search: 'to="{app}\.'
-    replace: 'to="sites_faciles_{app}.'
-    scope: migrations
+text_extensions:
+  - .py
+  - .html
+  - .htm
+  - .txt
+  - .md
+  - .csv
+  - .json
+  - .yaml
+  - .yml
+  - .po
+  - .ini
+  - .cfg
+  - .rst
+  - .xml
+  - .js
+  - .ts
+  - .css
+  - .scss
 
-  - search: 'through="{app}\.'
-    replace: 'through="sites_faciles_{app}.'
-    scope: migrations
+# Rules. Each rule may use:
+#  - scope: referral to a named scope (scopes.<name>)
+#  - path_glob: an explicit git ls-files pattern (overrides scope if present)
+#  - literal: true -> do a literal string replace (no regex); safer for punctuation/quotes
+#  - search & replace are strings (quote as needed)
+rules:
 
   - search: 'from {app}\.'
     replace: 'from sites_faciles.{app}.'
     scope: all
 
-  - search: 'template="{app}/'
-    replace: 'template="sites_faciles/{app}/'
-    scope: templates
+  - search: 'content_manager.MegaMenu'
+    replace: 'sites_faciles_content_manager.MegaMenu'
+    path_glob: '**/models.py'
+    literal: true
 
-  - search: 'import {app}'
-    replace: 'import sites_faciles.{app}'
-    scope: migrations
+  - search: '"content_manager.MegaMenu'
+    replace: '"sites_faciles_content_manager.MegaMenu'
+    path_glob: '**/models.py'
+    literal: true
+
+  - search: 'content_manager.MegaMenu,'
+    replace: 'sites_faciles_content_manager.MegaMenu,'
+    path_glob: '**/models.py'
+    literal: true

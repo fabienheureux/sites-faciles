@@ -6,7 +6,8 @@ git clone --depth 1 --branch v2.0.0 git@github.com:numerique-gouv/sites-faciles.
 cd sites_faciles_temp
 
 # Run refactor
-../packagify.py
+../packagify.py -v
 
-# See what changed
-# git diff
+# Cleanup
+cd ..
+rm -rf sites_faciles_temp
