@@ -294,7 +294,9 @@ class EventEntryPage(RoutablePageMixin, SitesFacilesBasePage):
     )
 
     authors = ParentalManyToManyField(
-        "blog.Person", blank=True, help_text=_("Author entries can be created in Snippets > Persons")
+        "sites_faciles_blog.Person",
+        blank=True,
+        help_text=_("Author entries can be created in Snippets > Persons"),
     )
 
     parent_page_types = ["events.EventsIndexPage"]
