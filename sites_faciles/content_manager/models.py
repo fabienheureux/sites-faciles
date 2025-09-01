@@ -65,7 +65,7 @@ class CatalogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
         ),
     ]
 
-    subpage_types = ["content_manager.ContentPage"]
+    subpage_types = ["sites_faciles_content_manager.ContentPage"]
 
     class Meta:
         verbose_name = _("Catalog index page")

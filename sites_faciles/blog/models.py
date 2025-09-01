@@ -229,7 +229,7 @@ class BlogIndexPage(RoutablePageMixin, SitesFacilesBasePage):
         ),
     ]
 
-    subpage_types = ["blog.BlogEntryPage"]
+    subpage_types = ["sites_faciles_blog.BlogEntryPage"]
 
     class Meta:
         verbose_name = _("Blog index")
@@ -525,7 +525,7 @@ class BlogEntryPage(SitesFacilesBasePage):
         help_text=_("Author entries can be created in Snippets > Persons"),
     )
 
-    parent_page_types = ["blog.BlogIndexPage"]
+    parent_page_types = ["sites_faciles_blog.BlogIndexPage"]
     subpage_types = []
 
     settings_panels = SitesFacilesBasePage.settings_panels + [
