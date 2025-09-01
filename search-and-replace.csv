@@ -27,6 +27,8 @@ through="config\.,through="sites_faciles_config.,**/migrations
 from config\.,from sites_faciles.config.,*
 template="config\/,to="sites_faciles/config/,**/templates
 
+content_manager\.models\.MonospaceField,sites_faciles.content_manager.models.MonospaceField,**/migrations
+
 
 to="forms\.,to="sites_faciles_forms.,**/migrations
 through="forms\.,through="sites_faciles_forms.,**/migrations
