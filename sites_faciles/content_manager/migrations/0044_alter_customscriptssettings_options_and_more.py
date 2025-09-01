@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="customscriptssettings",
             name="body_scripts",
-            field=content_manager.models.MonospaceField(
+            field=sites_faciles_sites_faciles_content_manager.models.MonospaceField(
                 blank=True,
                 help_text="Allows for scripts to be placed at the end of the <body> tag of the website pages.",
                 null=True,
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="customscriptssettings",
             name="head_scripts",
-            field=content_manager.models.MonospaceField(
+            field=sites_faciles_sites_faciles_content_manager.models.MonospaceField(
                 blank=True,
                 help_text="Allows for scripts to be placed in the <head> tag of the website pages.",
                 null=True,
