@@ -2,7 +2,7 @@
 """
 refactor.py
 A safer, more maintainable find-and-replace tool for git-tracked text files.
-Now with multithreading for faster file processing.
+Supports multithreaded file processing for better performance.
 Renames template directories after replacements.
 """
 
@@ -24,7 +24,7 @@ import yaml
 
 
 def setup_logger(verbose: int) -> None:
-    """Configure logging verbosity using structural pattern matching."""
+    """Configure logging verbosity based on verbosity level."""
     match verbose:
         case 0:
             level = logging.WARNING
@@ -105,7 +105,7 @@ def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def is_text_file(path: Path, text_exts: set[str]) -> bool:
-    """Rudimentary check: treat file as text if suffix is in text_exts."""
+    """Check if file should be treated as text based on file extension."""
     return path.suffix in text_exts
 
 
@@ -239,7 +239,7 @@ def main() -> None:
 
     expanded_rules = expand_rules(config)
 
-    # -- Multithreaded file processing --
+    # -- Process files with multithreading --
     total_files_changed = 0
     scanned_files = 0
 
@@ -282,7 +282,7 @@ def main() -> None:
         total_files_changed,
     )
 
-    # 🔥 Always run rename step after replacements
+    # Always run rename step after replacements
     apps: list[str] = config.get("apps", [])
     if apps:
         rename_template_dirs(apps, args.dry_run or False)
