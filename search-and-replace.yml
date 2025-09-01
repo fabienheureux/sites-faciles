@@ -75,9 +75,9 @@ rules:
     replace: 'template = ("sites_faciles_{app}'
     scope: templates
 
-  - search: '\{\{\ settings.{app}'
-    replace: '{{ settings.sites_faciles_{app}'
-    scope: templates
+  - search: '\ settings.{app}'
+    replace: ' settings.sites_faciles_{app}'
+    scope: all
 
   - search: '"{app}\.blocks'
     replace: '"sites_faciles.{app}.blocks'
@@ -95,34 +95,42 @@ rules:
   - search: ' content_manager.blocks.IconPickerBlock'
     replace: ' sites_faciles.content_manager.blocks.IconPickerBlock'
     scope: migrations
+    literal: true
 
   - search: 'content_manager.models.sites_faciles.content_manager'
     replace: 'sites_faciles_content_manager.models.sites_faciles.content_manager'
     scope: all
+    literal: true
 
   - search: '"blog.Person"'
     replace: '"sites_faciles_blog.Person"'
     scope: all
+    literal: true
 
   - search: '"blog.Category"'
     replace: '"sites_faciles_blog.Category"'
     scope: all
+    literal: true
 
   - search: '"blog.BlogEntryPage"'
     replace: '"sites_faciles_blog.BlogEntryPage"'
     scope: all
+    literal: true
 
   - search: '"blog.BlogIndexPage"'
     replace: '"sites_faciles_blog.BlogIndexPage"'
     scope: all
+    literal: true
 
   - search: '"events.EventEntryPage"'
     replace: '"sites_faciles_events.EventEntryPage"'
     scope: all
+    literal: true
 
   - search: '"events.EventsIndexPage"'
     replace: '"sites_faciles_events.EventsIndexPage"'
     scope: all
+    literal: true
 
   - search: '"content_manager.MegaMenu'
     replace: '"sites_faciles_content_manager.MegaMenu'
@@ -132,3 +140,4 @@ rules:
   - search: '"content_manager.ContentPage"'
     replace: '"sites_faciles_content_manager.ContentPage"'
     scope: all
+    literal: true
