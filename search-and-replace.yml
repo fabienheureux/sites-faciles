@@ -101,6 +101,11 @@ rules:
     scope: migrations
     literal: true
 
+  - search: '"content_manager.utils.'
+    replace: '"sites_faciles.content_manager.utils.'
+    scope: all
+    literal: true
+
   - search: 'content_manager.models.sites_faciles.content_manager'
     replace: 'sites_faciles_content_manager.models.sites_faciles.content_manager'
     scope: all

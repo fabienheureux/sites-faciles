@@ -29,4 +29,6 @@ class Command(shell.Command):
             "django.db.models.Exists",
             "django.db.models.OuterRef",
             "django.db.models.Subquery",
+            # Project-related custom imports
+            "sites_faciles.content_manager.utils.get_default_site",
         ]

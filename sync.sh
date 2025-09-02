@@ -1,8 +1,8 @@
 # Install deps
 pip install pyyaml
 
-# Clone repo fresh
-git clone --quiet -c advice.detachedHead=false --depth 1 --branch v2.0.0 git@github.com:numerique-gouv/sites-faciles.git sites_faciles_temp
+# Clone fresh repo
+git clone --quiet -c advice.detachedHead=false --depth 1 git@github.com:numerique-gouv/sites-faciles.git sites_faciles_temp
 cd sites_faciles_temp
 
 # Run refactor
