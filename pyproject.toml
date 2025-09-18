@@ -1,6 +1,6 @@
 [project]
 name = "sites-faciles-experiment"
-version = "2.1.0rc3"
+version = "2.1.0rc4"
 description = "Gestionnaire de contenu permettant de créer et gérer un site internet basé sur le Système de design de l’État, accessible et responsive"
 authors = [
     { name = "Sébastien Reuiller", email = "sebastien.reuiller@beta.gouv.fr" },
@@ -38,6 +38,7 @@ dependencies = [
     "faker>=37.4.0",
     "rust-just>=1.40.0",
     "mozilla-django-oidc>=4.0.1",
+    "pyyaml>=6.0.2",
 ]
 
 [dependency-groups]

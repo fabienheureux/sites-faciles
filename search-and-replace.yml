@@ -81,6 +81,10 @@ rules:
     replace: 'template = "sites_faciles_{app}/'
     scope: all
 
+  - search: '"template": "{app}/'
+    replace: '"template": "sites_faciles_{app}/'
+    scope: all
+
   - search: '\ settings.{app}'
     replace: " settings.sites_faciles_{app}"
     scope: all
