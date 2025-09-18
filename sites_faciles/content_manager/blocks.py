@@ -944,7 +944,7 @@ class BlogRecentEntriesBlock(blocks.StructBlock):
         label=_("Number of entries"), required=False, min_value=1, max_value=8, default=3
     )
     category_filter = SnippetChooserBlock("sites_faciles_blog.Category", label=_("Filter by category"), required=False)
-    tag_filter = SnippetChooserBlock("content_manager.Tag", label=_("Filter by tag"), required=False)
+    tag_filter = SnippetChooserBlock("sites_faciles_content_manager.Tag", label=_("Filter by tag"), required=False)
     author_filter = SnippetChooserBlock("sites_faciles_blog.Person", label=_("Filter by author"), required=False)
     source_filter = SnippetChooserBlock(
         "blog.Organization",
@@ -974,7 +974,7 @@ class EventsRecentEntriesBlock(blocks.StructBlock):
         label=_("Number of entries"), required=False, min_value=1, max_value=8, default=3
     )
     category_filter = SnippetChooserBlock("sites_faciles_blog.Category", label=_("Filter by category"), required=False)
-    tag_filter = SnippetChooserBlock("content_manager.Tag", label=_("Filter by tag"), required=False)
+    tag_filter = SnippetChooserBlock("sites_faciles_content_manager.Tag", label=_("Filter by tag"), required=False)
     author_filter = SnippetChooserBlock("sites_faciles_blog.Person", label=_("Filter by author"), required=False)
     source_filter = SnippetChooserBlock(
         "blog.Organization",

@@ -2913,7 +2913,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "tag_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "content_manager.Tag",
+                                                                "sites_faciles_content_manager.Tag",
                                                                 label="Filter by tag",
                                                                 required=False,
                                                             ),
@@ -5063,7 +5063,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "tag_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "content_manager.Tag",
+                                                                                        "sites_faciles_content_manager.Tag",
                                                                                         label="Filter by tag",
                                                                                         required=False,
                                                                                     ),
@@ -7092,7 +7092,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "tag_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "content_manager.Tag",
+                                                                "sites_faciles_content_manager.Tag",
                                                                 label="Filter by tag",
                                                                 required=False,
                                                             ),
@@ -8053,7 +8053,7 @@ class Migration(migrations.Migration):
                                 (
                                     "tag_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "content_manager.Tag", label="Filter by tag", required=False
+                                        "sites_faciles_content_manager.Tag", label="Filter by tag", required=False
                                     ),
                                 ),
                                 (
@@ -10988,7 +10988,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "tag_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "content_manager.Tag",
+                                                                "sites_faciles_content_manager.Tag",
                                                                 label="Filter by tag",
                                                                 required=False,
                                                             ),
@@ -13138,7 +13138,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "tag_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "content_manager.Tag",
+                                                                                        "sites_faciles_content_manager.Tag",
                                                                                         label="Filter by tag",
                                                                                         required=False,
                                                                                     ),
@@ -15167,7 +15167,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "tag_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "content_manager.Tag",
+                                                                "sites_faciles_content_manager.Tag",
                                                                 label="Filter by tag",
                                                                 required=False,
                                                             ),
@@ -16128,7 +16128,7 @@ class Migration(migrations.Migration):
                                 (
                                     "tag_filter",
                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                        "content_manager.Tag", label="Filter by tag", required=False
+                                        "sites_faciles_content_manager.Tag", label="Filter by tag", required=False
                                     ),
                                 ),
                                 (
@@ -17552,7 +17552,7 @@ class Migration(migrations.Migration):
                                                         (
                                                             "tag_filter",
                                                             wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                "content_manager.Tag",
+                                                                "sites_faciles_content_manager.Tag",
                                                                 label="Filter by tag",
                                                                 required=False,
                                                             ),
@@ -19702,7 +19702,7 @@ class Migration(migrations.Migration):
                                                                                 (
                                                                                     "tag_filter",
                                                                                     wagtail.snippets.blocks.SnippetChooserBlock(
-                                                                                        "content_manager.Tag",
+                                                                                        "sites_faciles_content_manager.Tag",
                                                                                         label="Filter by tag",
                                                                                         required=False,
                                                                                     ),

@@ -883,7 +883,7 @@ class Migration(migrations.Migration):
                     ),
                     113: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("content_manager.Tag",),
+                        ("sites_faciles_content_manager.Tag",),
                         {"label": "Filter by tag", "required": False},
                     ),
                     114: (
@@ -2204,7 +2204,7 @@ class Migration(migrations.Migration):
                     ),
                     113: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("content_manager.Tag",),
+                        ("sites_faciles_content_manager.Tag",),
                         {"label": "Filter by tag", "required": False},
                     ),
                     114: (

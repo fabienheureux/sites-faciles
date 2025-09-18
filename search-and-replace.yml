@@ -81,6 +81,10 @@ rules:
     replace: 'template = "sites_faciles_{app}/'
     scope: all
 
+  - search: 'template_name = "{app}/'
+    replace: 'template_name = "sites_faciles_{app}/'
+    scope: all
+
   - search: '"template": "{app}/'
     replace: '"template": "sites_faciles_{app}/'
     scope: all
@@ -154,5 +158,10 @@ rules:
 
   - search: '"content_manager.ContentPage"'
     replace: '"sites_faciles_content_manager.ContentPage"'
+    scope: all
+    literal: true
+
+  - search: '"content_manager.Tag"'
+    replace: '"sites_faciles_content_manager.Tag"'
     scope: all
     literal: true

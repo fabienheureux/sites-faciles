@@ -1103,7 +1103,7 @@ class Migration(migrations.Migration):
                             ),
                             128: (
                                 "wagtail.snippets.blocks.SnippetChooserBlock",
-                                ("content_manager.Tag",),
+                                ("sites_faciles_content_manager.Tag",),
                                 {"label": "Filter by tag", "required": False},
                             ),
                             129: (
@@ -2566,7 +2566,7 @@ class Migration(migrations.Migration):
                     ),
                     122: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("content_manager.Tag",),
+                        ("sites_faciles_content_manager.Tag",),
                         {"label": "Filter by tag", "required": False},
                     ),
                     123: (
@@ -4180,7 +4180,7 @@ class Migration(migrations.Migration):
                             ),
                             122: (
                                 "wagtail.snippets.blocks.SnippetChooserBlock",
-                                ("content_manager.Tag",),
+                                ("sites_faciles_content_manager.Tag",),
                                 {"label": "Filter by tag", "required": False},
                             ),
                             123: (
