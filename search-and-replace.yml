@@ -40,7 +40,6 @@ text_extensions:
 #  - literal: true -> do a literal string replace (no regex)
 #  - search & replace are strings
 rules:
-
   # ---------- Generic patterns (expanded per app) ----------
   - search: 'to="{app}\.'
     replace: 'to="sites_faciles_{app}.'
@@ -63,13 +62,12 @@ rules:
     scope: migrations
 
   - search: 'from {app}\.'
-    replace: 'from sites_faciles.{app}.'
+    replace: "from sites_faciles.{app}."
     scope: all
 
   - search: 'template="{app}/'
     replace: 'template="sites_faciles_{app}/'
     scope: all
-
 
   - search: 'include\ "{app}/'
     replace: 'include "sites_faciles_{app}/'
@@ -79,25 +77,29 @@ rules:
     replace: 'template = ("sites_faciles_{app}'
     scope: all
 
+  - search: 'template = "{app}/'
+    replace: 'template = "sites_faciles_{app}/'
+    scope: all
+
   - search: '\ settings.{app}'
-    replace: ' settings.sites_faciles_{app}'
+    replace: " settings.sites_faciles_{app}"
     scope: all
 
   - search: '"{app}\.blocks'
     replace: '"sites_faciles.{app}.blocks'
     scope: migrations
 
-  - search: 'import {app}'
-    replace: 'import sites_faciles.{app}'
+  - search: "import {app}"
+    replace: "import sites_faciles.{app}"
     scope: migrations
 
   # ---------- Special-case overrides ----------
   - search: 'content_manager\.models\.MonospaceField'
-    replace: 'sites_faciles.content_manager.models.MonospaceField'
+    replace: "sites_faciles.content_manager.models.MonospaceField"
     scope: migrations
 
-  - search: ' content_manager.blocks.IconPickerBlock'
-    replace: ' sites_faciles.content_manager.blocks.IconPickerBlock'
+  - search: " content_manager.blocks.IconPickerBlock"
+    replace: " sites_faciles.content_manager.blocks.IconPickerBlock"
     scope: migrations
     literal: true
 
@@ -106,8 +108,8 @@ rules:
     scope: all
     literal: true
 
-  - search: 'content_manager.models.sites_faciles.content_manager'
-    replace: 'sites_faciles_content_manager.models.sites_faciles.content_manager'
+  - search: "content_manager.models.sites_faciles.content_manager"
+    replace: "sites_faciles_content_manager.models.sites_faciles.content_manager"
     scope: all
     literal: true
 
@@ -143,7 +145,7 @@ rules:
 
   - search: '"content_manager.MegaMenu'
     replace: '"sites_faciles_content_manager.MegaMenu'
-    path_glob: '**/models.py'
+    path_glob: "**/models.py"
     literal: true
 
   - search: '"content_manager.ContentPage"'

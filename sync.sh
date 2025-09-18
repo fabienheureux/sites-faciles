@@ -1,12 +1,11 @@
 # Install deps
-pip install pyyaml
 
 # Clone fresh repo
-git clone --quiet -c advice.detachedHead=false --depth 1 git@github.com:numerique-gouv/sites-faciles.git sites_faciles_temp
+git clone --quiet -c advice.detachedHead=false --branch v2.1.0 --depth 1 git@github.com:numerique-gouv/sites-faciles.git sites_faciles_temp
 cd sites_faciles_temp
 
 # Run refactor
-../packagify.py
+../packagify.py -v
 
 # Cleanup
 cd ..
