@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(update_header_fields, elidable=True),
         MigrateStreamData(
-            app_name="content_manager",
+            app_name="sites_faciles_content_manager",
             model_name="ContentPage",
             field_name="body",
             operations_and_block_paths=[

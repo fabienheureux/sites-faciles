@@ -49,6 +49,10 @@ rules:
     replace: 'through="sites_faciles_{app}.'
     scope: migrations
 
+  - search: 'app_name="{app}'
+    replace: 'app_name="sites_faciles_{app}'
+    scope: migrations
+
   - search: 'apps\.get_model\(\"{app}\"'
     replace: 'apps.get_model("sites_faciles_{app}"'
     scope: migrations

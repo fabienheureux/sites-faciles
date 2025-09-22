@@ -662,7 +662,7 @@ class Migration(migrations.Migration):
             },
         ),
         wagtail.blocks.migrations.migrate_operation.MigrateStreamData(
-            app_name="content_manager",
+            app_name="sites_faciles_content_manager",
             model_name="ContentPage",
             field_name="body",
             operations_and_block_paths=[
