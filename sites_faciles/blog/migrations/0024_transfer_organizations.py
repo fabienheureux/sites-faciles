@@ -5,8 +5,8 @@ from django.utils.text import slugify
 
 
 def link_organizations(apps, schema_editor):
-    Person = apps.get_model("blog", "Person")
-    Organization = apps.get_model("blog", "Organization")
+    Person = apps.get_model("sites_faciles_blog", "Person")
+    Organization = apps.get_model("sites_faciles_blog", "Organization")
     for person in Person.objects.all():
         if person.organization:
             organization, _created = Organization.objects.get_or_create(
