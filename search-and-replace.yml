@@ -49,12 +49,18 @@ rules:
     replace: 'through="sites_faciles_{app}.'
     scope: migrations
 
-  - search: '\("{app}"'
-    replace: '("sites_faciles_{app}"'
+  - search: 'apps\.get_model\(\"\{app\}\"'
+    replace: 'apps.get_model("sites_faciles_{app}"'
     scope: migrations
 
-  - search: '"{app}"'
+  - search: '\"{app}"'
     replace: '"sites_faciles_{app}"'
+    filter: 'replaces = \[(.*?)\]'
+    scope: migrations
+
+  - search: '\"{app}"'
+    replace: '"sites_faciles_{app}"'
+    filter: 'dependencies = \[(.*?)\]'
     scope: migrations
 
   - search: '"page_type": \["{app}'
@@ -128,6 +134,11 @@ rules:
 
   - search: '"blog.Category"'
     replace: '"sites_faciles_blog.Category"'
+    scope: all
+    literal: true
+
+  - search: '"blog.Organization"'
+    replace: '"sites_faciles_blog.Organization"'
     scope: all
     literal: true
 

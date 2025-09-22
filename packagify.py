@@ -114,6 +114,7 @@ def apply_rule_to_file(path: Path, rule: dict[str, Any], dry_run: bool) -> bool:
     search: str = rule["search"]
     replace: str = rule["replace"]
     literal: bool = bool(rule.get("literal", False))
+    filter: str = rule.get("filter")
 
     try:
         text = path.read_text(encoding="utf-8")
@@ -129,7 +130,15 @@ def apply_rule_to_file(path: Path, rule: dict[str, Any], dry_run: bool) -> bool:
         new_text = text.replace(search, replace)
     else:
         try:
-            new_text, count = re.subn(search, replace, text)
+            if filter:
+                pattern = fr"{filter}"
+                matches = re.findall(pattern, text, re.DOTALL)
+                new_text = text
+                for match in matches:
+                    replaced_text, count = re.subn(search, replace, match)
+                    new_text = new_text.replace(match, replaced_text)
+            else:
+                new_text, count = re.subn(search, replace, text)
         except re.error as exc:
             logging.error("Invalid regex pattern %r in rule: %s", search, exc)
             return False

@@ -884,7 +884,7 @@ class Migration(migrations.Migration):
                     ),
                     117: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Organization",),
+                        ("sites_faciles_blog.Organization",),
                         {
                             "help_text": "The source is the organization of the post author",
                             "label": "Filter by source",
@@ -902,7 +902,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 1),
                                 ("heading_tag", 111),
-                                ("sites_faciles_blog", 112),
+                                ("blog", 112),
                                 ("entries_count", 113),
                                 ("category_filter", 114),
                                 ("tag_filter", 115),
@@ -2307,7 +2307,7 @@ class Migration(migrations.Migration):
                     ),
                     117: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Organization",),
+                        ("sites_faciles_blog.Organization",),
                         {
                             "help_text": "The source is the organization of the post author",
                             "label": "Filter by source",
@@ -2325,7 +2325,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 1),
                                 ("heading_tag", 111),
-                                ("sites_faciles_blog", 112),
+                                ("blog", 112),
                                 ("entries_count", 113),
                                 ("category_filter", 114),
                                 ("tag_filter", 115),
@@ -3631,7 +3631,7 @@ class Migration(migrations.Migration):
                     ),
                     100: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Organization",),
+                        ("sites_faciles_blog.Organization",),
                         {
                             "help_text": "The source is the organization of the post author",
                             "label": "Filter by source",
@@ -3649,7 +3649,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 24),
                                 ("heading_tag", 94),
-                                ("sites_faciles_blog", 95),
+                                ("blog", 95),
                                 ("entries_count", 96),
                                 ("category_filter", 97),
                                 ("tag_filter", 98),

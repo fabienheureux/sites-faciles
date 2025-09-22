@@ -662,7 +662,7 @@ class Migration(migrations.Migration):
             },
         ),
         wagtail.blocks.migrations.migrate_operation.MigrateStreamData(
-            app_name="sites_faciles_content_manager",
+            app_name="content_manager",
             model_name="ContentPage",
             field_name="body",
             operations_and_block_paths=[
@@ -1609,7 +1609,7 @@ class Migration(migrations.Migration):
                     ),
                     124: (
                         "wagtail.snippets.blocks.SnippetChooserBlock",
-                        ("blog.Organization",),
+                        ("sites_faciles_blog.Organization",),
                         {
                             "help_text": "The source is the organization of the post author",
                             "label": "Filter by source",
@@ -1627,7 +1627,7 @@ class Migration(migrations.Migration):
                             [
                                 ("title", 1),
                                 ("heading_tag", 118),
-                                ("sites_faciles_blog", 119),
+                                ("blog", 119),
                                 ("entries_count", 120),
                                 ("category_filter", 121),
                                 ("tag_filter", 122),
@@ -3785,7 +3785,7 @@ class Migration(migrations.Migration):
                             ),
                             124: (
                                 "wagtail.snippets.blocks.SnippetChooserBlock",
-                                ("blog.Organization",),
+                                ("sites_faciles_blog.Organization",),
                                 {
                                     "help_text": "The source is the organization of the post author",
                                     "label": "Filter by source",
@@ -3803,7 +3803,7 @@ class Migration(migrations.Migration):
                                     [
                                         ("title", 1),
                                         ("heading_tag", 118),
-                                        ("sites_faciles_blog", 119),
+                                        ("blog", 119),
                                         ("entries_count", 120),
                                         ("category_filter", 121),
                                         ("tag_filter", 122),

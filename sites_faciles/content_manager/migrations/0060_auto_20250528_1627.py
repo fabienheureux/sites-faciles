@@ -6,8 +6,8 @@ from itertools import chain
 
 
 def migrate_obsolete_fields(apps, schema_editor):
-    ContentPage = apps.get_model("sites_faciles_content_manager", "ContentPage")
-    CatalogIndexPage = apps.get_model("sites_faciles_content_manager", "CatalogIndexPage")
+    ContentPage = apps.get_model("content_manager", "ContentPage")
+    CatalogIndexPage = apps.get_model("content_manager", "CatalogIndexPage")
 
     pages = chain(ContentPage.objects.all(), CatalogIndexPage.objects.all())
 
