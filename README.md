@@ -16,37 +16,27 @@ Un script de synchronisation a donc été écrit qui vise à :
 
 Le script `packagify.py` permet de synchroniser ce fork avec le dépôt Sites Faciles officiel et d'appliquer automatiquement les transformations nécessaires à l'empaquetage.
 
-### Synchroniser avec une nouvelle version
+### Utilisation
 
 ```bash
 # Synchroniser avec la version v2.1.0
-./packagify.py sync v2.1.0
+./packagify.py v2.1.0
 
 # Avec mode dry-run pour voir les changements sans les appliquer
-./packagify.py sync v2.1.0 --dry-run -v
+./packagify.py v2.1.0 --dry-run -v
 
 # Avec une configuration personnalisée
-./packagify.py sync v2.2.0 -c ma-config.yml
-```
-
-### Appliquer uniquement les transformations
-
-Si vous avez déjà récupéré le code manuellement et souhaitez uniquement appliquer les transformations :
-
-```bash
-# Appliquer les règles de refactoring au répertoire courant
-./packagify.py refactor -v
-
-# En mode dry-run
-./packagify.py refactor --dry-run -vv
+./packagify.py v2.2.0 -c ma-config.yml
 ```
 
 ### Options disponibles
 
+- `tag` : Version git à synchroniser (requis, ex: v2.1.0)
 - `-v, -vv` : Augmente la verbosité des logs
 - `--dry-run` : Simule les changements sans modifier les fichiers
 - `-j N` : Nombre de threads pour le traitement parallèle
-- `-c CONFIG` : Chemin vers le fichier de configuration YAML
+- `-c CONFIG` : Chemin vers le fichier de configuration YAML (défaut: search-and-replace.yml)
+- `--repo URL` : URL du dépôt à cloner (défaut: git@github.com:numerique-gouv/sites-faciles.git)
 
 ---
 

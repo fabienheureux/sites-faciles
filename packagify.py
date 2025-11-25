@@ -1,11 +1,9 @@
 #!/usr/bin/env -S uv run python
 """
 packagify.py
-A tool for syncing and refactoring the sites-faciles codebase.
+A tool for syncing the sites-faciles codebase and applying transformations.
 
-Commands:
-  sync    - Clone a specific version and apply refactoring rules
-  refactor - Apply refactoring rules to the current directory
+Clones a specific version from upstream and applies namespacing transformations.
 """
 
 from __future__ import annotations
@@ -106,17 +104,6 @@ def git_clone(repo_url: str, tag: str, target_dir: Path) -> None:
     logging.info("✅ Clone completed")
 
 
-def git_restore_files(pattern: str, source: str = "fork/main") -> None:
-    """Restore files from a git source."""
-    logging.info("🔄 Restoring %s from %s", pattern, source)
-    cmd = ["git", "restore", f"--source={source}", pattern]
-
-    try:
-        run_command(cmd, check=False)
-    except Exception as exc:
-        logging.warning("Could not restore %s: %s", pattern, exc)
-
-
 # -- Configuration Loading ----------------------------------------------------
 
 
@@ -138,8 +125,9 @@ def load_config(path: Path) -> dict[str, Any]:
 
 
 def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
-    """Expand {app} placeholders into concrete rules and validate minimal schema."""
+    """Expand {app} and {package_name} placeholders into concrete rules and validate minimal schema."""
     apps: list[str] = config.get("apps", [])
+    package_name: str = config.get("package_name", "sites_faciles")
     raw_rules: list[dict[str, Any]] = config.get("rules", []) or []
 
     expanded: list[dict[str, Any]] = []
@@ -151,6 +139,10 @@ def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
             logging.warning("Skipping invalid rule (missing search/replace): %s", rule)
             continue
 
+        # Replace {package_name} placeholder first
+        search = search.replace("{package_name}", package_name)
+        replace = replace.replace("{package_name}", package_name)
+
         if "{app}" in (search + replace) and apps:
             for app in apps:
                 expanded.append(
@@ -161,7 +153,7 @@ def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
                     }
                 )
         else:
-            expanded.append(rule)
+            expanded.append({**rule, "search": search, "replace": replace})
 
     logging.info("🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded))
     return expanded
@@ -273,11 +265,11 @@ def apply_rule_to_file(path: Path, rule: dict[str, Any], dry_run: bool) -> bool:
 # -- Directory Operations -----------------------------------------------------
 
 
-def rename_template_dirs(apps: list[str], dry_run: bool = False) -> None:
-    """Move {app}/templates/{app} → {app}/templates/sites_faciles_{app}."""
+def rename_template_dirs(apps: list[str], package_name: str, dry_run: bool = False) -> None:
+    """Move {app}/templates/{app} → {app}/templates/{package_name}_{app}."""
     for app in apps:
         src = Path(app) / "templates" / app
-        dst = Path(app) / "templates" / f"sites_faciles_{app}"
+        dst = Path(app) / "templates" / f"{package_name}_{app}"
 
         if not src.exists():
             logging.debug("⏭️  No template dir to move for app %r: %s", app, src)
@@ -300,8 +292,8 @@ def rename_template_dirs(apps: list[str], dry_run: bool = False) -> None:
 # -- Refactoring Logic --------------------------------------------------------
 
 
-def run_refactor(config_path: Path, dry_run: bool, jobs: int | None) -> None:
-    """Run the refactoring process on the current directory."""
+def _apply_transformations(config_path: Path, dry_run: bool, jobs: int | None) -> None:
+    """Apply transformation rules to the current directory."""
     # Load configuration
     config = load_config(config_path)
     scopes: dict[str, str] = config.get("scopes", {})
@@ -334,53 +326,47 @@ def run_refactor(config_path: Path, dry_run: bool, jobs: int | None) -> None:
     # Expand rules
     expanded_rules = expand_rules(config)
 
-    # Build file-to-rules mapping to avoid redundant processing
-    file_to_rules: dict[Path, list[dict[str, Any]]] = {}
-
-    for rule in expanded_rules:
-        files = get_files_for_rule(rule, scopes)
-
-        for f in files:
-            path = Path(f)
-            if not is_text_file(path, text_exts):
-                continue
-
-            if path not in file_to_rules:
-                file_to_rules[path] = []
-            file_to_rules[path].append(rule)
-
-    logging.info("📊 Found %d files to process", len(file_to_rules))
-
-    # Process files with multithreading
+    # Process files: apply each rule to all matching files
     total_files_changed = 0
+    scanned_files = 0
+    all_files_processed = set()
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as executor:
-        futures: dict[concurrent.futures.Future[bool], Path] = {}
+        futures: list[concurrent.futures.Future[bool]] = []
 
-        for path, rules in file_to_rules.items():
-            for rule in rules:
+        for rule in expanded_rules:
+            files = get_files_for_rule(rule, scopes)
+
+            for f in files:
+                path = Path(f)
+                if not is_text_file(path, text_exts):
+                    continue
+
+                all_files_processed.add(path)
                 future = executor.submit(apply_rule_to_file, path, rule, dry_run)
-                futures[future] = path
+                futures.append(future)
+
+        scanned_files = len(all_files_processed)
 
         for future in concurrent.futures.as_completed(futures):
-            path = futures[future]
             try:
                 if future.result():
                     total_files_changed += 1
             except Exception as exc:
-                logging.error("Worker failed for %s: %s", path, exc)
+                logging.error("Worker failed: %s", exc)
 
     logging.warning(
         "🎬 Finished replacements %s: scanned %d files, %d file(s) changed",
         "(dry-run)" if dry_run else "",
-        len(file_to_rules),
+        scanned_files,
         total_files_changed,
     )
 
     # Rename template directories
     apps: list[str] = config.get("apps", [])
+    package_name: str = config.get("package_name", "sites_faciles")
     if apps:
-        rename_template_dirs(apps, dry_run)
+        rename_template_dirs(apps, package_name, dry_run)
 
 
 # -- Sync Command -------------------------------------------------------------
@@ -394,8 +380,12 @@ def run_sync(
     repo_url: str = "git@github.com:numerique-gouv/sites-faciles.git",
 ) -> None:
     """Sync sites-faciles from upstream and apply refactoring."""
-    temp_dir = Path("sites_faciles_temp")
-    target_dir = Path("sites_faciles")
+    # Load config to get package_name
+    config = load_config(config_path)
+    package_name: str = config.get("package_name", "sites_faciles")
+
+    temp_dir = Path(f"{package_name}_temp")
+    target_dir = Path(package_name)
 
     # Clean up temp directory if it exists
     if temp_dir.exists():
@@ -405,15 +395,15 @@ def run_sync(
     # Clone repository
     git_clone(repo_url, tag, temp_dir)
 
-    # Change to temp directory and run refactor
+    # Change to temp directory and apply transformations
     original_dir = Path.cwd()
     try:
         os.chdir(temp_dir)
-        logging.info("🔧 Running refactoring...")
+        logging.info("🔧 Applying transformations...")
 
         # Adjust config path to be relative to temp dir
         config_path_adjusted = Path("..") / config_path
-        run_refactor(config_path_adjusted, dry_run, jobs)
+        _apply_transformations(config_path_adjusted, dry_run, jobs)
 
     finally:
         os.chdir(original_dir)
@@ -438,9 +428,24 @@ def run_sync(
             else:
                 full_path.unlink()
 
-    # Restore specific files from fork
-    git_restore_files("**/apps.py")
-    git_restore_files("**/__init__.py")
+    # Create main apps.py from template
+    template_path = Path("templates") / "apps.py.template"
+    if template_path.exists():
+        logging.info("📝 Creating main apps.py from template")
+        template_content = template_path.read_text(encoding="utf-8")
+
+        # Transform placeholders
+        package_name_title = package_name.replace("_", " ").title()
+        class_name = "".join(word.capitalize() for word in package_name.split("_"))
+
+        apps_content = template_content.replace("{PackageName}", class_name)
+        apps_content = apps_content.replace("{package_name}", package_name)
+        apps_content = apps_content.replace("{package_verbose_name}", package_name_title)
+
+        apps_file = target_dir / "apps.py"
+        apps_file.write_text(apps_content, encoding="utf-8")
+    else:
+        logging.warning("⚠️  Template file not found: %s", template_path)
 
     logging.warning("✅ Sync completed successfully!")
 
@@ -450,78 +455,39 @@ def run_sync(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Sync and refactor the sites-faciles codebase",
+        description="Sync sites-faciles from upstream and apply transformations",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
-    subparsers = parser.add_subparsers(dest="command", help="Command to run")
-
-    # Sync command
-    sync_parser = subparsers.add_parser(
-        "sync",
-        help="Clone a specific version and apply refactoring",
-    )
-    sync_parser.add_argument(
+    parser.add_argument(
         "tag",
         help="Git tag or branch to sync (e.g., v2.1.0)",
     )
-    sync_parser.add_argument(
+    parser.add_argument(
         "-c",
         "--config",
         type=Path,
         default=Path("search-and-replace.yml"),
         help="Path to YAML config (default: search-and-replace.yml)",
     )
-    sync_parser.add_argument(
+    parser.add_argument(
         "--repo",
         default="git@github.com:numerique-gouv/sites-faciles.git",
         help="Repository URL to clone from",
     )
-    sync_parser.add_argument(
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show changes without modifying files",
     )
-    sync_parser.add_argument(
+    parser.add_argument(
         "-v",
         "--verbose",
         action="count",
         default=0,
         help="Increase verbosity (-v, -vv)",
     )
-    sync_parser.add_argument(
-        "-j",
-        "--jobs",
-        type=int,
-        default=None,
-        help="Number of worker threads (default: CPU count)",
-    )
-
-    # Refactor command
-    refactor_parser = subparsers.add_parser(
-        "refactor",
-        help="Apply refactoring rules to current directory",
-    )
-    refactor_parser.add_argument(
-        "-c",
-        "--config",
-        type=Path,
-        default=Path("search-and-replace.yml"),
-        help="Path to YAML config (default: search-and-replace.yml)",
-    )
-    refactor_parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Show changes without modifying files",
-    )
-    refactor_parser.add_argument(
-        "-v",
-        "--verbose",
-        action="count",
-        default=0,
-        help="Increase verbosity (-v, -vv)",
-    )
-    refactor_parser.add_argument(
+    parser.add_argument(
         "-j",
         "--jobs",
         type=int,
@@ -531,27 +497,15 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    # Show help if no command specified
-    if not args.command:
-        parser.print_help()
-        sys.exit(1)
-
     setup_logger(args.verbose)
 
-    if args.command == "sync":
-        run_sync(
-            tag=args.tag,
-            config_path=args.config,
-            dry_run=args.dry_run,
-            jobs=args.jobs,
-            repo_url=args.repo,
-        )
-    elif args.command == "refactor":
-        run_refactor(
-            config_path=args.config,
-            dry_run=args.dry_run,
-            jobs=args.jobs,
-        )
+    run_sync(
+        tag=args.tag,
+        config_path=args.config,
+        dry_run=args.dry_run,
+        jobs=args.jobs,
+        repo_url=args.repo,
+    )
 
 
 if __name__ == "__main__":

@@ -1,5 +1,8 @@
 # search-and-replace.yml
 
+# Package name for namespacing (used in {package_name} placeholder)
+package_name: sites_faciles
+
 apps:
   - blog
   - events
@@ -40,143 +43,149 @@ text_extensions:
 #  - literal: true -> do a literal string replace (no regex)
 #  - search & replace are strings
 rules:
+  # ---------- Apps configuration ----------
+  # Transform app name in AppConfig classes
+  - search: '(    name = ")({app})(")'
+    replace: '\1{package_name}.\2\3\n    label = "{package_name}_\2"'
+    path_glob: "**/apps.py"
+
   # ---------- Generic patterns (expanded per app) ----------
   - search: 'to="{app}\.'
-    replace: 'to="sites_faciles_{app}.'
+    replace: 'to="{package_name}_{app}.'
     scope: migrations
 
   - search: 'through="{app}\.'
-    replace: 'through="sites_faciles_{app}.'
+    replace: 'through="{package_name}_{app}.'
     scope: migrations
 
   - search: 'app_name="{app}'
-    replace: 'app_name="sites_faciles_{app}'
+    replace: 'app_name="{package_name}_{app}'
     scope: migrations
 
   - search: 'apps\.get_model\(\"{app}\"'
-    replace: 'apps.get_model("sites_faciles_{app}"'
+    replace: 'apps.get_model("{package_name}_{app}"'
     scope: migrations
 
   - search: '\"{app}"'
-    replace: '"sites_faciles_{app}"'
+    replace: '"{package_name}_{app}"'
     filter: 'replaces = \[(.*?)\]'
     scope: migrations
 
   - search: '\"{app}"'
-    replace: '"sites_faciles_{app}"'
+    replace: '"{package_name}_{app}"'
     filter: 'dependencies = \[(.*?)\]'
     scope: migrations
 
   - search: '"page_type": \["{app}'
-    replace: '"page_type": ["sites_faciles_{app}'
+    replace: '"page_type": ["{package_name}_{app}'
     scope: migrations
 
   - search: 'from {app}\.'
-    replace: "from sites_faciles.{app}."
+    replace: "from {package_name}.{app}."
     scope: all
 
   - search: 'template="{app}/'
-    replace: 'template="sites_faciles_{app}/'
+    replace: 'template="{package_name}_{app}/'
     scope: all
 
   - search: 'include\ "{app}/'
-    replace: 'include "sites_faciles_{app}/'
+    replace: 'include "{package_name}_{app}/'
     scope: templates
 
   - search: 'template = \("{app}'
-    replace: 'template = ("sites_faciles_{app}'
+    replace: 'template = ("{package_name}_{app}'
     scope: all
 
   - search: 'template = "{app}/'
-    replace: 'template = "sites_faciles_{app}/'
+    replace: 'template = "{package_name}_{app}/'
     scope: all
 
   - search: 'template_name = "{app}/'
-    replace: 'template_name = "sites_faciles_{app}/'
+    replace: 'template_name = "{package_name}_{app}/'
     scope: all
 
   - search: '"template": "{app}/'
-    replace: '"template": "sites_faciles_{app}/'
+    replace: '"template": "{package_name}_{app}/'
     scope: all
 
   - search: '\ settings.{app}'
-    replace: " settings.sites_faciles_{app}"
+    replace: " settings.{package_name}_{app}"
     scope: all
 
   - search: '"{app}\.blocks'
-    replace: '"sites_faciles.{app}.blocks'
+    replace: '"{package_name}.{app}.blocks'
     scope: migrations
 
   - search: "import {app}"
-    replace: "import sites_faciles.{app}"
+    replace: "import {package_name}.{app}"
     scope: migrations
 
   # ---------- Special-case overrides ----------
   - search: 'content_manager\.models\.MonospaceField'
-    replace: "sites_faciles.content_manager.models.MonospaceField"
+    replace: "{package_name}.content_manager.models.MonospaceField"
     scope: migrations
 
   - search: " content_manager.blocks.IconPickerBlock"
-    replace: " sites_faciles.content_manager.blocks.IconPickerBlock"
+    replace: " {package_name}.content_manager.blocks.IconPickerBlock"
     scope: migrations
     literal: true
 
   - search: '"content_manager.utils.'
-    replace: '"sites_faciles.content_manager.utils.'
+    replace: '"{package_name}.content_manager.utils.'
     scope: all
     literal: true
 
-  - search: "content_manager.models.sites_faciles.content_manager"
-    replace: "sites_faciles_content_manager.models.sites_faciles.content_manager"
+  - search: "content_manager.models.{package_name}.content_manager"
+    replace: "{package_name}_content_manager.models.{package_name}.content_manager"
     scope: all
     literal: true
 
   - search: '"blog.Person"'
-    replace: '"sites_faciles_blog.Person"'
+    replace: '"{package_name}_blog.Person"'
     scope: all
     literal: true
 
   - search: '"blog.Category"'
-    replace: '"sites_faciles_blog.Category"'
+    replace: '"{package_name}_blog.Category"'
     scope: all
     literal: true
 
   - search: '"blog.Organization"'
-    replace: '"sites_faciles_blog.Organization"'
+    replace: '"{package_name}_blog.Organization"'
     scope: all
     literal: true
 
   - search: '"blog.BlogEntryPage"'
-    replace: '"sites_faciles_blog.BlogEntryPage"'
+    replace: '"{package_name}_blog.BlogEntryPage"'
     scope: all
     literal: true
 
   - search: '"blog.BlogIndexPage"'
-    replace: '"sites_faciles_blog.BlogIndexPage"'
+    replace: '"{package_name}_blog.BlogIndexPage"'
     scope: all
     literal: true
 
   - search: '"events.EventEntryPage"'
-    replace: '"sites_faciles_events.EventEntryPage"'
+    replace: '"{package_name}_events.EventEntryPage"'
     scope: all
     literal: true
 
   - search: '"events.EventsIndexPage"'
-    replace: '"sites_faciles_events.EventsIndexPage"'
+    replace: '"{package_name}_events.EventsIndexPage"'
     scope: all
     literal: true
 
   - search: '"content_manager.MegaMenu'
-    replace: '"sites_faciles_content_manager.MegaMenu'
+    replace: '"{package_name}_content_manager.MegaMenu'
     path_glob: "**/models.py"
     literal: true
 
   - search: '"content_manager.ContentPage"'
-    replace: '"sites_faciles_content_manager.ContentPage"'
+    replace: '"{package_name}_content_manager.ContentPage"'
     scope: all
     literal: true
 
   - search: '"content_manager.Tag"'
-    replace: '"sites_faciles_content_manager.Tag"'
+    replace: '"{package_name}_content_manager.Tag"'
     scope: all
     literal: true
