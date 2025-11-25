@@ -1,0 +1,12 @@
+[project]
+name = "demo"
+version = "0.1.0"
+description = "Demo Wagtail site using sites_faciles"
+readme = "README.md"
+requires-python = ">=3.11, <4.0"
+dependencies = [
+    "sites-faciles",
+]
+
+[tool.uv.sources]
+sites-faciles = { path = "../sites_faciles", editable = true }

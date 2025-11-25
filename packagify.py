@@ -418,8 +418,8 @@ def run_sync(
         shutil.rmtree(target_dir)
     shutil.move(str(temp_dir), str(target_dir))
 
-    # Cleanup unwanted directories
-    for path in [".git", ".github", "pyproject.toml"]:
+    # Cleanup unwanted directories and files
+    for path in [".git", ".github"]:
         full_path = target_dir / path
         if full_path.exists():
             logging.debug("Removing %s", full_path)
@@ -428,15 +428,22 @@ def run_sync(
             else:
                 full_path.unlink()
 
-    # Create main apps.py from template
-    template_path = Path("templates") / "apps.py.template"
-    if template_path.exists():
-        logging.info("📝 Creating main apps.py from template")
-        template_content = template_path.read_text(encoding="utf-8")
+    # Remove upstream's build files (we'll create our own)
+    for build_file in ["pyproject.toml", "setup.py", "setup.cfg"]:
+        build_path = target_dir / build_file
+        if build_path.exists():
+            logging.debug("Removing upstream %s", build_file)
+            build_path.unlink()
 
-        # Transform placeholders
-        package_name_title = package_name.replace("_", " ").title()
-        class_name = "".join(word.capitalize() for word in package_name.split("_"))
+    # Transform placeholders for templates
+    package_name_title = package_name.replace("_", " ").title()
+    class_name = "".join(word.capitalize() for word in package_name.split("_"))
+
+    # Create main apps.py from template
+    apps_template = Path("templates") / "apps.py.template"
+    if apps_template.exists():
+        logging.info("📝 Creating main apps.py from template")
+        template_content = apps_template.read_text(encoding="utf-8")
 
         apps_content = template_content.replace("{PackageName}", class_name)
         apps_content = apps_content.replace("{package_name}", package_name)
@@ -445,7 +452,20 @@ def run_sync(
         apps_file = target_dir / "apps.py"
         apps_file.write_text(apps_content, encoding="utf-8")
     else:
-        logging.warning("⚠️  Template file not found: %s", template_path)
+        logging.warning("⚠️  Template file not found: %s", apps_template)
+
+    # Create pyproject.toml from template
+    pyproject_template = Path("templates") / "pyproject.toml.template"
+    if pyproject_template.exists():
+        logging.info("📝 Creating pyproject.toml from template")
+        template_content = pyproject_template.read_text(encoding="utf-8")
+
+        pyproject_content = template_content.replace("{package_name}", package_name)
+
+        pyproject_file = target_dir / "pyproject.toml"
+        pyproject_file.write_text(pyproject_content, encoding="utf-8")
+    else:
+        logging.warning("⚠️  Template file not found: %s", pyproject_template)
 
     logging.warning("✅ Sync completed successfully!")
 

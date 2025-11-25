@@ -97,17 +97,12 @@ INSTALLED_APPS.extend(
         "sites_faciles.blog",
         "sites_faciles.content_manager",
         "sites_faciles.events",
-        "sass_processor",
         "wagtail.contrib.settings",
         "wagtail_modeladmin",
         "wagtailmenus",
         "wagtailmarkdown",
     ]
 )
-
-STATICFILES_FINDERS.extend([
-    "sass_processor.finders.CssFinder",
-])
 ```  
 - Éventuellement **overrider le template de base de Sites Faciles** pour utiliser directement les modèles de page proposés
 ```html
