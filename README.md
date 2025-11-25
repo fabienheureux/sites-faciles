@@ -1,32 +1,46 @@
-# Sites Faciles - Expérimentation sous forme de package
+# Sites Faciles - Package Python
 
-Sites Faciles est un gestionnaire de contenu permettant de créer et gérer un site internet basé sur le Système de design de l'État, accessible et responsive.
-Développé sous forme de site Wagtail, il n'est à l'heure actuelle pas possible de l'utiliser comme dépendance d'un projet Wagtail existant.
+Ce dépôt contient les outils permettant de transformer [Sites Faciles](https://github.com/numerique-gouv/sites-faciles) en package Python réutilisable.
 
-Le projet courant vise cet objectif.
+**Package publié :** [sites-faciles sur PyPI](https://pypi.org/project/sites-faciles/)
 
-C'est un soft-fork, au sens où aucune fonctionnalité ne sera ajoutée via Sites Faciles dans ce fork.
-Cependant une synchronisation directe des deux dépôts n'est pas possible car l'empaquetage de Sites Faciles nécessite de déplacer des fichiers, ce qui fausse la synchronisation.
+## 🎯 Objectif
 
-Un script de synchronisation a donc été écrit qui vise à :
-- déplacer l'arborescence dans un sous-dossier
-- namespacer tout ce qui doit l'être dans le code source de Sites Faciles
+Sites Faciles est un gestionnaire de contenu basé sur Wagtail et le Système de design de l'État (DSFR). Ce projet le rend installable comme dépendance dans d'autres projets Wagtail.
+
+C'est un soft-fork : aucune fonctionnalité n'est ajoutée, seule la structure du code est adaptée pour l'empaquetage (déplacement de fichiers, ajout de namespaces).
 
 ## 🔄 Synchronisation avec le dépôt upstream
 
-Le script `packagify.py` permet de synchroniser ce fork avec le dépôt Sites Faciles officiel et d'appliquer automatiquement les transformations nécessaires à l'empaquetage.
+Le script `paquet_facile.py` permet de synchroniser ce fork avec le dépôt Sites Faciles officiel et d'appliquer automatiquement les transformations nécessaires à l'empaquetage.
 
-### Utilisation
+### Structure générée
+
+Le script crée une structure de package Python standard :
+
+```
+sites_faciles/              # Racine du package
+├── pyproject.toml         # Configuration du package
+├── README.md             # Documentation du package
+└── sites_faciles/        # Code Python
+    ├── __init__.py
+    ├── apps.py
+    ├── blog/
+    ├── content_manager/
+    └── ...
+```
+
+### Utilisation du script
 
 ```bash
 # Synchroniser avec la version v2.1.0
-./packagify.py v2.1.0
+./paquet_facile.py v2.1.0
 
-# Avec mode dry-run pour voir les changements sans les appliquer
-./packagify.py v2.1.0 --dry-run -v
+# Mode dry-run (voir les changements sans les appliquer)
+./paquet_facile.py v2.1.0 --dry-run -v
 
 # Avec une configuration personnalisée
-./packagify.py v2.2.0 -c ma-config.yml
+./paquet_facile.py v2.2.0 -c ma-config.yml
 ```
 
 ### Options disponibles
@@ -35,116 +49,67 @@ Le script `packagify.py` permet de synchroniser ce fork avec le dépôt Sites Fa
 - `-v, -vv` : Augmente la verbosité des logs
 - `--dry-run` : Simule les changements sans modifier les fichiers
 - `-j N` : Nombre de threads pour le traitement parallèle
-- `-c CONFIG` : Chemin vers le fichier de configuration YAML (défaut: search-and-replace.yml)
-- `--repo URL` : URL du dépôt à cloner (défaut: git@github.com:numerique-gouv/sites-faciles.git)
+- `-c CONFIG` : Configuration YAML (défaut: search-and-replace.yml)
+- `--repo URL` : URL du dépôt source
 
----
+### Configuration
 
-Pour l'utilisation de Sites Faciles, voir le [README](./sites_faciles/README.md) original.
+Le fichier `search-and-replace.yml` permet de configurer :
+- Le nom du package (`package_name`)
+- Les règles de transformation du code
+- Les applications Django à inclure
 
----
+Le versioning suit celui de Sites Faciles (tags iso).
 
-Le versionning et les tags suit de manière iso ceux de Sites Faciles.
+## 📦 Utilisation du package
 
-## 🙋‍♂️ Comment tester 
-
-### Utiliser le package local dans un autre projet
-
-Pour tester le package généré dans `sites_faciles/` depuis un autre projet local :
-
-1. **Installer le package en mode développement** depuis votre autre projet :
+### Installation locale (développement)
 
 ```bash
-# Avec pip
+# Depuis un autre projet
 pip install -e /chemin/vers/sites-faciles/sites_faciles
-
-# Avec poetry
-poetry add --editable /chemin/vers/sites-faciles/sites_faciles
-
-# Avec uv
-uv add --editable /chemin/vers/sites-faciles/sites_faciles
 ```
 
-2. **Continuer avec la configuration Django** (voir ci-dessous)
+### Installation depuis PyPI
 
-Les modifications apportées au package `sites_faciles/` seront immédiatement visibles dans votre projet sans besoin de réinstallation.
-
-### Utiliser le package publié
-
-**Pour le tester dans un projet wagtail existant** (⚠ c'est hautement expérimental, à ne tester que sur un projet local) :
-- `poetry add sites-faciles-experiment` ou `pip install sites-faciles-experiment`
-- ajouter quelques **settings** nécessaires au bon fonctionnement du projet, à savoir 
-```py
-TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                # ...
-                "wagtailmenus.context_processors.wagtailmenus",
-                "sites_faciles.content_manager.context_processors.skiplinks",
-                "sites_faciles.content_manager.context_processors.mega_menus",
-            ],
-        },
-    },
-]
-
-INSTALLED_APPS.extend(
-    [
-        "sites_faciles",
-        "sites_faciles.blog",
-        "sites_faciles.content_manager",
-        "sites_faciles.events",
-        "wagtail.contrib.settings",
-        "wagtail_modeladmin",
-        "wagtail.contrib.typed_table_block",
-        "wagtail.contrib.routable_page",
-        "wagtailmenus",
-        "wagtailmarkdown",
-    ]
-)
-```  
-- Éventuellement **overrider le template de base de Sites Faciles** pour utiliser directement les modèles de page proposés
-```html
-{# sites_faciles/base.html #}
-
-{% extends "votre_wagtail_existant/base.html" %}
-
-{# Fournir un block content dans lequel les modèles de pages de sites faciles peuvent render le contenu #}
-{% block content %}{% endblock %}
-```
-- Sinon utiliser le **champ streamfield sur un modèle existant**
-```py 
-# models.py 
-from sites_faciles.content_manager.blocks import STREAMFIELD_COMMON_BLOCKS
-
-# ... 
-
-class CMSPage(Page):
-    body = StreamField(
-        STREAMFIELD_COMMON_BLOCKS,
-        blank=True,
-        use_json_field=True,
-    )
+```bash
+pip install sites-faciles
 ```
 
-- Voir la PR en cours côté [quefairemesdechets / longue vie aux objets](https://github.com/incubateur-ademe/quefairedemesobjets/pull/1375/files) pour l'ajout de wagtail + sites faciles à un projet Django
+### Configuration Django
 
-## 🔍 Quelques infos / observations en vrac 
+Voir le [README du package](./sites_faciles/README.md) pour la configuration complète.
 
-- On a fait une solution _quick&dirty_ pour évaluer la faisabilité, on récupère **tout** : les modèles, les templates etc
-- Idéalement il serait intéressant de pouvoir importer que le champ streamfield avec le rendering qui va bien, mais comme de nombreux blocs dépendent de `blog` et `event`, on se retrouve à devoir ajouter ces apps. Donc à voir pour rendre ça plus modulaire 
-- Il y a un certains nombres de dépendances nécessaires à Sites Faciles qui sont normalement gérées par le wagtail existant qui accueille `sites-faciles-experiment` : `gunicorn`, `dj-database-url`...
-- La dépendance à sass semble superflue, pourrait-on imaginer s'en passer ?
+Exemple minimal :
 
-## ✅ Reste à faire 
+```python
+INSTALLED_APPS.extend([
+    "dsfr",
+    "sites_faciles",
+    "sites_faciles.blog",
+    "sites_faciles.content_manager",
+    "sites_faciles.events",
+    "wagtail.contrib.settings",
+    "wagtail_modeladmin",
+    "wagtailmenus",
+    "wagtailmarkdown",
+])
+```
 
-- [ ] Voir comment rendre une éventuelle refacto rétro compatible avec les sites déjà déployés
-- [ ] Rendre le streamfield de `content_manager` plus modulaire pour le rendre utilisable sans les dépendances aux apps blog et event
-- [ ] Définir le scope
-  - [ ] SSO / proconnect ? 
-  - [ ] Streamfield
-  - [ ] Modèles de page
-  - [ ] Config wagtail
+## 🧪 Projet de démonstration
+
+Le répertoire `demo/` contient un projet Wagtail minimal utilisant le package.
+
+```bash
+cd demo
+uv sync
+uv run python manage.py migrate
+uv run python manage.py runserver
+```
+
+## 📚 Ressources
+
+- **Documentation complète :** Voir le [README du package](./sites_faciles/README.md)
+- **Projet original :** [Sites Faciles sur GitHub](https://github.com/numerique-gouv/sites-faciles)
+- **Package PyPI :** [sites-faciles](https://pypi.org/project/sites-faciles/)
+- **Exemple d'intégration :** [PR Que Faire de Mes Objets](https://github.com/incubateur-ademe/quefairedemesobjets/pull/1375)

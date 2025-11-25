@@ -1,7 +1,7 @@
 # search-and-replace.yml
 
 # Package name for namespacing (used in {package_name} placeholder)
-package_name: sites_faciles
+package_name: wagtail_dsfr
 
 apps:
   - blog
