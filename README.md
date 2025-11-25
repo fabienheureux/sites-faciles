@@ -58,6 +58,29 @@ Le versionning et les tags suit de manière iso ceux de Sites Faciles.
 
 ## 🙋‍♂️ Comment tester 
 
+### Utiliser le package local dans un autre projet
+
+Pour tester le package généré dans `sites_faciles/` depuis un autre projet local :
+
+1. **Installer le package en mode développement** depuis votre autre projet :
+
+```bash
+# Avec pip
+pip install -e /chemin/vers/sites-faciles/sites_faciles
+
+# Avec poetry
+poetry add --editable /chemin/vers/sites-faciles/sites_faciles
+
+# Avec uv
+uv add --editable /chemin/vers/sites-faciles/sites_faciles
+```
+
+2. **Continuer avec la configuration Django** (voir ci-dessous)
+
+Les modifications apportées au package `sites_faciles/` seront immédiatement visibles dans votre projet sans besoin de réinstallation.
+
+### Utiliser le package publié
+
 **Pour le tester dans un projet wagtail existant** (⚠ c'est hautement expérimental, à ne tester que sur un projet local) :
 - `poetry add sites-faciles-experiment` ou `pip install sites-faciles-experiment`
 - ajouter quelques **settings** nécessaires au bon fonctionnement du projet, à savoir 
