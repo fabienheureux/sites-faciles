@@ -445,6 +445,7 @@ def run_sync(
 
     # Transform placeholders for templates
     package_name_title = package_name.replace("_", " ").title()
+    package_name_kebab = package_name.replace("_", "-")
     class_name = "".join(word.capitalize() for word in package_name.split("_"))
 
     # Create main apps.py from template
