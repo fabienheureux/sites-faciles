@@ -448,6 +448,9 @@ def run_sync(
     package_name_kebab = package_name.replace("_", "-")
     class_name = "".join(word.capitalize() for word in package_name.split("_"))
 
+    # Extract version from tag (remove leading 'v' if present)
+    version = tag.lstrip("v")
+
     # Create main apps.py from template
     apps_template = Path("templates") / "apps.py.template"
     if apps_template.exists():
@@ -475,6 +478,7 @@ def run_sync(
         pyproject_content = pyproject_content.replace(
             "{package_name_kebab}", package_name_kebab
         )
+        pyproject_content = pyproject_content.replace("{version}", version)
 
         pyproject_file = package_root / "pyproject.toml"
         pyproject_file.write_text(pyproject_content, encoding="utf-8")
