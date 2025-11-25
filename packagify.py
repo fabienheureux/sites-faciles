@@ -155,7 +155,9 @@ def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
         else:
             expanded.append({**rule, "search": search, "replace": replace})
 
-    logging.info("🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded))
+    logging.info(
+        "🔧 Expanded %d rules into %d concrete rules", len(raw_rules), len(expanded)
+    )
     return expanded
 
 
@@ -265,7 +267,9 @@ def apply_rule_to_file(path: Path, rule: dict[str, Any], dry_run: bool) -> bool:
 # -- Directory Operations -----------------------------------------------------
 
 
-def rename_template_dirs(apps: list[str], package_name: str, dry_run: bool = False) -> None:
+def rename_template_dirs(
+    apps: list[str], package_name: str, dry_run: bool = False
+) -> None:
     """Move {app}/templates/{app} → {app}/templates/{package_name}_{app}."""
     for app in apps:
         src = Path(app) / "templates" / app
@@ -385,7 +389,8 @@ def run_sync(
     package_name: str = config.get("package_name", "sites_faciles")
 
     temp_dir = Path(f"{package_name}_temp")
-    target_dir = Path(package_name)
+    package_root = Path(package_name)
+    package_dir = package_root / package_name
 
     # Clean up temp directory if it exists
     if temp_dir.exists():
@@ -409,18 +414,21 @@ def run_sync(
         os.chdir(original_dir)
 
     if dry_run:
-        logging.warning("🎬 DRY-RUN: Would replace %s with %s", target_dir, temp_dir)
+        logging.warning("🎬 DRY-RUN: Would create nested structure in %s", package_root)
         return
 
-    # Replace target directory
-    logging.info("📦 Replacing %s with synced version", target_dir)
-    if target_dir.exists():
-        shutil.rmtree(target_dir)
-    shutil.move(str(temp_dir), str(target_dir))
+    # Create package structure: package_name/package_name/
+    logging.info("📦 Creating nested package structure")
+    if package_root.exists():
+        shutil.rmtree(package_root)
+    package_root.mkdir(parents=True)
 
-    # Cleanup unwanted directories and files
+    # Move cloned content into nested directory
+    shutil.move(str(temp_dir), str(package_dir))
+
+    # Cleanup unwanted directories and files from nested package
     for path in [".git", ".github"]:
-        full_path = target_dir / path
+        full_path = package_dir / path
         if full_path.exists():
             logging.debug("Removing %s", full_path)
             if full_path.is_dir():
@@ -430,7 +438,7 @@ def run_sync(
 
     # Remove upstream's build files (we'll create our own)
     for build_file in ["pyproject.toml", "setup.py", "setup.cfg"]:
-        build_path = target_dir / build_file
+        build_path = package_dir / build_file
         if build_path.exists():
             logging.debug("Removing upstream %s", build_file)
             build_path.unlink()
@@ -447,9 +455,11 @@ def run_sync(
 
         apps_content = template_content.replace("{PackageName}", class_name)
         apps_content = apps_content.replace("{package_name}", package_name)
-        apps_content = apps_content.replace("{package_verbose_name}", package_name_title)
+        apps_content = apps_content.replace(
+            "{package_verbose_name}", package_name_title
+        )
 
-        apps_file = target_dir / "apps.py"
+        apps_file = package_dir / "apps.py"
         apps_file.write_text(apps_content, encoding="utf-8")
     else:
         logging.warning("⚠️  Template file not found: %s", apps_template)
@@ -462,10 +472,40 @@ def run_sync(
 
         pyproject_content = template_content.replace("{package_name}", package_name)
 
-        pyproject_file = target_dir / "pyproject.toml"
+        pyproject_file = package_root / "pyproject.toml"
         pyproject_file.write_text(pyproject_content, encoding="utf-8")
     else:
         logging.warning("⚠️  Template file not found: %s", pyproject_template)
+
+    # Create __init__.py from template
+    init_template = Path("templates") / "__init__.py.template"
+    if init_template.exists():
+        logging.info("📝 Creating __init__.py from template")
+        template_content = init_template.read_text(encoding="utf-8")
+
+        init_content = template_content.replace("{PackageName}", class_name)
+        init_content = init_content.replace("{package_name}", package_name)
+
+        init_file = package_dir / "__init__.py"
+        init_file.write_text(init_content, encoding="utf-8")
+    else:
+        logging.warning("⚠️  Template file not found: %s", init_template)
+
+    # Create README.md in package root
+    readme_template = Path("templates") / "README.md.template"
+    if readme_template.exists():
+        logging.info("📝 Creating README.md from template")
+        template_content = readme_template.read_text(encoding="utf-8")
+
+        readme_content = template_content.replace("{package_name}", package_name)
+        readme_content = readme_content.replace(
+            "{package_verbose_name}", package_name_title
+        )
+
+        readme_file = package_root / "README.md"
+        readme_file.write_text(readme_content, encoding="utf-8")
+    else:
+        logging.warning("⚠️  Template file not found: %s", readme_template)
 
     logging.warning("✅ Sync completed successfully!")
 

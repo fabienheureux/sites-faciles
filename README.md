@@ -99,6 +99,8 @@ INSTALLED_APPS.extend(
         "sites_faciles.events",
         "wagtail.contrib.settings",
         "wagtail_modeladmin",
+        "wagtail.contrib.typed_table_block",
+        "wagtail.contrib.routable_page",
         "wagtailmenus",
         "wagtailmarkdown",
     ]

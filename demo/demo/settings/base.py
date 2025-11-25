@@ -115,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "fr-fr"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Paris"
 
 USE_I18N = True
 
@@ -190,3 +190,30 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
+# =====================
+# SITES FACILES CONFIG
+# ======================
+#
+TEMPLATES[0]["OPTIONS"]["context_processors"].extend(
+    [
+        "wagtailmenus.context_processors.wagtailmenus",
+        "sites_faciles.content_manager.context_processors.skiplinks",
+        "sites_faciles.content_manager.context_processors.mega_menus",
+    ]
+)
+
+INSTALLED_APPS.extend(
+    [
+        "dsfr",
+        "sites_faciles",
+        "sites_faciles.blog",
+        "sites_faciles.content_manager",
+        "sites_faciles.events",
+        "wagtail.contrib.settings",
+        "wagtail.contrib.typed_table_block",
+        "wagtail.contrib.routable_page",
+        "wagtail_modeladmin",
+        "wagtailmenus",
+        "wagtailmarkdown",
+    ]
+)

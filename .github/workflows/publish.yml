@@ -20,20 +20,26 @@ jobs:
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Run packagify to generate package
         run: |
           python -m pip install --upgrade pip
-          python -m pip install flit
-          python -m flit install --symlink
+          python -m pip install pyyaml
+          python packagify.py v2.1.0
 
-      - name: Build
-        run: python -m flit build
+      - name: Install build dependencies
+        working-directory: ./sites_faciles
+        run: |
+          python -m pip install --upgrade build
+
+      - name: Build package
+        working-directory: ./sites_faciles
+        run: python -m build
 
       - uses: actions/upload-artifact@v4
         with:
-          path: ./dist
+          path: ./sites_faciles/dist
 
   publish:
     needs: build
