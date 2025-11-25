@@ -83,6 +83,9 @@ LIMITED_RICHTEXTFIELD_FEATURES = [
     "superscript",
     "subscript",
     "strikethrough",
+    "text-left",
+    "text-center",
+    "text-right",
 ]
 
 LIMITED_RICHTEXTFIELD_FEATURES_WITHOUT_LINKS = [
@@ -138,4 +141,23 @@ ALIGN_VERTICAL_CHOICES_EXTENDED = [
     ("top", _("Top")),
     ("middle", _("Middle")),
     ("bottom", _("Bottom")),
+]
+
+TEMPLATE_EXAMPLE_BUTTON_LIST = [
+    {
+        "link_type": "external_url",
+        "text": "Nous contacter",
+        "external_url": "https://sites.beta.gouv.fr/contactez-nous/",
+        "button_type": "fr-btn",
+        "icon_side": "--",
+        "anchor": "",
+    },
+    {
+        "link_type": "external_url",
+        "text": "Voir la vidéo",
+        "external_url": "https://tube.numerique.gouv.fr/",
+        "button_type": "fr-btn fr-btn--secondary",
+        "icon_side": "--",
+        "anchor": "",
+    },
 ]

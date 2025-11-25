@@ -9,7 +9,8 @@ from wagtail.images.api.fields import ImageRenditionField
 from wagtail.models import Page
 from wagtail.search import index
 
-from sites_faciles.content_manager.blocks import HERO_STREAMFIELD_BLOCKS, STREAMFIELD_COMMON_BLOCKS, ButtonsHorizontalListBlock
+from sites_faciles.content_manager.blocks.buttons_links import ButtonsHorizontalListBlock
+from sites_faciles.content_manager.blocks.core import HERO_STREAMFIELD_BLOCKS, STREAMFIELD_COMMON_BLOCKS
 from sites_faciles.content_manager.utils import get_streamfield_raw_text
 
 
@@ -92,7 +93,14 @@ class SitesFacilesBasePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel("hero", heading=_("Hero")),
+        FieldPanel(
+            "hero",
+            heading=_("Hero"),
+            help_text=_(
+                "Header section of the page. If empty, no header is displayed "
+                "and the page title appears at the top of the content."
+            ),
+        ),
         FieldPanel("body", heading=_("Body")),
     ]
 
@@ -140,6 +148,36 @@ class SitesFacilesBasePage(Page):
     def get_preview_image(self):
         return self.preview_image or self.header_image
 
+    @property
+    def show_title(self):
+        for block in self.hero:
+            if block.block_type != "old_hero":
+                return False
+
+            if block.value.get("header_with_title") is True:
+                return False
+        return True
+
+    @property
+    def cover(self):
+        hero_blocks = getattr(self, "hero", None)
+
+        if not hero_blocks:
+            return None
+
+        first_hero = hero_blocks[0].value or {}
+
+        if "image" in first_hero:
+            image_block = first_hero.get("image")
+            if isinstance(image_block, dict) and "image" in image_block:
+                return image_block.get("image")
+            return image_block
+
+        if "header_image" in first_hero:
+            return first_hero.get("header_image")
+
+        return None
+
     def get_absolute_url(self):
         return self.url
 
@@ -149,6 +187,8 @@ class SitesFacilesBasePage(Page):
             if search_description:
                 self.search_description = search_description
         return super().save(*args, **kwargs)
+
+    exclude_fields_in_copy = ["source_url"]
 
     class Meta:
         abstract = True
