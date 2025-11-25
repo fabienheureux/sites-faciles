@@ -472,6 +472,9 @@ def run_sync(
         template_content = pyproject_template.read_text(encoding="utf-8")
 
         pyproject_content = template_content.replace("{package_name}", package_name)
+        pyproject_content = pyproject_content.replace(
+            "{package_name_kebab}", package_name_kebab
+        )
 
         pyproject_file = package_root / "pyproject.toml"
         pyproject_file.write_text(pyproject_content, encoding="utf-8")
