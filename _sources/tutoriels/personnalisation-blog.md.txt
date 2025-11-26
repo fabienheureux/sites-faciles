@@ -1,9 +1,0 @@
-# Personnalisation du blog
-
-## Utiliser les modèles swappables
-
-Pour personnaliser le blog, utilisez le système de modèles swappables décrit dans le [guide des modèles personnalisés](../guide/modeles-personnalises.md).
-
-## Exemple
-
-Voir l'exemple complet dans le dossier `custom_blog` du projet de démonstration.
