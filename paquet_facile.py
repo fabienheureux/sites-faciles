@@ -426,6 +426,58 @@ def run_sync(
     # Move cloned content into nested directory
     shutil.move(str(temp_dir), str(package_dir))
 
+    # Create a new branch in the cloned repo before removing .git
+    git_dir = package_dir / ".git"
+    if git_dir.exists():
+        branch_name = f"{tag}-paquet-facile"
+        logging.info("🌿 Creating branch %s", branch_name)
+
+        try:
+            # Create new branch
+            run_command(["git", "checkout", "-b", branch_name], cwd=package_dir)
+
+            # Stage all changes
+            run_command(["git", "add", "-A"], cwd=package_dir)
+
+            # Commit transformations
+            commit_msg = f"Apply paquet-facile transformations for {tag}"
+            run_command(["git", "commit", "-m", commit_msg], cwd=package_dir)
+
+            # Get remote URL from main repository
+            result = run_command(["git", "remote", "get-url", "origin"], check=False)
+            if result.returncode == 0:
+                main_repo_remote = result.stdout.strip()
+                logging.info(
+                    "📡 Adding remote 'paquet-facile' pointing to %s", main_repo_remote
+                )
+
+                # Add the main repo as a new remote
+                run_command(
+                    ["git", "remote", "add", "paquet-facile", main_repo_remote],
+                    cwd=package_dir,
+                    check=False,
+                )
+
+                # Push the new branch to the remote
+                logging.info(
+                    "🚀 Pushing branch %s to paquet-facile remote", branch_name
+                )
+                push_result = run_command(
+                    ["git", "push", "paquet-facile", branch_name],
+                    cwd=package_dir,
+                    check=False,
+                )
+
+                if push_result.returncode == 0:
+                    logging.info("✅ Successfully pushed branch to remote")
+                else:
+                    logging.warning("⚠️  Failed to push branch: %s", push_result.stderr)
+            else:
+                logging.warning("⚠️  Could not get main repository remote URL")
+
+        except Exception as exc:
+            logging.warning("⚠️  Failed to create/push branch: %s", exc)
+
     # Cleanup unwanted directories and files from nested package
     for path in [".git", ".github"]:
         full_path = package_dir / path
