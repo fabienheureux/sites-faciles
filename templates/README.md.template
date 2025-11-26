@@ -49,6 +49,45 @@ TEMPLATES[0]["OPTIONS"]["context_processors"].extend(
 )
 ```
 
+## Migration depuis Sites Faciles
+
+Si vous migrez un site existant depuis le dépôt Sites Faciles vers ce package, vous devez mettre à jour les références ContentType dans votre base de données.
+
+### Étapes de migration
+
+1. **Installez le package** comme décrit ci-dessus et ajoutez toutes les applications à `INSTALLED_APPS`
+
+2. **Exécutez les migrations Django** pour créer les nouveaux ContentTypes :
+   ```bash
+   python manage.py migrate
+   ```
+
+3. **Migrez les ContentTypes existants** :
+   ```bash
+   python manage.py migrate_contenttype
+   ```
+
+   Cette commande va :
+   - Identifier tous les ContentTypes de l'ancienne structure (blog, events, forms, content_manager, config)
+   - Mettre à jour toutes les pages Wagtail pour pointer vers les nouveaux ContentTypes
+   - Supprimer les anciens ContentTypes
+
+4. **Vérifiez la migration** (optionnel - mode dry-run) :
+   ```bash
+   python manage.py migrate_contenttype --dry-run
+   ```
+
+### Pourquoi cette migration est nécessaire
+
+Lorsque vous renommez des applications Django (par exemple de `blog` à `{package_name}_blog`), Django crée de nouveaux ContentTypes. Les pages Wagtail existantes référencent toujours les anciens ContentTypes, ce qui provoque l'erreur :
+
+```
+PageClassNotFoundError: The page 'xxx' cannot be edited because the model class
+used to create it (blog.blogindexpage) can no longer be found in the codebase.
+```
+
+La commande `migrate_contenttype` résout ce problème en mettant à jour toutes les références.
+
 ## Documentation
 
 Pour plus d'informations sur l'utilisation de Sites Faciles, consultez la [documentation officielle](https://github.com/numerique-gouv/sites-faciles).

@@ -275,11 +275,11 @@ name = "demo"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "sites-faciles" },
+    { name = "wagtail-dsfr" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "sites-faciles", editable = "../sites_faciles" }]
+requires-dist = [{ name = "wagtail-dsfr", editable = "../wagtail_dsfr" }]
 
 [[package]]
 name = "dj-database-url"
@@ -930,70 +930,6 @@ wheels = [
 ]
 
 [[package]]
-name = "sites-faciles"
-version = "2.1.0"
-source = { editable = "../sites_faciles" }
-dependencies = [
-    { name = "beautifulsoup4" },
-    { name = "dj-database-url" },
-    { name = "dj-static" },
-    { name = "django" },
-    { name = "django-dsfr" },
-    { name = "django-taggit" },
-    { name = "faker" },
-    { name = "gunicorn" },
-    { name = "icalendar" },
-    { name = "mozilla-django-oidc" },
-    { name = "psycopg2-binary" },
-    { name = "python-dotenv" },
-    { name = "pyyaml" },
-    { name = "rust-just" },
-    { name = "unidecode" },
-    { name = "wagtail" },
-    { name = "wagtail-localize" },
-    { name = "wagtail-markdown" },
-    { name = "wagtail-modeladmin" },
-    { name = "wagtailmenus" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "beautifulsoup4", specifier = ">=4.13.4" },
-    { name = "dj-database-url", specifier = ">=3.0.0" },
-    { name = "dj-static", specifier = ">=0.0.6" },
-    { name = "django", specifier = ">=5.2.3" },
-    { name = "django-dsfr", specifier = ">=2.4.0" },
-    { name = "django-taggit", specifier = ">=6.1.0" },
-    { name = "faker", specifier = ">=37.4.0" },
-    { name = "gunicorn", specifier = ">=23.0.0" },
-    { name = "icalendar", specifier = ">=6.3.1" },
-    { name = "mozilla-django-oidc", specifier = ">=4.0.1" },
-    { name = "psycopg2-binary", specifier = ">=2.9.10" },
-    { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "pyyaml", specifier = ">=6.0.2" },
-    { name = "rust-just", specifier = ">=1.40.0" },
-    { name = "unidecode", specifier = ">=1.4.0" },
-    { name = "wagtail", specifier = ">=7.0.1" },
-    { name = "wagtail-localize", specifier = ">=1.12.1" },
-    { name = "wagtail-markdown", specifier = ">=0.12.1" },
-    { name = "wagtail-modeladmin", specifier = ">=2.2.0" },
-    { name = "wagtailmenus", specifier = ">=4.0.3" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "black", specifier = ">=25.1.0" },
-    { name = "coverage", specifier = ">=7.9.1" },
-    { name = "django-compressor", specifier = ">=4.5.1" },
-    { name = "django-debug-toolbar", specifier = ">=5.2.0" },
-    { name = "djlint", specifier = ">=1.36.4" },
-    { name = "ipython", specifier = ">=9.3.0" },
-    { name = "pre-commit", specifier = ">=4.2.0" },
-    { name = "ruff", specifier = ">=0.12.0" },
-    { name = "tblib", specifier = ">=3.1.0" },
-]
-
-[[package]]
 name = "six"
 version = "1.17.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1098,6 +1034,70 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/83/1a/79dc8e4cb9ea51f26096e5ce7c8f1619c9534edffe2c7d27b1791e20f2be/wagtail-7.2.tar.gz", hash = "sha256:8a39df908bd64ab029e08bf191f475f54cc914f84aa41e9ae79b41bf41d55ec3", size = 6757172, upload-time = "2025-11-05T12:27:52.195Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2d/da/55b302face51c505ebeb1df349c90455058362d53ed5c29114647a8fdbba/wagtail-7.2-py3-none-any.whl", hash = "sha256:2c0d41545976b57266e84df3f03e7dd812e6a4d0a8d61d5b76863fe021613973", size = 9229326, upload-time = "2025-11-05T12:27:46.459Z" },
+]
+
+[[package]]
+name = "wagtail-dsfr"
+version = "2.3.0"
+source = { editable = "../wagtail_dsfr" }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "dj-database-url" },
+    { name = "dj-static" },
+    { name = "django" },
+    { name = "django-dsfr" },
+    { name = "django-taggit" },
+    { name = "faker" },
+    { name = "gunicorn" },
+    { name = "icalendar" },
+    { name = "mozilla-django-oidc" },
+    { name = "psycopg2-binary" },
+    { name = "python-dotenv" },
+    { name = "pyyaml" },
+    { name = "rust-just" },
+    { name = "unidecode" },
+    { name = "wagtail" },
+    { name = "wagtail-localize" },
+    { name = "wagtail-markdown" },
+    { name = "wagtail-modeladmin" },
+    { name = "wagtailmenus" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "beautifulsoup4", specifier = ">=4.13.4" },
+    { name = "dj-database-url", specifier = ">=3.0.0" },
+    { name = "dj-static", specifier = ">=0.0.6" },
+    { name = "django", specifier = ">=5.2.3" },
+    { name = "django-dsfr", specifier = ">=2.4.0" },
+    { name = "django-taggit", specifier = ">=6.1.0" },
+    { name = "faker", specifier = ">=37.4.0" },
+    { name = "gunicorn", specifier = ">=23.0.0" },
+    { name = "icalendar", specifier = ">=6.3.1" },
+    { name = "mozilla-django-oidc", specifier = ">=4.0.1" },
+    { name = "psycopg2-binary", specifier = ">=2.9.10" },
+    { name = "python-dotenv", specifier = ">=1.1.0" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "rust-just", specifier = ">=1.40.0" },
+    { name = "unidecode", specifier = ">=1.4.0" },
+    { name = "wagtail", specifier = ">=7.0.1" },
+    { name = "wagtail-localize", specifier = ">=1.12.1" },
+    { name = "wagtail-markdown", specifier = ">=0.12.1" },
+    { name = "wagtail-modeladmin", specifier = ">=2.2.0" },
+    { name = "wagtailmenus", specifier = ">=4.0.3" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "black", specifier = ">=25.1.0" },
+    { name = "coverage", specifier = ">=7.9.1" },
+    { name = "django-compressor", specifier = ">=4.5.1" },
+    { name = "django-debug-toolbar", specifier = ">=5.2.0" },
+    { name = "djlint", specifier = ">=1.36.4" },
+    { name = "ipython", specifier = ">=9.3.0" },
+    { name = "pre-commit", specifier = ">=4.2.0" },
+    { name = "ruff", specifier = ">=0.12.0" },
+    { name = "tblib", specifier = ">=3.1.0" },
 ]
 
 [[package]]

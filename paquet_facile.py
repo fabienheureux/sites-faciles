@@ -515,6 +515,43 @@ def run_sync(
     else:
         logging.warning("⚠️  Template file not found: %s", readme_template)
 
+    # Create management command structure from templates
+    management_template_dir = Path("templates") / "management"
+    if management_template_dir.exists():
+        logging.info("📝 Creating management commands from templates")
+
+        # Create management/commands directory
+        management_dir = package_dir / "management"
+        commands_dir = management_dir / "commands"
+        commands_dir.mkdir(parents=True, exist_ok=True)
+
+        # Process __init__.py files
+        for init_file in ["__init__.py.template", "commands/__init__.py.template"]:
+            init_template = management_template_dir / init_file
+            if init_template.exists():
+                template_content = init_template.read_text(encoding="utf-8")
+                init_content = template_content.replace("{package_name}", package_name)
+
+                # Determine output path (remove .template extension)
+                output_path = management_dir / init_file.replace(".template", "")
+                output_path.write_text(init_content, encoding="utf-8")
+
+        # Process management command templates
+        commands_template_dir = management_template_dir / "commands"
+        if commands_template_dir.exists():
+            for template_file in commands_template_dir.glob("*.py.template"):
+                template_content = template_file.read_text(encoding="utf-8")
+                command_content = template_content.replace(
+                    "{package_name}", package_name
+                )
+
+                # Write to commands directory (remove .template extension)
+                output_file = commands_dir / template_file.name.replace(".template", "")
+                output_file.write_text(command_content, encoding="utf-8")
+                logging.debug("  Created command: %s", output_file.name)
+    else:
+        logging.debug("⏭️  No management command templates found")
+
     logging.warning("✅ Sync completed successfully!")
 
 

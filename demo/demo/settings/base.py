@@ -197,23 +197,26 @@ WAGTAILDOCS_EXTENSIONS = [
 TEMPLATES[0]["OPTIONS"]["context_processors"].extend(
     [
         "wagtailmenus.context_processors.wagtailmenus",
-        "sites_faciles.content_manager.context_processors.skiplinks",
-        "sites_faciles.content_manager.context_processors.mega_menus",
+        "wagtail_dsfr.content_manager.context_processors.skiplinks",
+        "wagtail_dsfr.content_manager.context_processors.mega_menus",
     ]
 )
 
 INSTALLED_APPS.extend(
     [
         "dsfr",
-        "sites_faciles",
-        "sites_faciles.blog",
-        "sites_faciles.content_manager",
-        "sites_faciles.events",
+        "wagtail_dsfr",
+        "wagtail_dsfr.blog",
+        "wagtail_dsfr.content_manager",
+        "wagtail_dsfr.events",
         "wagtail.contrib.settings",
         "wagtail.contrib.typed_table_block",
         "wagtail.contrib.routable_page",
         "wagtail_modeladmin",
         "wagtailmenus",
         "wagtailmarkdown",
+        "proconnect",
     ]
 )
+
+HOST_PROTO = "http"

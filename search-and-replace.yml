@@ -9,6 +9,7 @@ apps:
   - forms
   - content_manager
   - config
+  - proconnect
 
 # Named scopes (rules can reference these by name)
 scopes:
