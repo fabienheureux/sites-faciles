@@ -22,7 +22,6 @@ maxdepth: 2
 caption: Documentation
 ---
 guide/installation
-tutoriels/personnalisation-blog
 guide/configuration
 guide/blocs-personnalises
 reference/settings
@@ -46,7 +45,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-{doc}`Voir le guide complet d'installation → <guide/installation>`
+[Voir le guide complet d'installation →](guide/installation.md)
 
 ## Besoin d'aide ?
 

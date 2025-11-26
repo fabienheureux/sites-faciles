@@ -62,4 +62,3 @@ python manage.py collectstatic
 ## Prochaines étapes
 
 - [Configuration avancée →](configuration.md)
-- [Personnaliser le blog →](../tutoriels/personnalisation-blog.md)
