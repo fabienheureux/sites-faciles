@@ -186,21 +186,6 @@
 </pre></div>
 </div>
 </section>
-<section id="modeles-swappables-optionnel">
-<h2>Modèles swappables (optionnel)<a class="headerlink" href="#modeles-swappables-optionnel" title="Lien vers cette rubrique">¶</a></h2>
-<p>Si vous souhaitez personnaliser les modèles de blog, vous pouvez utiliser le système de modèles swappables :</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># =============================================</span>
-<span class="c1"># SWAPPABLE MODELS CONFIGURATION</span>
-<span class="c1"># =============================================</span>
-<span class="c1"># This configuration tells wagtail_dsfr to use your custom blog models</span>
-<span class="c1"># instead of the default ones.</span>
-
-<span class="n">WAGTAIL_DSFR_BLOG_INDEX_MODEL</span> <span class="o">=</span> <span class="s2">&quot;custom_blog.CustomBlogIndexPage&quot;</span>
-<span class="n">WAGTAIL_DSFR_BLOG_ENTRY_MODEL</span> <span class="o">=</span> <span class="s2">&quot;custom_blog.CustomBlogEntryPage&quot;</span>
-</pre></div>
-</div>
-<p>Pour plus d’informations sur les modèles swappables, consultez le <span class="xref std std-doc">guide des modèles personnalisés</span>.</p>
-</section>
 <section id="migrations-et-collecte-des-fichiers-statiques">
 <h2>Migrations et collecte des fichiers statiques<a class="headerlink" href="#migrations-et-collecte-des-fichiers-statiques" title="Lien vers cette rubrique">¶</a></h2>
 <p>Après la configuration, exécutez :</p>
@@ -213,7 +198,6 @@ python<span class="w"> </span>manage.py<span class="w"> </span>collectstatic
 <h2>Prochaines étapes<a class="headerlink" href="#prochaines-etapes" title="Lien vers cette rubrique">¶</a></h2>
 <ul class="simple">
 <li><p><span class="xref std std-doc">Configuration avancée →</span></p></li>
-<li><p><span class="xref std std-doc">Utiliser les modèles swappables →</span></p></li>
 <li><p><span class="xref std std-doc">Personnaliser le blog →</span></p></li>
 </ul>
 </section>
@@ -238,7 +222,6 @@ python<span class="w"> </span>manage.py<span class="w"> </span>collectstatic
 <li><a class="reference internal" href="#prerequis">Prérequis</a></li>
 <li><a class="reference internal" href="#installation-via-pip">Installation via pip</a></li>
 <li><a class="reference internal" href="#configuration">Configuration</a></li>
-<li><a class="reference internal" href="#modeles-swappables-optionnel">Modèles swappables (optionnel)</a></li>
 <li><a class="reference internal" href="#migrations-et-collecte-des-fichiers-statiques">Migrations et collecte des fichiers statiques</a></li>
 <li><a class="reference internal" href="#prochaines-etapes">Prochaines étapes</a></li>
 </ul>

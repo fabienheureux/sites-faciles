@@ -1,9 +1,12 @@
 # Personnalisation du blog
 
-## Utiliser les modèles swappables
+Ce tutoriel montre comment adapter le blog fourni par `wagtail_dsfr` sans entrer dans les détails des modèles personnalisés.
 
-Pour personnaliser le blog, utilisez le système de modèles swappables décrit dans le [guide des modèles personnalisés](../guide/modeles-personnalises.md).
+## Exemple de référence
 
-## Exemple
+Le projet de démonstration (`demo/`) contient un blog complet prêt à l'emploi. Inspirez-vous des modèles et gabarits fournis pour :
+- Ajouter des champs de contenu supplémentaires aux pages de blog
+- Adapter les templates aux besoins du DSFR
+- Tester le rendu des blocs fournis
 
-Voir l'exemple complet dans le dossier `custom_blog` du projet de démonstration.
+Pour des personnalisations plus poussées (héritage de modèles, réglages Wagtail/Django), reportez-vous à la documentation officielle Wagtail et Django.

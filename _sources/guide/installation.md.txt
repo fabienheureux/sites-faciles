@@ -50,23 +50,6 @@ HOST_PROTO = "http"
 WAGTAIL_I18N_ENABLED = True
 ```
 
-## Modèles swappables (optionnel)
-
-Si vous souhaitez personnaliser les modèles de blog, vous pouvez utiliser le système de modèles swappables :
-
-```python
-# =============================================
-# SWAPPABLE MODELS CONFIGURATION
-# =============================================
-# This configuration tells wagtail_dsfr to use your custom blog models
-# instead of the default ones.
-
-WAGTAIL_DSFR_BLOG_INDEX_MODEL = "custom_blog.CustomBlogIndexPage"
-WAGTAIL_DSFR_BLOG_ENTRY_MODEL = "custom_blog.CustomBlogEntryPage"
-```
-
-Pour plus d'informations sur les modèles swappables, consultez le {doc}`guide des modèles personnalisés <guide/modeles-personnalises>`.
-
 ## Migrations et collecte des fichiers statiques
 
 Après la configuration, exécutez :
@@ -79,5 +62,4 @@ python manage.py collectstatic
 ## Prochaines étapes
 
 - {doc}`Configuration avancée → <guide/configuration>`
-- {doc}`Utiliser les modèles swappables → <guide/modeles-personnalises>`
 - {doc}`Personnaliser le blog → <tutoriels/personnalisation-blog>`

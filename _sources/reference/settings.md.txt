@@ -68,7 +68,3 @@ Active l'authentification ProConnect.
 **Défaut :** `False`
 
 Indicateur pour les environnements de test.
-
-## Modèles swappables
-
-Voir la [référence des modèles swappables](modeles-swappables.md).
