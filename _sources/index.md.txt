@@ -20,36 +20,36 @@ wagtail-dsfr est un package Python qui étend Wagtail pour créer des sites conf
 ---
 maxdepth: 2
 caption: Guide d'utilisation
+glob: true
 ---
-guide/installation
-guide/configuration
-guide/modeles-personnalises
-guide/blocs-personnalises
+guide/*
 ```
 
 ```{toctree}
 ---
 maxdepth: 2
 caption: Tutoriels
+glob: true
 ---
-tutoriels/personnalisation-blog
+tutoriels/*
 ```
 
 ```{toctree}
 ---
 maxdepth: 2
 caption: Référence technique
+glob: true
 ---
-reference/modeles-swappables
-reference/settings
+reference/*
 ```
 
 ```{toctree}
 ---
 maxdepth: 1
 caption: Développement
+glob: true
 ---
-developpement/contribution
+developpement/*
 changelog
 ```
 
