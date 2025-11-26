@@ -32,7 +32,6 @@ guide/blocs-personnalises
 maxdepth: 2
 caption: Tutoriels
 ---
-tutoriels/premier-site
 tutoriels/personnalisation-blog
 ```
 

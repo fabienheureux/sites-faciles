@@ -80,3 +80,4 @@ python manage.py collectstatic
 
 - [Configuration avancée →](configuration.md)
 - [Utiliser les modèles swappables →](modeles-personnalises.md)
+- [Personnaliser le blog →](../tutoriels/personnalisation-blog.md)
