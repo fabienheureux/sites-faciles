@@ -85,6 +85,14 @@ rules:
     replace: "from {package_name}.{app}."
     scope: all
 
+  - search: "from {app} import"
+    replace: "from {package_name}.{app} import"
+    scope: all
+
+  - search: 'include\("{app}\.'
+    replace: 'include("{package_name}.{app}.'
+    scope: all
+
   - search: 'template="{app}/'
     replace: 'template="{package_name}_{app}/'
     scope: all

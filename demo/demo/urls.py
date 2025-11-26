@@ -1,8 +1,4 @@
-from django.conf import settings
-from django.urls import include, path
-from wagtail import urls as wagtail_urls
-from wagtail_dsfr.config import urls as sitesfaciles_urls
+# Use wagtail_dsfr's URL configuration directly
+# This is the recommended approach for projects using wagtail_dsfr
 
-from search import views as search_views
-
-urlpatterns = [path("", include(sitesfaciles_urls))]
+from wagtail_dsfr.config.urls import *  # noqa: F401, F403

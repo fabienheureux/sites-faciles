@@ -10,3 +10,8 @@ dependencies = [
 
 [tool.uv.sources]
 wagtail-dsfr = { path = "../wagtail_dsfr", editable = true }
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar>=6.1.0",
+]

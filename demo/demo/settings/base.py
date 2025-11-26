@@ -215,8 +215,13 @@ INSTALLED_APPS.extend(
         "wagtail_modeladmin",
         "wagtailmenus",
         "wagtailmarkdown",
-        "proconnect",
+        "wagtail_dsfr.proconnect",
     ]
 )
+WAGTAILADMIN_PATH = "admin/"
+TESTING = False
+HOST_URL = "localhost"
+PROCONNECT_ACTIVATED = False
 
 HOST_PROTO = "http"
+WAGTAIL_I18N_ENABLED = True

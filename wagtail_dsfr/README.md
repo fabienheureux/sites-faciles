@@ -49,6 +49,17 @@ TEMPLATES[0]["OPTIONS"]["context_processors"].extend(
 )
 ```
 
+Configurez les URLs dans votre `urls.py` :
+
+```python
+# Option 1 : Utiliser directement la configuration d'URLs de wagtail_dsfr (recommandé)
+from wagtail_dsfr.config.urls import *
+
+# Option 2 : Configuration personnalisée
+# Si vous avez besoin de personnaliser les URLs, vous pouvez copier le contenu
+# de wagtail_dsfr.config.urls et l'adapter à vos besoins
+```
+
 ## Migration depuis Sites Faciles
 
 Si vous migrez un site existant depuis le dépôt Sites Faciles vers ce package, vous devez mettre à jour les références ContentType dans votre base de données.

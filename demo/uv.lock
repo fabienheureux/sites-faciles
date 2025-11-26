@@ -278,8 +278,16 @@ dependencies = [
     { name = "wagtail-dsfr" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "django-debug-toolbar" },
+]
+
 [package.metadata]
 requires-dist = [{ name = "wagtail-dsfr", editable = "../wagtail_dsfr" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "django-debug-toolbar", specifier = ">=6.1.0" }]
 
 [[package]]
 name = "dj-database-url"
@@ -335,6 +343,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/79/a1/6a638d13717e4d4f8df169dade0fa51bdc65d9825df39d98ce709a776b49/django_crispy_forms-2.5.tar.gz", hash = "sha256:066e72a8f152a1334f1c811cc37740868efe3265e5a218f79079ef89f848c3d8", size = 1097999, upload-time = "2025-11-06T20:44:01.921Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2c/58/ac3a11950baaf75c1f3242e3af9dfe45201f6ee10c113dd37a9c000876d2/django_crispy_forms-2.5-py3-none-any.whl", hash = "sha256:adc99d5901baca09479c53bf536b3909e80a9f2bb299438a223de4c106ebf1f9", size = 31464, upload-time = "2025-11-06T20:44:00.795Z" },
+]
+
+[[package]]
+name = "django-debug-toolbar"
+version = "6.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "sqlparse" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c0/50/acae2dd379164f6f4c6b6b36fd48a4d21b02095a03f4df7c30a8d1f1a62c/django_debug_toolbar-6.1.0.tar.gz", hash = "sha256:e962ec350c9be8bdba918138e975a9cdb193f60ec396af2bb71b769e8e165519", size = 309141, upload-time = "2025-10-30T19:50:39.458Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6d/72/685c978af45ad08257e2c69687a873eda6b6531c79b6e6091794c41c5ff6/django_debug_toolbar-6.1.0-py3-none-any.whl", hash = "sha256:e214dea4494087e7cebdcea84223819c5eb97f9de3110a3665ad673f0ba98413", size = 269069, upload-time = "2025-10-30T19:50:37.71Z" },
 ]
 
 [[package]]
