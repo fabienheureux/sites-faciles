@@ -3,6 +3,11 @@ from wagtail import blocks
 from wagtail.blocks import BooleanBlock
 from wagtail.snippets.blocks import SnippetChooserBlock
 
+from wagtail_dsfr.content_manager.blocks.choosers import (
+    BlogIndexChooserBlock,
+    EventsIndexChooserBlock,
+)
+
 from wagtail_dsfr.content_manager.constants import (
     HEADING_CHOICES_2_5,
 )
@@ -90,7 +95,7 @@ class BlogRecentEntriesBlock(blocks.StructBlock):
         default="h2",
         help_text=_("Adapt to the page layout. Defaults to heading 2."),
     )
-    blog = blocks.PageChooserBlock(label=_("Blog"), page_type="wagtail_dsfr_blog.BlogIndexPage")
+    blog = BlogIndexChooserBlock(label=_("Blog"))
     entries_count = blocks.IntegerBlock(
         label=_("Number of entries"), required=False, min_value=1, max_value=8, default=3
     )
@@ -120,7 +125,7 @@ class EventsRecentEntriesBlock(blocks.StructBlock):
         default="h2",
         help_text=_("Adapt to the page layout. Defaults to heading 2."),
     )
-    index_page = blocks.PageChooserBlock(label=_("Event calendar"), page_type="wagtail_dsfr_events.EventsIndexPage")
+    index_page = EventsIndexChooserBlock(label=_("Event calendar"))
     entries_count = blocks.IntegerBlock(
         label=_("Number of entries"), required=False, min_value=1, max_value=8, default=3
     )

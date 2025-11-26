@@ -198,3 +198,93 @@ rules:
     replace: '"{package_name}_content_manager.Tag"'
     scope: all
     literal: true
+
+  # ---------- Swappable model helpers ----------
+  # Convert PageChooserBlock with page_type to custom chooser blocks
+  - search: 'blocks\.PageChooserBlock\(label=_\("Blog"\), page_type="wagtail_dsfr_blog\.BlogIndexPage"\)'
+    replace: 'BlogIndexChooserBlock(label=_("Blog"))'
+    scope: all
+
+  - search: 'blocks\.PageChooserBlock\(label=_\("Event calendar"\), page_type="wagtail_dsfr_events\.EventsIndexPage"\)'
+    replace: 'EventsIndexChooserBlock(label=_("Event calendar"))'
+    scope: all
+
+  # Add import for chooser blocks when needed
+  - search: "from wagtail import blocks\nfrom wagtail.blocks import BooleanBlock\nfrom wagtail.snippets.blocks import SnippetChooserBlock"
+    replace: "from wagtail import blocks\nfrom wagtail.blocks import BooleanBlock\nfrom wagtail.snippets.blocks import SnippetChooserBlock\n\nfrom {package_name}.content_manager.blocks.choosers import (\n    BlogIndexChooserBlock,\n    EventsIndexChooserBlock,\n)"
+    path_glob: "**/blocks/related_entries.py"
+    literal: true
+
+  - search: "from wagtail_dsfr.utils.models import"
+    replace: "from {package_name}.utils.models import"
+    scope: all
+    literal: true
+
+  - search: "from wagtail_dsfr.content_manager.blocks.choosers import"
+    replace: "from {package_name}.content_manager.blocks.choosers import"
+    scope: all
+    literal: true
+
+  # Settings keys for swappable models
+  - search: "WAGTAIL_DSFR_BLOG_INDEX_MODEL"
+    replace: "{package_name_upper}_BLOG_INDEX_MODEL"
+    scope: all
+    literal: true
+
+  - search: "WAGTAIL_DSFR_BLOG_ENTRY_MODEL"
+    replace: "{package_name_upper}_BLOG_ENTRY_MODEL"
+    scope: all
+    literal: true
+
+  - search: "WAGTAIL_DSFR_EVENTS_INDEX_MODEL"
+    replace: "{package_name_upper}_EVENTS_INDEX_MODEL"
+    scope: all
+    literal: true
+
+  - search: "WAGTAIL_DSFR_EVENTS_ENTRY_MODEL"
+    replace: "{package_name_upper}_EVENTS_ENTRY_MODEL"
+    scope: all
+    literal: true
+
+  - search: "WAGTAIL_DSFR_CONTENT_PAGE_MODEL"
+    replace: "{package_name_upper}_CONTENT_PAGE_MODEL"
+    scope: all
+    literal: true
+
+  # ---------- Abstract model class names ----------
+  # Convert BlogIndexPage to AbstractBlogIndexPage
+  - search: "class BlogIndexPage("
+    replace: "class AbstractBlogIndexPage("
+    path_glob: "**/blog/models.py"
+    literal: true
+
+  - search: "class BlogEntryPage("
+    replace: "class AbstractBlogEntryPage("
+    path_glob: "**/blog/models.py"
+    literal: true
+
+  - search: "class EventsIndexPage("
+    replace: "class AbstractEventsIndexPage("
+    path_glob: "**/events/models.py"
+    literal: true
+
+  - search: "class EventEntryPage("
+    replace: "class AbstractEventEntryPage("
+    path_glob: "**/events/models.py"
+    literal: true
+
+  - search: "class ContentPage("
+    replace: "class AbstractContentPage("
+    path_glob: "**/content_manager/models.py"
+    literal: true
+
+  # Add concrete implementations after abstract classes
+  - search: '    class Meta:\n        verbose_name = _("Blog index")'
+    replace: '    class Meta:\n        abstract = True\n        verbose_name = _("Blog index")\n\n\nclass BlogIndexPage(AbstractBlogIndexPage):\n    """\n    Default concrete implementation of blog index page.\n    Can be replaced by a custom implementation using {package_name_upper}_BLOG_INDEX_MODEL setting.\n    """\n    pass'
+    path_glob: "**/blog/models.py"
+    literal: true
+
+  - search: '    class Meta:\n        verbose_name = _("Blog page")'
+    replace: '    class Meta:\n        abstract = True\n        verbose_name = _("Blog page")\n\n\nclass BlogEntryPage(AbstractBlogEntryPage):\n    """\n    Default concrete implementation of blog entry page.\n    Can be replaced by a custom implementation using {package_name_upper}_BLOG_ENTRY_MODEL setting.\n    """\n    pass'
+    path_glob: "**/blog/models.py"
+    literal: true

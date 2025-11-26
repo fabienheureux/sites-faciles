@@ -125,9 +125,10 @@ def load_config(path: Path) -> dict[str, Any]:
 
 
 def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
-    """Expand {app} and {package_name} placeholders into concrete rules and validate minimal schema."""
+    """Expand {app}, {package_name}, and {package_name_upper} placeholders into concrete rules and validate minimal schema."""
     apps: list[str] = config.get("apps", [])
     package_name: str = config.get("package_name", "sites_faciles")
+    package_name_upper: str = package_name.upper()
     raw_rules: list[dict[str, Any]] = config.get("rules", []) or []
 
     expanded: list[dict[str, Any]] = []
@@ -139,9 +140,11 @@ def expand_rules(config: dict[str, Any]) -> list[dict[str, Any]]:
             logging.warning("Skipping invalid rule (missing search/replace): %s", rule)
             continue
 
-        # Replace {package_name} placeholder first
+        # Replace {package_name} and {package_name_upper} placeholders first
         search = search.replace("{package_name}", package_name)
         replace = replace.replace("{package_name}", package_name)
+        search = search.replace("{package_name_upper}", package_name_upper)
+        replace = replace.replace("{package_name_upper}", package_name_upper)
 
         if "{app}" in (search + replace) and apps:
             for app in apps:
@@ -529,28 +532,50 @@ def _process_templates(
             output_file = content_manager_dir / "apps.py"
             output_file.write_text(apps_content, encoding="utf-8")
             logging.debug("  Created apps.py")
-
-        # Create registry directory and process templates
-        registry_template_dir = content_manager_template_dir / "registry"
-        if registry_template_dir.exists():
-            registry_dir = content_manager_dir / "registry"
-            registry_dir.mkdir(parents=True, exist_ok=True)
-
-            # Process all Python template files in registry
-            for template_file in registry_template_dir.glob("*.template.py"):
-                template_content = template_file.read_text(encoding="utf-8")
-                registry_content = template_content.replace(
-                    "{package_name}", package_name
-                )
-
-                # Write to registry directory (remove .template. from filename)
-                output_file = registry_dir / template_file.name.replace(
-                    ".template.", "."
-                )
-                output_file.write_text(registry_content, encoding="utf-8")
-                logging.debug("  Created registry file: %s", output_file.name)
     else:
         logging.debug("⏭️  No content_manager templates found")
+
+    # Create utils structure from templates
+    utils_template_dir = Path("templates") / "utils"
+    if utils_template_dir.exists():
+        logging.info("📝 Creating utils files from templates")
+
+        utils_dir = package_dir / "utils"
+        utils_dir.mkdir(parents=True, exist_ok=True)
+
+        # Process all Python template files in utils
+        for template_file in utils_template_dir.glob("*.template.py"):
+            template_content = template_file.read_text(encoding="utf-8")
+            utils_content = template_content.replace("{package_name}", package_name)
+            utils_content = utils_content.replace(
+                "{package_name_upper}", package_name.upper()
+            )
+
+            # Write to utils directory (remove .template. from filename)
+            output_file = utils_dir / template_file.name.replace(".template.", ".")
+            output_file.write_text(utils_content, encoding="utf-8")
+            logging.debug("  Created utils file: %s", output_file.name)
+    else:
+        logging.debug("⏭️  No utils templates found")
+
+    # Create content_manager/blocks/choosers.py from template
+    choosers_template = (
+        Path("templates") / "content_manager" / "blocks" / "choosers.template.py"
+    )
+    if choosers_template.exists():
+        logging.info("📝 Creating choosers.py from template")
+
+        blocks_dir = package_dir / "content_manager" / "blocks"
+        blocks_dir.mkdir(parents=True, exist_ok=True)
+
+        template_content = choosers_template.read_text(encoding="utf-8")
+        choosers_content = template_content.replace("{package_name}", package_name)
+
+        output_file = blocks_dir / "choosers.py"
+        output_file.write_text(choosers_content, encoding="utf-8")
+        logging.debug("  Created choosers.py")
+    else:
+        logging.debug("⏭️  No choosers template found")
 
 
 def _create_and_push_git_branch(package_dir: Path, tag: str) -> None:

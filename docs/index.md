@@ -1,0 +1,54 @@
+# Documentation wagtail-dsfr
+
+Bienvenue dans la documentation de **wagtail-dsfr**, un gestionnaire de contenu basé sur Wagtail et le Système de design de l'État (DSFR).
+
+:::{note}
+Cette documentation concerne les fonctionnalités spécifiques à wagtail-dsfr. Pour la documentation générale de Wagtail, consultez [docs.wagtail.org](https://docs.wagtail.org/).
+:::
+
+## Qu'est-ce que wagtail-dsfr ?
+
+wagtail-dsfr est un package Python qui étend Wagtail pour créer des sites conformes au [Système de Design de l'État français (DSFR)](https://www.systeme-de-design.gouv.fr/).
+
+**Fonctionnalités principales :**
+- 📝 Modèles de pages pour blog, événements et contenu
+- 🧩 Blocs StreamField conformes au DSFR
+- 🧭 Gabarits et menus adaptés au DSFR
+- ♿ Accessibilité RGAA intégrée
+
+```{toctree}
+---
+maxdepth: 2
+caption: Documentation
+---
+guide/installation
+guide/configuration
+guide/blocs-personnalises
+reference/settings
+migration
+changelog
+```
+
+## Démarrage rapide
+
+```bash
+# Installation
+pip install wagtail-dsfr
+
+# Ajouter à INSTALLED_APPS
+INSTALLED_APPS = [
+    "wagtail_dsfr",
+    "wagtail_dsfr.blog",
+    "wagtail_dsfr.content_manager",
+    "wagtail_dsfr.events",
+    # ...
+]
+```
+
+[Voir le guide complet d'installation →](guide/installation.md)
+
+## Besoin d'aide ?
+
+- 📖 [Documentation Wagtail](https://docs.wagtail.org/)
+- 💬 [GitHub Discussions](https://github.com/numerique-gouv/sites-faciles/discussions)
+- 🐛 [Signaler un bug](https://github.com/numerique-gouv/sites-faciles/issues)

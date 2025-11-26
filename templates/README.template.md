@@ -99,93 +99,153 @@ used to create it (blog.blogindexpage) can no longer be found in the codebase.
 
 La commande `migrate_contenttype` résout ce problème en mettant à jour toutes les références.
 
-## Personnalisation avec des blocs custom
+## Modèles de pages personnalisés
 
-{package_name} fournit un système de registre permettant d'ajouter facilement vos propres blocs StreamField personnalisés à tous les éditeurs de contenu.
+{package_name} utilise des modèles de pages configurables, similaires au système `AUTH_USER_MODEL` de Django ou `WAGTAILIMAGES_IMAGE_MODEL` de Wagtail.
 
-### Utilisation du registre de blocs
+### Modèles par défaut
 
-Pour ajouter vos propres blocs au StreamField commun, utilisez le décorateur `@register_common_block` :
+Par défaut, le package fournit les modèles concrets suivants :
+- `{package_name}_blog.BlogIndexPage`
+- `{package_name}_blog.BlogEntryPage`
+- `{package_name}_events.EventsIndexPage`
+- `{package_name}_events.EventEntryPage`
+- `{package_name}_content_manager.ContentPage`
+
+### Utilisation de modèles personnalisés
+
+Si vous souhaitez personnaliser complètement ces modèles (par exemple, pour modifier les StreamField disponibles), vous pouvez créer vos propres modèles et les configurer via les settings Django.
+
+#### Étape 1 : Créer vos modèles personnalisés
+
+Par exemple, pour créer un modèle de blog personnalisé avec des blocs supplémentaires :
 
 ```python
-from {package_name}.content_manager.registry import register_common_block
+# myapp/models.py
+from {package_name}.blog.models import BlogIndexPage as AbstractBlogIndexPage
+from {package_name}.blog.models import BlogEntryPage as AbstractBlogEntryPage
+from wagtail.fields import StreamField
 from wagtail import blocks
 
-@register_common_block(
-    label="Mon Bloc Personnalisé",
-    group="Mes Blocs"
-)
-class MonBlocCustom(blocks.StructBlock):
-    titre = blocks.CharBlock(label="Titre")
-    contenu = blocks.RichTextBlock(label="Contenu")
+# Définir vos blocs personnalisés
+CUSTOM_BLOCKS = [
+    ('heading', blocks.CharBlock(form_classname="title")),
+    ('paragraph', blocks.RichTextBlock()),
+    ('custom_block', MyCustomBlock()),  # Votre bloc personnalisé
+]
+
+class CustomBlogIndexPage(AbstractBlogIndexPage):
+    # Vous pouvez ajouter des champs supplémentaires ici si nécessaire
+    class Meta:
+        verbose_name = "Index de blog personnalisé"
+
+class CustomBlogEntryPage(AbstractBlogEntryPage):
+    # Surcharger le StreamField avec vos blocs personnalisés
+    body = StreamField(CUSTOM_BLOCKS, blank=True, use_json_field=True)
     
     class Meta:
-        icon = "doc-full"
-        template = "blocks/mon_bloc_custom.html"
+        verbose_name = "Article de blog personnalisé"
 ```
 
-### Paramètres du décorateur
-
-Le décorateur `@register_common_block` accepte les paramètres suivants :
-
-- **`name`** (optionnel) : Nom unique du bloc. Si non fourni, le nom de la classe en snake_case est utilisé
-- **`label`** (optionnel) : Libellé affiché dans l'éditeur. Si non fourni, le nom de la classe formaté est utilisé
-- **`group`** (optionnel) : Groupe dans lequel ranger le bloc dans l'interface d'édition
-- **`**block_kwargs`** : Arguments supplémentaires passés au bloc (ex: `icon`, `template`, etc.)
-
-### Exemple complet
+#### Étape 2 : Configurer les settings
 
 ```python
-# Dans votre application Django (ex: myapp/blocks.py)
-from {package_name}.content_manager.registry import register_common_block
+# settings.py
+{package_name_upper}_BLOG_INDEX_MODEL = 'myapp.CustomBlogIndexPage'
+{package_name_upper}_BLOG_ENTRY_MODEL = 'myapp.CustomBlogEntryPage'
+{package_name_upper}_EVENTS_INDEX_MODEL = 'myapp.CustomEventsIndexPage'
+{package_name_upper}_EVENTS_ENTRY_MODEL = 'myapp.CustomEventEntryPage'
+{package_name_upper}_CONTENT_PAGE_MODEL = 'myapp.CustomContentPage'
+```
+
+#### Étape 3 : Créer et appliquer les migrations
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+**Important :** Cette configuration doit être faite **avant** de créer votre première page. Si vous avez déjà des pages existantes, vous devrez migrer les données.
+
+### Helper functions
+
+Le package fournit des fonctions helpers pour obtenir les modèles configurés :
+
+```python
+from {package_name}.utils.models import (
+    get_blog_index_model,
+    get_blog_entry_model,
+    get_events_index_model,
+    get_events_entry_model,
+    get_content_page_model,
+)
+
+# Obtenir le modèle configuré
+BlogIndexPage = get_blog_index_model()
+```
+
+### Créer des blocs personnalisés avec références de modèles
+
+Le package fournit des blocs `ChooserBlock` qui utilisent automatiquement les modèles configurés. Cela vous permet de créer des blocs personnalisés qui référencent les bonnes pages, même si vous utilisez des modèles personnalisés.
+
+#### Exemple : Bloc de mise en avant d'articles
+
+```python
+# myapp/blocks.py
 from wagtail import blocks
-from wagtail.images.blocks import ImageChooserBlock
+from {package_name}.content_manager.blocks.choosers import BlogIndexChooserBlock
 
-@register_common_block(
-    label="Carte avec image",
-    group="Composants personnalisés",
-    icon="image"
-)
-class CarteImageBlock(blocks.StructBlock):
-    titre = blocks.CharBlock(label="Titre de la carte")
-    image = ImageChooserBlock(label="Image")
-    description = blocks.TextBlock(label="Description")
-    lien = blocks.URLBlock(label="Lien", required=False)
+class FeaturedArticlesBlock(blocks.StructBlock):
+    title = blocks.CharBlock(label="Titre de la section")
+    blog = BlogIndexChooserBlock(label="Blog source")
+    number_of_articles = blocks.IntegerBlock(
+        label="Nombre d'articles",
+        min_value=1,
+        max_value=10,
+        default=3
+    )
     
     class Meta:
-        template = "blocks/carte_image.html"
+        icon = "list-ul"
+        template = "blocks/featured_articles.html"
 
-@register_common_block(
-    label="Citation mise en avant",
-    group="Composants personnalisés"
-)
-class CitationBlock(blocks.StructBlock):
-    citation = blocks.TextBlock(label="Citation")
-    auteur = blocks.CharBlock(label="Auteur", required=False)
-    source = blocks.CharBlock(label="Source", required=False)
-    
-    class Meta:
-        icon = "openquote"
-        template = "blocks/citation.html"
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        blog = value.get('blog')
+        if blog:
+            # Le bloc utilisera automatiquement le bon modèle
+            context['articles'] = blog.posts[:value.get('number_of_articles', 3)]
+        return context
 ```
 
-### Chargement automatique
+#### Blocs disponibles
 
-Les blocs enregistrés sont automatiquement ajoutés à `STREAMFIELD_COMMON_BLOCKS` au démarrage de l'application, grâce au hook `ready()` de `ContentManagerConfig`. Assurez-vous simplement que votre fichier contenant les blocs personnalisés est importé au démarrage de votre application.
+Le package fournit les chooser blocks suivants :
 
-Pour cela, vous pouvez par exemple importer vos blocs dans le fichier `apps.py` de votre application :
+- `BlogIndexChooserBlock` - Pour sélectionner une page d'index de blog
+- `EventsIndexChooserBlock` - Pour sélectionner une page d'index d'événements
+
+Ces blocs s'adaptent automatiquement si vous configurez des modèles personnalisés via les settings.
+
+#### Exemple d'utilisation dans un StreamField
 
 ```python
-# Dans votre myapp/apps.py
-from django.apps import AppConfig
+# myapp/models.py
+from wagtail.fields import StreamField
+from wagtail import blocks
+from {package_name}.content_manager.blocks.choosers import (
+    BlogIndexChooserBlock,
+    EventsIndexChooserBlock,
+)
 
-class MyappConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'myapp'
-    
-    def ready(self):
-        # Importer vos blocs pour qu'ils soient enregistrés
-        from . import blocks  # noqa
+class MyCustomPage(Page):
+    body = StreamField([
+        ('heading', blocks.CharBlock()),
+        ('paragraph', blocks.RichTextBlock()),
+        ('blog_reference', BlogIndexChooserBlock(label="Référence vers un blog")),
+        ('events_reference', EventsIndexChooserBlock(label="Référence vers un calendrier")),
+        ('featured_articles', FeaturedArticlesBlock()),
+    ], blank=True, use_json_field=True)
 ```
 
 ## Documentation
