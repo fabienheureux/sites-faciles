@@ -24,6 +24,7 @@ BASE_DIR = PROJECT_DIR.parent
 # Application definition
 
 INSTALLED_APPS = [
+    "demo.apps.DemoConfig",
     "home",
     "search",
     "wagtail.contrib.forms",

@@ -463,7 +463,7 @@ def run_sync(
                     "🚀 Pushing branch %s to paquet-facile remote", branch_name
                 )
                 push_result = run_command(
-                    ["git", "push", "paquet-facile", branch_name],
+                    ["git", "push", "-f", "paquet-facile", branch_name],
                     cwd=package_dir,
                     check=False,
                 )
@@ -504,7 +504,7 @@ def run_sync(
     version = tag.lstrip("v")
 
     # Create main apps.py from template
-    apps_template = Path("templates") / "apps.py.template"
+    apps_template = Path("templates") / "apps.template.py"
     if apps_template.exists():
         logging.info("📝 Creating main apps.py from template")
         template_content = apps_template.read_text(encoding="utf-8")
@@ -521,7 +521,7 @@ def run_sync(
         logging.warning("⚠️  Template file not found: %s", apps_template)
 
     # Create pyproject.toml from template
-    pyproject_template = Path("templates") / "pyproject.toml.template"
+    pyproject_template = Path("templates") / "pyproject.template.toml"
     if pyproject_template.exists():
         logging.info("📝 Creating pyproject.toml from template")
         template_content = pyproject_template.read_text(encoding="utf-8")
@@ -538,7 +538,7 @@ def run_sync(
         logging.warning("⚠️  Template file not found: %s", pyproject_template)
 
     # Create __init__.py from template
-    init_template = Path("templates") / "__init__.py.template"
+    init_template = Path("templates") / "__init__.template.py"
     if init_template.exists():
         logging.info("📝 Creating __init__.py from template")
         template_content = init_template.read_text(encoding="utf-8")
@@ -552,7 +552,7 @@ def run_sync(
         logging.warning("⚠️  Template file not found: %s", init_template)
 
     # Create README.md in package root
-    readme_template = Path("templates") / "README.md.template"
+    readme_template = Path("templates") / "README.template.md"
     if readme_template.exists():
         logging.info("📝 Creating README.md from template")
         template_content = readme_template.read_text(encoding="utf-8")
@@ -578,31 +578,55 @@ def run_sync(
         commands_dir.mkdir(parents=True, exist_ok=True)
 
         # Process __init__.py files
-        for init_file in ["__init__.py.template", "commands/__init__.py.template"]:
+        for init_file in ["__init__.template.py", "commands/__init__.template.py"]:
             init_template = management_template_dir / init_file
             if init_template.exists():
                 template_content = init_template.read_text(encoding="utf-8")
                 init_content = template_content.replace("{package_name}", package_name)
 
-                # Determine output path (remove .template extension)
-                output_path = management_dir / init_file.replace(".template", "")
+                # Determine output path (remove .template. from filename)
+                output_path = management_dir / init_file.replace(".template.", ".")
+                output_path.parent.mkdir(parents=True, exist_ok=True)
                 output_path.write_text(init_content, encoding="utf-8")
 
         # Process management command templates
         commands_template_dir = management_template_dir / "commands"
         if commands_template_dir.exists():
-            for template_file in commands_template_dir.glob("*.py.template"):
+            for template_file in commands_template_dir.glob("*.template.py"):
                 template_content = template_file.read_text(encoding="utf-8")
                 command_content = template_content.replace(
                     "{package_name}", package_name
                 )
 
-                # Write to commands directory (remove .template extension)
-                output_file = commands_dir / template_file.name.replace(".template", "")
+                # Write to commands directory (remove .template. from filename)
+                output_file = commands_dir / template_file.name.replace(
+                    ".template.", "."
+                )
                 output_file.write_text(command_content, encoding="utf-8")
                 logging.debug("  Created command: %s", output_file.name)
     else:
         logging.debug("⏭️  No management command templates found")
+
+    # Create registry structure from templates
+    registry_template_dir = Path("templates") / "content_manager" / "registry"
+    if registry_template_dir.exists():
+        logging.info("📝 Creating registry from templates")
+
+        # Create registry directory
+        registry_dir = package_dir / "content_manager" / "registry"
+        registry_dir.mkdir(parents=True, exist_ok=True)
+
+        # Process all Python template files in registry
+        for template_file in registry_template_dir.glob("*.template.py"):
+            template_content = template_file.read_text(encoding="utf-8")
+            registry_content = template_content.replace("{package_name}", package_name)
+
+            # Write to registry directory (remove .template. from filename)
+            output_file = registry_dir / template_file.name.replace(".template.", ".")
+            output_file.write_text(registry_content, encoding="utf-8")
+            logging.debug("  Created registry file: %s", output_file.name)
+    else:
+        logging.debug("⏭️  No registry templates found")
 
     logging.warning("✅ Sync completed successfully!")
 
