@@ -32,4 +32,4 @@ Active l'authentification ProConnect :
 PROCONNECT_ACTIVATED = True
 ```
 
-Pour plus d'informations sur tous les paramètres disponibles, consultez la [référence des settings](../reference/settings.md).
+Pour plus d'informations sur tous les paramètres disponibles, consultez la {doc}`référence des settings <reference/settings>`.

@@ -65,7 +65,7 @@ WAGTAIL_DSFR_BLOG_INDEX_MODEL = "custom_blog.CustomBlogIndexPage"
 WAGTAIL_DSFR_BLOG_ENTRY_MODEL = "custom_blog.CustomBlogEntryPage"
 ```
 
-Pour plus d'informations sur les modèles swappables, consultez le [guide des modèles personnalisés](modeles-personnalises.md).
+Pour plus d'informations sur les modèles swappables, consultez le {doc}`guide des modèles personnalisés <guide/modeles-personnalises>`.
 
 ## Migrations et collecte des fichiers statiques
 
@@ -78,6 +78,6 @@ python manage.py collectstatic
 
 ## Prochaines étapes
 
-- [Configuration avancée →](configuration.md)
-- [Utiliser les modèles swappables →](modeles-personnalises.md)
-- [Personnaliser le blog →](../tutoriels/personnalisation-blog.md)
+- {doc}`Configuration avancée → <guide/configuration>`
+- {doc}`Utiliser les modèles swappables → <guide/modeles-personnalises>`
+- {doc}`Personnaliser le blog → <tutoriels/personnalisation-blog>`

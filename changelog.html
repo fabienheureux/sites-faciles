@@ -57,19 +57,29 @@
     </form>
 </div><div class="site-toc">
     <nav class="toc mt-3" aria-label="Main menu">
-        <p class="caption" role="heading"><span class="caption-text">Guide d'utilisation</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Démarrage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="guide/blocs-personnalises.html">Blocs StreamField</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide/configuration.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide/installation.html">Installation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Référence technique</span></p>
+<p class="caption" role="heading"><span class="caption-text">Tutoriels</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutoriels/personnalisation-blog.html">Personnalisation du blog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides pratiques</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guide/configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/blocs-personnalises.html">Blocs StreamField</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Référence</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/settings.html">Référence des paramètres</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Développement</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="developpement/contribution.html">Contribuer au projet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Notes de version</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a></li>
 </ul>
 
@@ -124,8 +134,42 @@
                         <main role="main" id="main">
     <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Lien vers cette rubrique">¶</a></h1>
-<section id="version-2-1-0-2025">
-<h2>Version 2.1.0 (2025)<a class="headerlink" href="#version-2-1-0-2025" title="Lien vers cette rubrique">¶</a></h2>
+<section id="version-2-3-0-amont">
+<h2>Version 2.3.0 (amont)<a class="headerlink" href="#version-2-3-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<section id="changements">
+<h3>Changements<a class="headerlink" href="#changements" title="Lien vers cette rubrique">¶</a></h3>
+<ul class="simple">
+<li><p>✨ Nouvelle répartition des blocs (#398)</p></li>
+<li><p>🔗 Mise à jour de l’URL Sites Faciles en pied de page (#402)</p></li>
+<li><p>📝 Correction d’une formulation « FranceConnect » → « ProConnect » (#404)</p></li>
+<li><p>🎛️ Boutons d’ancrage gauche/droite/centré dans l’éditeur de texte riche (#403)</p></li>
+</ul>
+</section>
+</section>
+<section id="version-2-2-1-amont">
+<h2>Version 2.2.1 (amont)<a class="headerlink" href="#version-2-2-1-amont" title="Lien vers cette rubrique">¶</a></h2>
+<section id="corrections">
+<h3>Corrections<a class="headerlink" href="#corrections" title="Lien vers cette rubrique">¶</a></h3>
+<ul class="simple">
+<li><p>🛡️ Empêche l’écrasement des pages publiées lors des mises à jour de modèles (#397)</p></li>
+<li><p>🖼️ Autorise l’écrasement des images dans les scripts d’import (#400)</p></li>
+</ul>
+</section>
+</section>
+<section id="version-2-2-0-amont">
+<h2>Version 2.2.0 (amont)<a class="headerlink" href="#version-2-2-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<section id="id1">
+<h3>Changements<a class="headerlink" href="#id1" title="Lien vers cette rubrique">¶</a></h3>
+<ul class="simple">
+<li><p>🧭 Nouvelles en-têtes (#373)</p></li>
+<li><p>🖼️ Support des GIF animés (#390)</p></li>
+<li><p>🔐 Possibilité de désactiver la connexion par mot de passe (#391)</p></li>
+<li><p>🔎 Tous les types de pages peuvent apparaître dans la recherche (#392)</p></li>
+</ul>
+</section>
+</section>
+<section id="version-2-1-0">
+<h2>Version 2.1.0<a class="headerlink" href="#version-2-1-0" title="Lien vers cette rubrique">¶</a></h2>
 <section id="nouvelles-fonctionnalites">
 <h3>Nouvelles fonctionnalités<a class="headerlink" href="#nouvelles-fonctionnalites" title="Lien vers cette rubrique">¶</a></h3>
 <ul class="simple">
@@ -157,15 +201,207 @@
 </ul>
 </section>
 </section>
-<section id="migration">
-<h2>Migration<a class="headerlink" href="#migration" title="Lien vers cette rubrique">¶</a></h2>
-<p>Si vous utilisiez <code class="docutils literal notranslate"><span class="pre">&#64;register_common_block</span></code> (qui ne fonctionnait pas réellement) :</p>
-<ol class="arabic simple">
-<li><p>Créez des modèles personnalisés héritant des modèles de base</p></li>
-<li><p>Redéfinissez le StreamField <code class="docutils literal notranslate"><span class="pre">body</span></code> avec vos blocs</p></li>
-<li><p>Configurez les settings <code class="docutils literal notranslate"><span class="pre">WAGTAIL_DSFR_*_MODEL</span></code></p></li>
-</ol>
-<p>Voir la <a class="reference external" href="https://numerique-gouv.github.io/sites-faciles/">documentation complète</a>.</p>
+<hr class="docutils" />
+<section id="version-2-0-0-amont">
+<h2>Version 2.0.0 (amont)<a class="headerlink" href="#version-2-0-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<section id="id2">
+<h3>Changements<a class="headerlink" href="#id2" title="Lien vers cette rubrique">¶</a></h3>
+<ul class="simple">
+<li><p>🔧 Passage à <code class="docutils literal notranslate"><span class="pre">just</span></code> et <code class="docutils literal notranslate"><span class="pre">uv</span></code> pour le dev/deploy</p></li>
+<li><p>🐝 Ajout d’un honeypot (#357)</p></li>
+<li><p>🖼️ Image de prévisualisation (#350)</p></li>
+<li><p>🔄 Ajustements divers (voir release notes upstream)</p></li>
+</ul>
+</section>
+</section>
+<section id="version-1-18-1-amont">
+<h2>Version 1.18.1 (amont)<a class="headerlink" href="#version-1-18-1-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🐛 Indicateur d’étapes : correction d’un bug d’affichage (#343)</p></li>
+</ul>
+</section>
+<section id="version-1-18-0-amont">
+<h2>Version 1.18.0 (amont)<a class="headerlink" href="#version-1-18-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🐘 Bump PostgreSQL minimum (#323)</p></li>
+<li><p>📦 Mises à jour dépendances (Wagtail 7.0) (#337)</p></li>
+<li><p>🏷️ Déplacement des étiquettes dans l’onglet contenu (#325)</p></li>
+<li><p>🖼️ Affichage du “Logo du site” (#328)</p></li>
+</ul>
+</section>
+<section id="version-1-17-0-amont">
+<h2>Version 1.17.0 (amont)<a class="headerlink" href="#version-1-17-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🧩 Alt vides pour les tuiles (#305)</p></li>
+<li><p>🛠️ Correction encodage largeur du logo (#307)</p></li>
+<li><p>🔗 Nouveau template tag <code class="docutils literal notranslate"><span class="pre">canonical_url</span></code> (#309)</p></li>
+<li><p>♿ Corrections suite audit accessibilité (#310)</p></li>
+</ul>
+</section>
+<section id="version-1-16-0-amont">
+<h2>Version 1.16.0 (amont)<a class="headerlink" href="#version-1-16-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>📊 Nouveau bloc tableau (#295)</p></li>
+<li><p>🔗 Liens externes ouvrent dans un nouvel onglet (#301)</p></li>
+<li><p>🤖 Ajout d’un <code class="docutils literal notranslate"><span class="pre">robots.txt</span></code> (#303)</p></li>
+<li><p>📦 Mises à jour dépendances (#302)</p></li>
+</ul>
+</section>
+<section id="version-1-15-1-amont">
+<h2>Version 1.15.1 (amont)<a class="headerlink" href="#version-1-15-1-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>📰 Bloc « Lettre d’information et réseaux sociaux » déplacé en aside (#297)</p></li>
+<li><p>🧱 Grille d’éléments : correction d’affichage (#299)</p></li>
+<li><p>📦 Mises à jour dépendances Python &amp; JS (#300)</p></li>
+</ul>
+</section>
+<section id="version-1-15-0-amont">
+<h2>Version 1.15.0 (amont)<a class="headerlink" href="#version-1-15-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🗺️ Page « Plan du site » (#279)</p></li>
+<li><p>🧩 Améliorations de composants (#276)</p></li>
+<li><p>🛠️ Nouvelle recette make <code class="docutils literal notranslate"><span class="pre">upgrade</span></code> (#281)</p></li>
+<li><p>🤖 Nouvelle CI <code class="docutils literal notranslate"><span class="pre">issues-notion-sync</span></code> (#282)</p></li>
+</ul>
+</section>
+<section id="version-1-14-0-amont">
+<h2>Version 1.14.0 (amont)<a class="headerlink" href="#version-1-14-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>♿ Correction accessibilité du champ recherche (#274)</p></li>
+<li><p>📦 Mises à jour dépendances (Wagtail 6.4.1) (#275)</p></li>
+<li><p>🗺️ Génération automatique du sitemap.xml (#271)</p></li>
+<li><p>🔐 Authentification via ProConnect (#273)</p></li>
+</ul>
+</section>
+<section id="version-1-13-0-amont">
+<h2>Version 1.13.0 (amont)<a class="headerlink" href="#version-1-13-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>📦 Mise à jour Wagtail 6.4 (#270)</p></li>
+<li><p>🛠️ Helper <code class="docutils literal notranslate"><span class="pre">get_default_site()</span></code> (#250)</p></li>
+</ul>
+</section>
+<section id="version-1-12-0-amont">
+<h2>Version 1.12.0 (amont)<a class="headerlink" href="#version-1-12-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🔗 Réordonnancement des liens de référence en pied de page (#260)</p></li>
+</ul>
+</section>
+<section id="version-1-11-5-amont">
+<h2>Version 1.11.5 (amont)<a class="headerlink" href="#version-1-11-5-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🛠️ Améliorations du Makefile (#257)</p></li>
+</ul>
+</section>
+<section id="version-1-11-4-amont">
+<h2>Version 1.11.4 (amont)<a class="headerlink" href="#version-1-11-4-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🐛 Import de fichiers S3 corrigé (#256)</p></li>
+</ul>
+</section>
+<section id="version-1-11-3-amont">
+<h2>Version 1.11.3 (amont)<a class="headerlink" href="#version-1-11-3-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>⚙️ Variable d’environnement <code class="docutils literal notranslate"><span class="pre">USE_POETRY</span></code> (#254)</p></li>
+</ul>
+</section>
+<section id="version-1-11-2-amont">
+<h2>Version 1.11.2 (amont)<a class="headerlink" href="#version-1-11-2-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>📦 Passage à Poetry 2.0 (#253)</p></li>
+</ul>
+</section>
+<section id="version-1-11-1-amont">
+<h2>Version 1.11.1 (amont)<a class="headerlink" href="#version-1-11-1-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🌐 Correction orthographe FR dans le gestionnaire d’étape (#251)</p></li>
+</ul>
+</section>
+<section id="version-1-11-0-amont">
+<h2>Version 1.11.0 (amont)<a class="headerlink" href="#version-1-11-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🧭 Carte contact verticale (#242)</p></li>
+<li><p>🧭 Gestion des index de catalogue (#244)</p></li>
+<li><p>🧩 Ajout de blocs manquants (#245)</p></li>
+<li><p>🐛 Corrections blog (#240)</p></li>
+</ul>
+</section>
+<section id="version-1-10-2-amont">
+<h2>Version 1.10.2 (amont)<a class="headerlink" href="#version-1-10-2-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🎨 Semi-rollback des pictos mode sombre (#235)</p></li>
+</ul>
+</section>
+<section id="version-1-10-1-amont">
+<h2>Version 1.10.1 (amont)<a class="headerlink" href="#version-1-10-1-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🐛 Corrections pictogrammes en mode sombre (#231, #232)</p></li>
+<li><p>📦 Mises à jour dépendances (Wagtail → 6.3, django-dsfr → 1.4.1) (#234)</p></li>
+</ul>
+</section>
+<section id="version-1-10-0-amont">
+<h2>Version 1.10.0 (amont)<a class="headerlink" href="#version-1-10-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>⚠️ Avertissement sur l’utilisation du DSFR (#221)</p></li>
+<li><p>🐳 Corrections Docker (#212)</p></li>
+<li><p>🛠️ Mise en place du système de modèles de pages (#218)</p></li>
+<li><p>🔀 Permet de migrer de versions précédentes (#217)</p></li>
+</ul>
+</section>
+<section id="version-1-9-0-amont">
+<h2>Version 1.9.0 (amont)<a class="headerlink" href="#version-1-9-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🧩 Nouveaux composants : Onglets et Partage (#206)</p></li>
+<li><p>📄 Ajout de <code class="docutils literal notranslate"><span class="pre">publiccode.yml</span></code> (#208)</p></li>
+<li><p>🌐 Mise en place de l’API (#209)</p></li>
+<li><p>🔐 Gestion de l’accès aux pages privées (#216)</p></li>
+<li><p>🧱 Blocs accordéons/étapier pour multi-colonnes (#215)</p></li>
+</ul>
+</section>
+<section id="version-1-8-0-amont">
+<h2>Version 1.8.0 (amont)<a class="headerlink" href="#version-1-8-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>📅 Système d’agenda/calendrier (#191)</p></li>
+<li><p>🖼️ Masque le header des cartes horizontales si pas d’image (#199)</p></li>
+<li><p>📢 Mention « Site fait avec Sites faciles » en pied de page (#196)</p></li>
+<li><p>📦 Mises à jour dépendances + nouveau bandeau info (#193)</p></li>
+</ul>
+</section>
+<section id="version-1-7-0-amont">
+<h2>Version 1.7.0 (amont)<a class="headerlink" href="#version-1-7-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🧩 Listes de boutons pour appels à action (#184)</p></li>
+<li><p>📰 Filtrage des articles sur l’index + bloc “Derniers articles” (#186)</p></li>
+<li><p>📦 Mises à jour dépendances Python (#190)</p></li>
+</ul>
+</section>
+<section id="version-1-6-1-amont">
+<h2>Version 1.6.1 (amont)<a class="headerlink" href="#version-1-6-1-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🐛 Répare l’affichage des tuiles (#180)</p></li>
+</ul>
+</section>
+<section id="version-1-6-0-amont">
+<h2>Version 1.6.0 (amont)<a class="headerlink" href="#version-1-6-0-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>✉️ Envoi de courriels de récupération de mot de passe (#168)</p></li>
+<li><p>🧰 Générateur de formulaire (#169)</p></li>
+<li><p>🌞 Force le thème clair à la première visite si sélecteur désactivé (#174)</p></li>
+<li><p>🐛 Corrections tuiles et ajustements (#176)</p></li>
+</ul>
+</section>
+<section id="version-1-5-2-amont">
+<h2>Version 1.5.2 (amont)<a class="headerlink" href="#version-1-5-2-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🗂️ Nouveau bloc “Liste des sous-pages” (#148, #150)</p></li>
+<li><p>🧩 Améliorations blocs Mise en avant / Mise en exergue (#147)</p></li>
+<li><p>🖼️ Paramètre <code class="docutils literal notranslate"><span class="pre">parameters</span></code> pour les iframes (#152)</p></li>
+</ul>
+</section>
+<section id="version-1-5-1-amont">
+<h2>Version 1.5.1 (amont)<a class="headerlink" href="#version-1-5-1-amont" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>🐛 Corrections d’affichage pour cartes/vidéos (#146)</p></li>
+</ul>
 </section>
 </section>
 
@@ -182,14 +418,54 @@
                             <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
                             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#version-2-1-0-2025">Version 2.1.0 (2025)</a><ul>
+<li><a class="reference internal" href="#version-2-3-0-amont">Version 2.3.0 (amont)</a><ul>
+<li><a class="reference internal" href="#changements">Changements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-2-2-1-amont">Version 2.2.1 (amont)</a><ul>
+<li><a class="reference internal" href="#corrections">Corrections</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-2-2-0-amont">Version 2.2.0 (amont)</a><ul>
+<li><a class="reference internal" href="#id1">Changements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-2-1-0">Version 2.1.0</a><ul>
 <li><a class="reference internal" href="#nouvelles-fonctionnalites">Nouvelles fonctionnalités</a></li>
 <li><a class="reference internal" href="#suppressions">Suppressions</a></li>
 <li><a class="reference internal" href="#ameliorations">Améliorations</a></li>
 <li><a class="reference internal" href="#documentation">Documentation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#migration">Migration</a></li>
+<li><a class="reference internal" href="#version-2-0-0-amont">Version 2.0.0 (amont)</a><ul>
+<li><a class="reference internal" href="#id2">Changements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-1-18-1-amont">Version 1.18.1 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-18-0-amont">Version 1.18.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-17-0-amont">Version 1.17.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-16-0-amont">Version 1.16.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-15-1-amont">Version 1.15.1 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-15-0-amont">Version 1.15.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-14-0-amont">Version 1.14.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-13-0-amont">Version 1.13.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-12-0-amont">Version 1.12.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-11-5-amont">Version 1.11.5 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-11-4-amont">Version 1.11.4 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-11-3-amont">Version 1.11.3 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-11-2-amont">Version 1.11.2 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-11-1-amont">Version 1.11.1 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-11-0-amont">Version 1.11.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-10-2-amont">Version 1.10.2 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-10-1-amont">Version 1.10.1 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-10-0-amont">Version 1.10.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-9-0-amont">Version 1.9.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-8-0-amont">Version 1.8.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-7-0-amont">Version 1.7.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-6-1-amont">Version 1.6.1 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-6-0-amont">Version 1.6.0 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-5-2-amont">Version 1.5.2 (amont)</a></li>
+<li><a class="reference internal" href="#version-1-5-1-amont">Version 1.5.1 (amont)</a></li>
 </ul>
 </li>
 </ul>
