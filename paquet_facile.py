@@ -376,109 +376,9 @@ def _apply_transformations(config_path: Path, dry_run: bool, jobs: int | None) -
 # -- Sync Command -------------------------------------------------------------
 
 
-def run_sync(
-    tag: str,
-    config_path: Path,
-    dry_run: bool,
-    jobs: int | None,
-    repo_url: str = "git@github.com:numerique-gouv/sites-faciles.git",
-) -> None:
-    """Sync sites-faciles from upstream and apply refactoring."""
-    # Load config to get package_name
-    config = load_config(config_path)
-    package_name: str = config.get("package_name", "sites_faciles")
-
-    temp_dir = Path(f"{package_name}_temp")
-    package_root = Path(package_name)
-    package_dir = package_root / package_name
-
-    # Clean up temp directory if it exists
-    if temp_dir.exists():
-        logging.info("🧹 Removing existing temp directory")
-        shutil.rmtree(temp_dir)
-
-    # Clone repository
-    git_clone(repo_url, tag, temp_dir)
-
-    # Change to temp directory and apply transformations
-    original_dir = Path.cwd()
-    try:
-        os.chdir(temp_dir)
-        logging.info("🔧 Applying transformations...")
-
-        # Adjust config path to be relative to temp dir
-        config_path_adjusted = Path("..") / config_path
-        _apply_transformations(config_path_adjusted, dry_run, jobs)
-
-    finally:
-        os.chdir(original_dir)
-
-    if dry_run:
-        logging.warning("🎬 DRY-RUN: Would create nested structure in %s", package_root)
-        return
-
-    # Create package structure: package_name/package_name/
-    logging.info("📦 Creating nested package structure")
-    if package_root.exists():
-        shutil.rmtree(package_root)
-    package_root.mkdir(parents=True)
-
-    # Move cloned content into nested directory
-    shutil.move(str(temp_dir), str(package_dir))
-
-    # Create a new branch in the cloned repo before removing .git
-    git_dir = package_dir / ".git"
-    if git_dir.exists():
-        branch_name = f"{tag}-paquet-facile"
-        logging.info("🌿 Creating branch %s", branch_name)
-
-        try:
-            # Create new branch
-            run_command(["git", "checkout", "-b", branch_name], cwd=package_dir)
-
-            # Stage all changes
-            run_command(["git", "add", "-A"], cwd=package_dir)
-
-            # Commit transformations
-            commit_msg = f"Apply paquet-facile transformations for {tag}"
-            run_command(["git", "commit", "-m", commit_msg], cwd=package_dir)
-
-            # Get remote URL from main repository
-            result = run_command(["git", "remote", "get-url", "origin"], check=False)
-            if result.returncode == 0:
-                main_repo_remote = result.stdout.strip()
-                logging.info(
-                    "📡 Adding remote 'paquet-facile' pointing to %s", main_repo_remote
-                )
-
-                # Add the main repo as a new remote
-                run_command(
-                    ["git", "remote", "add", "paquet-facile", main_repo_remote],
-                    cwd=package_dir,
-                    check=False,
-                )
-
-                # Push the new branch to the remote
-                logging.info(
-                    "🚀 Pushing branch %s to paquet-facile remote", branch_name
-                )
-                push_result = run_command(
-                    ["git", "push", "-f", "paquet-facile", branch_name],
-                    cwd=package_dir,
-                    check=False,
-                )
-
-                if push_result.returncode == 0:
-                    logging.info("✅ Successfully pushed branch to remote")
-                else:
-                    logging.warning("⚠️  Failed to push branch: %s", push_result.stderr)
-            else:
-                logging.warning("⚠️  Could not get main repository remote URL")
-
-        except Exception as exc:
-            logging.warning("⚠️  Failed to create/push branch: %s", exc)
-
-    # Cleanup unwanted directories and files from nested package
+def _cleanup_package_dir(package_dir: Path) -> None:
+    """Remove unwanted directories and build files from the package."""
+    # Cleanup unwanted directories and files
     for path in [".git", ".github"]:
         full_path = package_dir / path
         if full_path.exists():
@@ -495,6 +395,11 @@ def run_sync(
             logging.debug("Removing upstream %s", build_file)
             build_path.unlink()
 
+
+def _process_templates(
+    package_dir: Path, package_root: Path, package_name: str, tag: str
+) -> None:
+    """Process all template files and create package structure."""
     # Transform placeholders for templates
     package_name_title = package_name.replace("_", " ").title()
     package_name_kebab = package_name.replace("_", "-")
@@ -646,6 +551,121 @@ def run_sync(
                 logging.debug("  Created registry file: %s", output_file.name)
     else:
         logging.debug("⏭️  No content_manager templates found")
+
+
+def _create_and_push_git_branch(package_dir: Path, tag: str) -> None:
+    """Create a git branch with transformations and push to remote."""
+    git_dir = package_dir / ".git"
+    if not git_dir.exists():
+        logging.warning("⚠️  No .git directory found, skipping git operations")
+        return
+
+    branch_name = f"{tag}-paquet-facile"
+    logging.info("🌿 Creating branch %s", branch_name)
+
+    try:
+        # Create new branch
+        run_command(["git", "checkout", "-b", branch_name], cwd=package_dir)
+
+        # Stage all changes
+        run_command(["git", "add", "-A"], cwd=package_dir)
+
+        # Commit transformations
+        commit_msg = f"Apply paquet-facile transformations for {tag}"
+        run_command(["git", "commit", "-m", commit_msg], cwd=package_dir)
+
+        # Get remote URL from main repository
+        result = run_command(["git", "remote", "get-url", "origin"], check=False)
+        if result.returncode == 0:
+            main_repo_remote = result.stdout.strip()
+            logging.info(
+                "📡 Adding remote 'paquet-facile' pointing to %s", main_repo_remote
+            )
+
+            # Add the main repo as a new remote
+            run_command(
+                ["git", "remote", "add", "paquet-facile", main_repo_remote],
+                cwd=package_dir,
+                check=False,
+            )
+
+            # Push the new branch to the remote
+            logging.info("🚀 Pushing branch %s to paquet-facile remote", branch_name)
+            push_result = run_command(
+                ["git", "push", "-f", "paquet-facile", branch_name],
+                cwd=package_dir,
+                check=False,
+            )
+
+            if push_result.returncode == 0:
+                logging.info("✅ Successfully pushed branch to remote")
+            else:
+                logging.warning("⚠️  Failed to push branch: %s", push_result.stderr)
+        else:
+            logging.warning("⚠️  Could not get main repository remote URL")
+
+    except Exception as exc:
+        logging.warning("⚠️  Failed to create/push branch: %s", exc)
+
+
+def run_sync(
+    tag: str,
+    config_path: Path,
+    dry_run: bool,
+    jobs: int | None,
+    repo_url: str = "git@github.com:numerique-gouv/sites-faciles.git",
+) -> None:
+    """Sync sites-faciles from upstream and apply refactoring."""
+    # Load config to get package_name
+    config = load_config(config_path)
+    package_name: str = config.get("package_name", "sites_faciles")
+
+    temp_dir = Path(f"{package_name}_temp")
+    package_root = Path(package_name)
+    package_dir = package_root / package_name
+
+    # Clean up temp directory if it exists
+    if temp_dir.exists():
+        logging.info("🧹 Removing existing temp directory")
+        shutil.rmtree(temp_dir)
+
+    # Clone repository
+    git_clone(repo_url, tag, temp_dir)
+
+    # Change to temp directory and apply transformations
+    original_dir = Path.cwd()
+    try:
+        os.chdir(temp_dir)
+        logging.info("🔧 Applying transformations...")
+
+        # Adjust config path to be relative to temp dir
+        config_path_adjusted = Path("..") / config_path
+        _apply_transformations(config_path_adjusted, dry_run, jobs)
+
+    finally:
+        os.chdir(original_dir)
+
+    if dry_run:
+        logging.warning("🎬 DRY-RUN: Would create nested structure in %s", package_root)
+        return
+
+    # Create package structure: package_name/package_name/
+    logging.info("📦 Creating nested package structure")
+    if package_root.exists():
+        shutil.rmtree(package_root)
+    package_root.mkdir(parents=True)
+
+    # Move cloned content into nested directory
+    shutil.move(str(temp_dir), str(package_dir))
+
+    # Process all templates to create package files
+    _process_templates(package_dir, package_root, package_name, tag)
+
+    # Create git branch, commit changes, and push (must be done LAST)
+    _create_and_push_git_branch(package_dir, tag)
+
+    # Cleanup unwanted files and directories
+    _cleanup_package_dir(package_dir)
 
     logging.warning("✅ Sync completed successfully!")
 

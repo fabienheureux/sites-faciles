@@ -16,7 +16,6 @@ class ContentManagerConfig(AppConfig):
         from wagtail_dsfr.content_manager.blocks import core
         from wagtail_dsfr.content_manager.registry import get_registered_blocks
 
-        # Extend the STREAMFIELD_COMMON_BLOCKS list with registered blocks
         registered_blocks = get_registered_blocks()
         if registered_blocks:
             core.STREAMFIELD_COMMON_BLOCKS.extend(registered_blocks)
