@@ -1,0 +1,35 @@
+# Changelog
+
+## Version 2.1.0 (2025)
+
+### Nouvelles fonctionnalités
+
+- ✨ Système de modèles swappables (pattern AUTH_USER_MODEL)
+- ✨ Fonctions helpers pour obtenir les modèles configurés
+- ✨ Blocs chooser personnalisés (`BlogIndexChooserBlock`, `EventsIndexChooserBlock`)
+- ✨ Documentation complète en français avec Sphinx
+
+### Suppressions
+
+- 🗑️ Suppression du système de registre `@register_common_block` (non fonctionnel)
+
+### Améliorations
+
+- ⚡ Meilleure flexibilité pour la personnalisation des modèles
+- ⚡ Pas de conflits de migration avec les personnalisations
+
+### Documentation
+
+- 📚 Documentation Sphinx avec thème Wagtail
+- 📚 Guides, tutoriels et références techniques en français
+- 📚 Publication automatique sur GitHub Pages
+
+## Migration
+
+Si vous utilisiez `@register_common_block` (qui ne fonctionnait pas réellement) :
+
+1. Créez des modèles personnalisés héritant des modèles de base
+2. Redéfinissez le StreamField `body` avec vos blocs
+3. Configurez les settings `WAGTAIL_DSFR_*_MODEL`
+
+Voir la [documentation complète](https://numerique-gouv.github.io/sites-faciles/).
