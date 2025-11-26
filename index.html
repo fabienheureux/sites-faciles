@@ -14,7 +14,7 @@
             <link rel="index" title="Index" href="genindex.html" />
             <link rel="search" title="Recherche" href="search.html" />
             <link rel="top" title="Documentation wagtail-dsfr 2.1.0" href="#" />
-            <link rel="next" title="Changelog" href="changelog.html" />
+            <link rel="next" title="Installation" href="guide/installation.html" />
     </head>
 <body>
     <script type="text/javascript" src="_static/dist/blocking.js"></script>
@@ -57,8 +57,26 @@
     </form>
 </div><div class="site-toc">
     <nav class="toc mt-3" aria-label="Main menu">
-        <p class="caption" role="heading"><span class="caption-text">Développement</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Guide d'utilisation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="guide/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/modeles-personnalises.html">Modèles personnalisés (Swappables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/blocs-personnalises.html">Blocs StreamField</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutoriels</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutoriels/premier-site.html">Créer votre premier site</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutoriels/personnalisation-blog.html">Personnalisation du blog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Référence technique</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/modeles-swappables.html">Référence des modèles swappables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/settings.html">Référence des paramètres</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Développement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developpement/contribution.html">Contribuer au projet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -129,14 +147,71 @@
 <li><p>♿ Accessibilité RGAA intégrée</p></li>
 </ul>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Guide d'utilisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guide/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide/installation.html#prerequis">Prérequis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/installation.html#installation-via-pip">Installation via pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/installation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/installation.html#modeles-swappables-optionnel">Modèles swappables (optionnel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/installation.html#migrations-et-collecte-des-fichiers-statiques">Migrations et collecte des fichiers statiques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/installation.html#prochaines-etapes">Prochaines étapes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide/configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide/configuration.html#parametres-disponibles">Paramètres disponibles</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide/modeles-personnalises.html">Modèles personnalisés (Swappables)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide/modeles-personnalises.html#principe">Principe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/modeles-personnalises.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/modeles-personnalises.html#modeles-disponibles">Modèles disponibles</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide/blocs-personnalises.html">Blocs StreamField</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide/blocs-personnalises.html#utilisation">Utilisation</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Tutoriels</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutoriels/premier-site.html">Créer votre premier site</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutoriels/premier-site.html#creer-un-projet-wagtail">1. Créer un projet Wagtail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutoriels/premier-site.html#installer-wagtail-dsfr">2. Installer wagtail-dsfr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutoriels/premier-site.html#configurer-votre-projet">3. Configurer votre projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutoriels/premier-site.html#appliquer-les-migrations">4. Appliquer les migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutoriels/premier-site.html#lancer-le-serveur">5. Lancer le serveur</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutoriels/personnalisation-blog.html">Personnalisation du blog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutoriels/personnalisation-blog.html#utiliser-les-modeles-swappables">Utiliser les modèles swappables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutoriels/personnalisation-blog.html#exemple">Exemple</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Référence technique</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/modeles-swappables.html">Référence des modèles swappables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/modeles-swappables.html#modeles-de-blog">Modèles de blog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/modeles-swappables.html#utilisation">Utilisation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/settings.html">Référence des paramètres</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/settings.html#parametres-obligatoires">Paramètres obligatoires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/settings.html#parametres-optionnels">Paramètres optionnels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/settings.html#modeles-swappables">Modèles swappables</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Développement</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="developpement/contribution.html">Contribuer au projet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 </div>
@@ -156,7 +231,7 @@ pip<span class="w"> </span>install<span class="w"> </span>wagtail-dsfr
 <span class="o">]</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#guide/installation.md"><span class="xref myst">Voir le guide complet d’installation →</span></a></p>
+<p><a class="reference internal" href="guide/installation.html"><span class="std std-doc">Voir le guide complet d’installation →</span></a></p>
 </section>
 <section id="besoin-daide">
 <h2>Besoin d’aide ?<a class="headerlink" href="#besoin-daide" title="Lien vers cette rubrique">¶</a></h2>
@@ -170,8 +245,8 @@ pip<span class="w"> </span>install<span class="w"> </span>wagtail-dsfr
 
 </main>
                         <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
-    <a class="float-right" href="changelog.html" title="Next">
-        Changelog <span aria-hidden="true">&nbsp;→</span>
+    <a class="float-right" href="guide/installation.html" title="Next">
+        Installation <span aria-hidden="true">&nbsp;→</span>
     </a>
 </nav>
                     </div>

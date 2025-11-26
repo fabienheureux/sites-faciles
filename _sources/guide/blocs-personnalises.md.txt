@@ -1,0 +1,7 @@
+# Blocs StreamField
+
+## Utilisation
+
+wagtail-dsfr fournit des blocs StreamField conformes au DSFR. Pour plus d'informations sur les blocs disponibles et leur utilisation, consultez la documentation officielle de Wagtail sur les StreamFields.
+
+Les blocs fournis respectent automatiquement les styles et composants du Système de Design de l'État français (DSFR).

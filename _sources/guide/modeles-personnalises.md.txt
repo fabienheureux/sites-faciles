@@ -1,0 +1,41 @@
+# Modèles personnalisés (Swappables)
+
+## Principe
+
+Le système de modèles swappables permet de remplacer les modèles par défaut de wagtail-dsfr par vos propres modèles personnalisés, sans modifier le code source du package.
+
+## Configuration
+
+### Modèles de blog
+
+Pour personnaliser les modèles de blog, définissez ces paramètres dans `settings.py` :
+
+```python
+# Index des articles de blog
+WAGTAIL_DSFR_BLOG_INDEX_MODEL = "myapp.CustomBlogIndexPage"
+
+# Page d'article de blog
+WAGTAIL_DSFR_BLOG_ENTRY_MODEL = "myapp.CustomBlogEntryPage"
+```
+
+### Exemple d'implémentation
+
+Créez vos modèles personnalisés dans votre application :
+
+```python
+from wagtail_dsfr.blog.models import BlogIndexPage as BaseBlogIndexPage
+from wagtail_dsfr.blog.models import BlogEntryPage as BaseBlogEntryPage
+
+class CustomBlogIndexPage(BaseBlogIndexPage):
+    """Index de blog personnalisé"""
+    pass
+
+class CustomBlogEntryPage(BaseBlogEntryPage):
+    """Article de blog personnalisé avec champs additionnels"""
+    # Ajoutez vos champs personnalisés ici
+    pass
+```
+
+## Modèles disponibles
+
+Pour la liste complète des modèles swappables disponibles, consultez la [référence des modèles swappables](../reference/modeles-swappables.md).

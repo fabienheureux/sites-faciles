@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="no-js" lang="fr" data-content_root="../">
+<head>
+    <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <title>Modèles personnalisés (Swappables) &mdash; Documentation wagtail-dsfr 2.1.0</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/dist/fontawesome.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/dist/theme.css?v=310cf088" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+            <link rel="index" title="Index" href="../genindex.html" />
+            <link rel="search" title="Recherche" href="../search.html" />
+            <link rel="top" title="Documentation wagtail-dsfr 2.1.0" href="#" />
+            <link rel="next" title="Blocs StreamField" href="blocs-personnalises.html" />
+            <link rel="prev" title="Configuration" href="configuration.html" />
+    </head>
+<body>
+    <script type="text/javascript" src="../_static/dist/blocking.js"></script>
+    <header class="container-fluid bg-primary">
+        <a class="btn btn-sm btn-light skip-to-content-link" href="#main">Skip to content</a>
+        <div class="container-fluid">
+            <div class="navbar navbar-expand-lg navbar-dark font-weight-bold">
+                    <a href="../index.html"
+                        title="wagtail-dsfr"
+                        class="logo navbar-brand"
+                    >
+                        <img src="../_static/logo.svg" width="45" height="59" alt="wagtail-dsfr"
+                            class="logo-img"
+                        />
+                        wagtail-dsfr
+                    </a>
+                
+                
+                <button class="navbar-toggler btn btn-primary d-lg-none" type="button" data-toggle="collapse" data-target="#collapseSidebar" aria-expanded="false" aria-controls="collapseExample">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="sr-only">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-12 col-lg-3 sidebar-container">
+                <div id="collapseSidebar" class="collapse sticky-top d-lg-block pt-5 pr-lg-4">
+<div id="searchbox" class="searchbox mb-6 px-1" role="search">
+    <form id="search-form" action="../search.html" autocomplete="off" method="get" role="search">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text border-right-0 bg-white py-3 pl-3 pr-2"><span class="fas fa-search"></span></div>
+            </div>
+            <input class="form-control py-3 pr-3 pl-1 h-100 border-left-0" type="search" name="q" placeholder="Search documentation" aria-label="Search documentation" id="searchinput" />
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div><div class="site-toc">
+    <nav class="toc mt-3" aria-label="Main menu">
+        <p class="caption" role="heading"><span class="caption-text">Guide d'utilisation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modèles personnalisés (Swappables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blocs-personnalises.html">Blocs StreamField</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutoriels</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutoriels/premier-site.html">Créer votre premier site</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutoriels/personnalisation-blog.html">Personnalisation du blog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Référence technique</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/modeles-swappables.html">Référence des modèles swappables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/settings.html">Référence des paramètres</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Développement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developpement/contribution.html">Contribuer au projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+    </nav>
+    <template data-toggle-item-template>
+        <button class="btn btn-sm btn-link toctree-expand" type="button">
+            <span class="sr-only">Toggle menu contents</span>
+        </button>
+    </template>
+</div>
+                    <div class="d-lg-none border-bottom">
+                        
+                    </div>
+                </div>
+            </aside>
+            <div class="col-12 col-lg-9 pt-5">
+                <header class="row align-items-baseline">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+    <ol class="breadcrumb m-0 p-0 bg-transparent">
+        <li class="breadcrumb-item"><a href="../index.html">Docs</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Modèles personnalisés (Swappables)</li>
+    </ol>
+</nav>
+                    </div>
+                    <div class="col-sm-12 col-lg-auto mt-3 mt-lg-3">
+                        <noscript>
+                            <p>JavaScript is required to toggle light/dark mode..</p>
+                        </noscript>
+                        <button id="wagtail-theme" class="btn btn-sm btn-light text-decoration-none" type="button">
+                            <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
+                            <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
+                        </button>
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/numerique-gouv/sites-facilesguide/modeles-personnalises.md" rel="nofollow">
+        <span class="btn-icon"><span class="fab fa-github"></span></span>
+        <span class="btn-text">Edit on GitHub</span>
+    </a>
+    <a class="btn btn-sm btn-light text-decoration-none" href="../_sources/guide/modeles-personnalises.md.txt" rel="nofollow">
+        <span class="btn-icon"><span class="fas fa-code"></span></span>
+        <span class="btn-text">View source</span>
+    </a>
+                        
+                    </div>
+                </header>
+                <div class="row" >
+                    <div class="col-12">
+                        <hr class="w-100 my-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
+                        <main role="main" id="main">
+    <section id="modeles-personnalises-swappables">
+<h1>Modèles personnalisés (Swappables)<a class="headerlink" href="#modeles-personnalises-swappables" title="Lien vers cette rubrique">¶</a></h1>
+<section id="principe">
+<h2>Principe<a class="headerlink" href="#principe" title="Lien vers cette rubrique">¶</a></h2>
+<p>Le système de modèles swappables permet de remplacer les modèles par défaut de wagtail-dsfr par vos propres modèles personnalisés, sans modifier le code source du package.</p>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Lien vers cette rubrique">¶</a></h2>
+<section id="modeles-de-blog">
+<h3>Modèles de blog<a class="headerlink" href="#modeles-de-blog" title="Lien vers cette rubrique">¶</a></h3>
+<p>Pour personnaliser les modèles de blog, définissez ces paramètres dans <code class="docutils literal notranslate"><span class="pre">settings.py</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Index des articles de blog</span>
+<span class="n">WAGTAIL_DSFR_BLOG_INDEX_MODEL</span> <span class="o">=</span> <span class="s2">&quot;myapp.CustomBlogIndexPage&quot;</span>
+
+<span class="c1"># Page d&#39;article de blog</span>
+<span class="n">WAGTAIL_DSFR_BLOG_ENTRY_MODEL</span> <span class="o">=</span> <span class="s2">&quot;myapp.CustomBlogEntryPage&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="exemple-dimplementation">
+<h3>Exemple d’implémentation<a class="headerlink" href="#exemple-dimplementation" title="Lien vers cette rubrique">¶</a></h3>
+<p>Créez vos modèles personnalisés dans votre application :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">wagtail_dsfr.blog.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlogIndexPage</span> <span class="k">as</span> <span class="n">BaseBlogIndexPage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wagtail_dsfr.blog.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlogEntryPage</span> <span class="k">as</span> <span class="n">BaseBlogEntryPage</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomBlogIndexPage</span><span class="p">(</span><span class="n">BaseBlogIndexPage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Index de blog personnalisé&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomBlogEntryPage</span><span class="p">(</span><span class="n">BaseBlogEntryPage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Article de blog personnalisé avec champs additionnels&quot;&quot;&quot;</span>
+    <span class="c1"># Ajoutez vos champs personnalisés ici</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="modeles-disponibles">
+<h2>Modèles disponibles<a class="headerlink" href="#modeles-disponibles" title="Lien vers cette rubrique">¶</a></h2>
+<p>Pour la liste complète des modèles swappables disponibles, consultez la <a class="reference internal" href="../reference/modeles-swappables.html"><span class="std std-doc">référence des modèles swappables</span></a>.</p>
+</section>
+</section>
+
+</main>
+                        <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
+    <a class="float-left" href="configuration.html" title="Previous">
+        <span aria-hidden="true">←&nbsp;</span>Configuration
+    </a>
+    <a class="float-right" href="blocs-personnalises.html" title="Next">
+        Blocs StreamField <span aria-hidden="true">&nbsp;→</span>
+    </a>
+</nav>
+                    </div>
+                    
+                    <nav class="col-12 col-lg-3 pb-4">
+                        <div class="sticky-top toc page-toc" aria-labelledby="page-toc-heading">
+                            <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
+                            <ul>
+<li><a class="reference internal" href="#">Modèles personnalisés (Swappables)</a><ul>
+<li><a class="reference internal" href="#principe">Principe</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#modeles-de-blog">Modèles de blog</a></li>
+<li><a class="reference internal" href="#exemple-dimplementation">Exemple d’implémentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modeles-disponibles">Modèles disponibles</a></li>
+</ul>
+</li>
+</ul>
+
+                        </div>
+                    </nav>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid bg-primary text-light">
+        <div class="container">
+            <div class="row">
+        <div class="col p-4">
+            
+                <nav aria-label="Footer">
+                    <ul class="nav justify-content-center mb-2">
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/features/">Features</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/about-wagtail/"> About Wagtail</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/services/"> Services</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/blog/"> Blog</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/packages/"> Packages</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/developers/"> Developers</a></li>
+                        
+                    </ul>
+                </nav>
+            
+            <div class="text-center">
+                    &copy; Copyright 2025, DINUM
+            </div>
+            <div class="text-center text-white-50 font-italic mt-3">
+                <small>
+                    Created using
+                    <a class="text-white" href="https://github.com/wagtail/sphinx_wagtail_theme" rel="nofollow" target="_blank">
+                        Sphinx Wagtail Theme 6.5.0
+                    </a>
+                    and
+                    <a class="text-white" href="https://www.sphinx-doc.org/" rel="nofollow" target="_blank">
+                        Sphinx 8.2.3
+                    </a>
+                </small>
+            </div>
+        </div>
+    </div>
+        </div>
+    </footer>
+        <script src="../_static/documentation_options.js?v=a8eed6e8"></script>
+        <script src="../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/translations.js?v=e6b791cb"></script>
+        <script type="text/javascript" src="../_static/dist/theme.js"></script>
+        <script type="text/javascript" src="../_static/dist/vendor.js"></script>
+        <script type="text/javascript" src="../_static/searchtools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() { Search.loadIndex("../searchindex.js"); });
+        </script>
+        <script type="text/javascript" id="searchindexloader"></script>
+    </body>
+</html>

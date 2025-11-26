@@ -1,0 +1,33 @@
+# Contribuer au projet
+
+## Développement
+
+### Cloner le projet
+
+```bash
+git clone https://github.com/numerique-gouv/sites-faciles.git
+cd sites-faciles
+```
+
+### Installer les dépendances de développement
+
+```bash
+pip install -e ".[dev]"
+```
+
+### Lancer le projet de démonstration
+
+```bash
+cd demo
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+## Contribuer
+
+Les contributions sont les bienvenues ! N'hésitez pas à :
+
+- 🐛 [Signaler un bug](https://github.com/numerique-gouv/sites-faciles/issues)
+- 💬 [Participer aux discussions](https://github.com/numerique-gouv/sites-faciles/discussions)
+- 🔀 Proposer une pull request
