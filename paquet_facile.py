@@ -607,26 +607,45 @@ def run_sync(
     else:
         logging.debug("⏭️  No management command templates found")
 
-    # Create registry structure from templates
-    registry_template_dir = Path("templates") / "content_manager" / "registry"
-    if registry_template_dir.exists():
-        logging.info("📝 Creating registry from templates")
+    # Create content_manager structure from templates
+    content_manager_template_dir = Path("templates") / "content_manager"
+    if content_manager_template_dir.exists():
+        logging.info("📝 Creating content_manager files from templates")
 
-        # Create registry directory
-        registry_dir = package_dir / "content_manager" / "registry"
-        registry_dir.mkdir(parents=True, exist_ok=True)
+        content_manager_dir = package_dir / "content_manager"
+        content_manager_dir.mkdir(parents=True, exist_ok=True)
 
-        # Process all Python template files in registry
-        for template_file in registry_template_dir.glob("*.template.py"):
-            template_content = template_file.read_text(encoding="utf-8")
-            registry_content = template_content.replace("{package_name}", package_name)
+        # Process apps.py template if it exists
+        apps_template = content_manager_template_dir / "apps.template.py"
+        if apps_template.exists():
+            template_content = apps_template.read_text(encoding="utf-8")
+            apps_content = template_content.replace("{package_name}", package_name)
 
-            # Write to registry directory (remove .template. from filename)
-            output_file = registry_dir / template_file.name.replace(".template.", ".")
-            output_file.write_text(registry_content, encoding="utf-8")
-            logging.debug("  Created registry file: %s", output_file.name)
+            output_file = content_manager_dir / "apps.py"
+            output_file.write_text(apps_content, encoding="utf-8")
+            logging.debug("  Created apps.py")
+
+        # Create registry directory and process templates
+        registry_template_dir = content_manager_template_dir / "registry"
+        if registry_template_dir.exists():
+            registry_dir = content_manager_dir / "registry"
+            registry_dir.mkdir(parents=True, exist_ok=True)
+
+            # Process all Python template files in registry
+            for template_file in registry_template_dir.glob("*.template.py"):
+                template_content = template_file.read_text(encoding="utf-8")
+                registry_content = template_content.replace(
+                    "{package_name}", package_name
+                )
+
+                # Write to registry directory (remove .template. from filename)
+                output_file = registry_dir / template_file.name.replace(
+                    ".template.", "."
+                )
+                output_file.write_text(registry_content, encoding="utf-8")
+                logging.debug("  Created registry file: %s", output_file.name)
     else:
-        logging.debug("⏭️  No registry templates found")
+        logging.debug("⏭️  No content_manager templates found")
 
     logging.warning("✅ Sync completed successfully!")
 

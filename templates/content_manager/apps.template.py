@@ -3,8 +3,8 @@ from django.apps import AppConfig
 
 class ContentManagerConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "wagtail_dsfr.content_manager"
-    label = "wagtail_dsfr_content_manager"
+    name = "{package_name}.content_manager"
+    label = "{package_name}_content_manager"
 
     def ready(self):
         """
@@ -13,10 +13,9 @@ class ContentManagerConfig(AppConfig):
         This is called after all apps are loaded, so custom blocks registered
         via @register_common_block decorator will be available.
         """
-        from wagtail_dsfr.content_manager.blocks import core
-        from wagtail_dsfr.content_manager.registry import get_registered_blocks
+        from {package_name}.content_manager.blocks import core
+        from {package_name}.content_manager.registry import get_registered_blocks
 
-        # Extend the STREAMFIELD_COMMON_BLOCKS list with registered blocks
         registered_blocks = get_registered_blocks()
         if registered_blocks:
             core.STREAMFIELD_COMMON_BLOCKS.extend(registered_blocks)
