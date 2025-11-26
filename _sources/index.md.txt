@@ -13,55 +13,20 @@ wagtail-dsfr est un package Python qui étend Wagtail pour créer des sites conf
 **Fonctionnalités principales :**
 - 📝 Modèles de pages pour blog, événements et contenu
 - 🧩 Blocs StreamField conformes au DSFR
-- 🔄 Système de modèles swappables pour personnalisation
+- 🧭 Gabarits et menus adaptés au DSFR
 - ♿ Accessibilité RGAA intégrée
 
 ```{toctree}
 ---
 maxdepth: 2
-caption: Démarrage
+caption: Documentation
 ---
 guide/installation
-```
-
-```{toctree}
----
-maxdepth: 2
-caption: Tutoriels
----
 tutoriels/personnalisation-blog
-```
-
-```{toctree}
----
-maxdepth: 2
-caption: Guides pratiques
----
 guide/configuration
 guide/blocs-personnalises
-```
-
-```{toctree}
----
-maxdepth: 2
-caption: Référence
----
 reference/settings
-```
-
-```{toctree}
----
-maxdepth: 1
-caption: Développement
----
-developpement/contribution
-```
-
-```{toctree}
----
-maxdepth: 1
-caption: Notes de version
----
+migration
 changelog
 ```
 

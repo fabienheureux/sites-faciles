@@ -57,29 +57,14 @@
     </form>
 </div><div class="site-toc">
     <nav class="toc mt-3" aria-label="Main menu">
-        <p class="caption" role="heading"><span class="caption-text">Démarrage</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guide/installation.html">Installation</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Tutoriels</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="tutoriels/personnalisation-blog.html">Personnalisation du blog</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Guides pratiques</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="guide/configuration.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide/blocs-personnalises.html">Blocs StreamField</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Référence</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/settings.html">Référence des paramètres</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Développement</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="developpement/contribution.html">Contribuer au projet</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Notes de version</span></p>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration d’un site Wagtail existant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -146,11 +131,11 @@
 <ul class="simple">
 <li><p>📝 Modèles de pages pour blog, événements et contenu</p></li>
 <li><p>🧩 Blocs StreamField conformes au DSFR</p></li>
-<li><p>🔄 Système de modèles swappables pour personnalisation</p></li>
+<li><p>🧭 Gabarits et menus adaptés au DSFR</p></li>
 <li><p>♿ Accessibilité RGAA intégrée</p></li>
 </ul>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Démarrage</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guide/installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide/installation.html#prerequis">Prérequis</a></li>
@@ -160,50 +145,69 @@
 <li class="toctree-l2"><a class="reference internal" href="guide/installation.html#prochaines-etapes">Prochaines étapes</a></li>
 </ul>
 </li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Tutoriels</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="tutoriels/personnalisation-blog.html">Personnalisation du blog</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutoriels/personnalisation-blog.html#exemple-de-reference">Exemple de référence</a></li>
 </ul>
 </li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Guides pratiques</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="guide/configuration.html">Configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide/configuration.html#parametres-disponibles">Paramètres disponibles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/configuration.html#host-url">HOST_URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/configuration.html#host-proto">HOST_PROTO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/configuration.html#wagtailadmin-path">WAGTAILADMIN_PATH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/configuration.html#wagtail-i18n-enabled">WAGTAIL_I18N_ENABLED</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/configuration.html#proconnect-activated">PROCONNECT_ACTIVATED</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="guide/blocs-personnalises.html">Blocs StreamField</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guide/blocs-personnalises.html#utilisation">Utilisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/blocs-personnalises.html#ajouter-les-blocs-a-vos-pages">Ajouter les blocs à vos pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/blocs-personnalises.html#astuces-dintegration">Astuces d’intégration</a></li>
 </ul>
 </li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Référence</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/settings.html">Référence des paramètres</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/settings.html#parametres-obligatoires">Paramètres obligatoires</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/settings.html#parametres-optionnels">Paramètres optionnels</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration d’un site Wagtail existant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#sauvegarder">1. Sauvegarder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#installer-wagtail-dsfr">2. Installer wagtail-dsfr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#appliquer-les-migrations">3. Appliquer les migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#mettre-a-jour-les-contenttypes">4. Mettre à jour les ContentTypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#verifier">5. Vérifier</a></li>
 </ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Développement</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="developpement/contribution.html">Contribuer au projet</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-2-3-0-amont">Version 2.3.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-2-2-1-amont">Version 2.2.1 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-2-2-0-amont">Version 2.2.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-2-1-0">Version 2.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-2-0-0-amont">Version 2.0.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-18-1-amont">Version 1.18.1 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-18-0-amont">Version 1.18.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-17-0-amont">Version 1.17.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-16-0-amont">Version 1.16.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-15-1-amont">Version 1.15.1 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-15-0-amont">Version 1.15.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-14-0-amont">Version 1.14.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-13-0-amont">Version 1.13.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-12-0-amont">Version 1.12.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-11-5-amont">Version 1.11.5 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-11-4-amont">Version 1.11.4 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-11-3-amont">Version 1.11.3 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-11-2-amont">Version 1.11.2 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-11-1-amont">Version 1.11.1 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-11-0-amont">Version 1.11.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-10-2-amont">Version 1.10.2 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-10-1-amont">Version 1.10.1 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-10-0-amont">Version 1.10.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-9-0-amont">Version 1.9.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-8-0-amont">Version 1.8.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-7-0-amont">Version 1.7.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-6-1-amont">Version 1.6.1 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-6-0-amont">Version 1.6.0 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-5-2-amont">Version 1.5.2 (amont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-5-1-amont">Version 1.5.1 (amont)</a></li>
 </ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Notes de version</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</li>
 </ul>
 </div>
 </section>
@@ -247,9 +251,7 @@ pip<span class="w"> </span>install<span class="w"> </span>wagtail-dsfr
                             <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
                             <ul>
 <li><a class="reference internal" href="#">Documentation wagtail-dsfr</a><ul>
-<li><a class="reference internal" href="#quest-ce-que-wagtail-dsfr">Qu’est-ce que wagtail-dsfr ?</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#quest-ce-que-wagtail-dsfr">Qu’est-ce que wagtail-dsfr ?</a></li>
 <li><a class="reference internal" href="#demarrage-rapide">Démarrage rapide</a></li>
 <li><a class="reference internal" href="#besoin-daide">Besoin d’aide ?</a></li>
 </ul>

@@ -58,29 +58,14 @@
     </form>
 </div><div class="site-toc">
     <nav class="toc mt-3" aria-label="Main menu">
-        <p class="caption" role="heading"><span class="caption-text">Démarrage</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Tutoriels</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutoriels/personnalisation-blog.html">Personnalisation du blog</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Guides pratiques</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutoriels/personnalisation-blog.html">Personnalisation du blog</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blocs-personnalises.html">Blocs StreamField</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Référence</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../reference/settings.html">Référence des paramètres</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Développement</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../developpement/contribution.html">Contribuer au projet</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Notes de version</span></p>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migration d’un site Wagtail existant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 
@@ -135,44 +120,42 @@
                         <main role="main" id="main">
     <section id="configuration">
 <h1>Configuration<a class="headerlink" href="#configuration" title="Lien vers cette rubrique">¶</a></h1>
-<section id="parametres-disponibles">
-<h2>Paramètres disponibles<a class="headerlink" href="#parametres-disponibles" title="Lien vers cette rubrique">¶</a></h2>
+<p>Ce guide couvre uniquement les réglages spécifiques à <code class="docutils literal notranslate"><span class="pre">wagtail_dsfr</span></code>. Pour la configuration générale Wagtail/Django, référez-vous à leurs documentations officielles.</p>
 <section id="host-url">
-<h3>HOST_URL<a class="headerlink" href="#host-url" title="Lien vers cette rubrique">¶</a></h3>
+<h2>HOST_URL<a class="headerlink" href="#host-url" title="Lien vers cette rubrique">¶</a></h2>
 <p>URL de votre site (sans protocole) :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">HOST_URL</span> <span class="o">=</span> <span class="s2">&quot;monsite.gouv.fr&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="host-proto">
-<h3>HOST_PROTO<a class="headerlink" href="#host-proto" title="Lien vers cette rubrique">¶</a></h3>
+<h2>HOST_PROTO<a class="headerlink" href="#host-proto" title="Lien vers cette rubrique">¶</a></h2>
 <p>Protocole utilisé (<code class="docutils literal notranslate"><span class="pre">http</span></code> ou <code class="docutils literal notranslate"><span class="pre">https</span></code>) :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">HOST_PROTO</span> <span class="o">=</span> <span class="s2">&quot;https&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="wagtailadmin-path">
-<h3>WAGTAILADMIN_PATH<a class="headerlink" href="#wagtailadmin-path" title="Lien vers cette rubrique">¶</a></h3>
+<h2>WAGTAILADMIN_PATH<a class="headerlink" href="#wagtailadmin-path" title="Lien vers cette rubrique">¶</a></h2>
 <p>Chemin d’accès à l’administration Wagtail :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">WAGTAILADMIN_PATH</span> <span class="o">=</span> <span class="s2">&quot;admin/&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="wagtail-i18n-enabled">
-<h3>WAGTAIL_I18N_ENABLED<a class="headerlink" href="#wagtail-i18n-enabled" title="Lien vers cette rubrique">¶</a></h3>
+<h2>WAGTAIL_I18N_ENABLED<a class="headerlink" href="#wagtail-i18n-enabled" title="Lien vers cette rubrique">¶</a></h2>
 <p>Active l’internationalisation de Wagtail :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">WAGTAIL_I18N_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
 </section>
 <section id="proconnect-activated">
-<h3>PROCONNECT_ACTIVATED<a class="headerlink" href="#proconnect-activated" title="Lien vers cette rubrique">¶</a></h3>
+<h2>PROCONNECT_ACTIVATED<a class="headerlink" href="#proconnect-activated" title="Lien vers cette rubrique">¶</a></h2>
 <p>Active l’authentification ProConnect :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PROCONNECT_ACTIVATED</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
 <p>Pour plus d’informations sur tous les paramètres disponibles, consultez la <span class="xref std std-doc">référence des settings</span>.</p>
-</section>
 </section>
 </section>
 
@@ -192,14 +175,11 @@
                             <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
                             <ul>
 <li><a class="reference internal" href="#">Configuration</a><ul>
-<li><a class="reference internal" href="#parametres-disponibles">Paramètres disponibles</a><ul>
 <li><a class="reference internal" href="#host-url">HOST_URL</a></li>
 <li><a class="reference internal" href="#host-proto">HOST_PROTO</a></li>
 <li><a class="reference internal" href="#wagtailadmin-path">WAGTAILADMIN_PATH</a></li>
 <li><a class="reference internal" href="#wagtail-i18n-enabled">WAGTAIL_I18N_ENABLED</a></li>
 <li><a class="reference internal" href="#proconnect-activated">PROCONNECT_ACTIVATED</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

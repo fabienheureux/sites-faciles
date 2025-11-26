@@ -2,16 +2,20 @@
 <html class="no-js" lang="fr" data-content_root="./">
 <head>
     <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>Recherche &mdash; Documentation wagtail-dsfr 2.1.0</title>
+        <title>Migration d’un site Wagtail existant &mdash; Documentation wagtail-dsfr 2.1.0</title>
     
     <link rel="stylesheet" type="text/css" href="_static/dist/fontawesome.css" />
       <link rel="stylesheet" type="text/css" href="_static/dist/theme.css?v=310cf088" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
             <link rel="index" title="Index" href="genindex.html" />
-            <link rel="search" title="Recherche" href="#" />
+            <link rel="search" title="Recherche" href="search.html" />
             <link rel="top" title="Documentation wagtail-dsfr 2.1.0" href="#" />
+            <link rel="next" title="Changelog" href="changelog.html" />
+            <link rel="prev" title="Référence des paramètres" href="reference/settings.html" />
     </head>
 <body>
     <script type="text/javascript" src="_static/dist/blocking.js"></script>
@@ -42,7 +46,7 @@
             <aside class="col-12 col-lg-3 sidebar-container">
                 <div id="collapseSidebar" class="collapse sticky-top d-lg-block pt-5 pr-lg-4">
 <div id="searchbox" class="searchbox mb-6 px-1" role="search">
-    <form id="search-form" action="#" autocomplete="off" method="get" role="search">
+    <form id="search-form" action="search.html" autocomplete="off" method="get" role="search">
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text border-right-0 bg-white py-3 pl-3 pr-2"><span class="fas fa-search"></span></div>
@@ -55,13 +59,13 @@
 </div><div class="site-toc">
     <nav class="toc mt-3" aria-label="Main menu">
         <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="guide/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutoriels/personnalisation-blog.html">Personnalisation du blog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide/configuration.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide/blocs-personnalises.html">Blocs StreamField</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/settings.html">Référence des paramètres</a></li>
-<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration d’un site Wagtail existant</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Migration d’un site Wagtail existant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -83,7 +87,7 @@
                         <nav aria-label="breadcrumb">
     <ol class="breadcrumb m-0 p-0 bg-transparent">
         <li class="breadcrumb-item"><a href="index.html">Docs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Recherche</li>
+        <li class="breadcrumb-item active" aria-current="page">Migration d’un site Wagtail existant</li>
     </ol>
 </nav>
                     </div>
@@ -95,6 +99,15 @@
                             <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
                             <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
                         </button>
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/fabienheureux/wagtail-dsfr/migration.md" rel="nofollow">
+        <span class="btn-icon"><span class="fab fa-github"></span></span>
+        <span class="btn-text">Edit on GitHub</span>
+    </a>
+    <a class="btn btn-sm btn-light text-decoration-none" href="_sources/migration.md.txt" rel="nofollow">
+        <span class="btn-icon"><span class="fas fa-code"></span></span>
+        <span class="btn-text">View source</span>
+    </a>
+                        
                     </div>
                 </header>
                 <div class="row" >
@@ -105,23 +118,79 @@
                 <div class="row">
                     <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
                         <main role="main" id="main">
-
-    <noscript>
-        <div id="fallback" class="admonition warning">
-            <p class="last">
-                Please activate JavaScript to enable the search
-                functionality.
-            </p>
-        </div>
-    </noscript>
-    
-    <div id="search-results">
-        
-    </div>
+    <section id="migration-dun-site-wagtail-existant">
+<h1>Migration d’un site Wagtail existant<a class="headerlink" href="#migration-dun-site-wagtail-existant" title="Lien vers cette rubrique">¶</a></h1>
+<p>Ce guide réduit la migration à l’essentiel : sauvegarder, installer, migrer, mettre à jour les ContentTypes.</p>
+<section id="sauvegarder">
+<h2>1. Sauvegarder<a class="headerlink" href="#sauvegarder" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>Exportez la base : <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">dumpdata</span> <span class="pre">&gt;</span> <span class="pre">backup.json</span></code> (ou votre méthode habituelle).</p></li>
+<li><p>Sauvegardez les fichiers médias si nécessaire.</p></li>
+</ul>
+</section>
+<section id="installer-wagtail-dsfr">
+<h2>2. Installer wagtail-dsfr<a class="headerlink" href="#installer-wagtail-dsfr" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>Ajoutez la dépendance : <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">wagtail-dsfr</span></code>.</p></li>
+<li><p>Suivez la <a class="reference internal" href="guide/installation.html"><span class="doc">page d’installation</span></a> pour compléter <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> et les context processors (pas de configuration Django/Wagtail générique ici : voir leurs docs officielles).</p></li>
+</ul>
+</section>
+<section id="appliquer-les-migrations">
+<h2>3. Appliquer les migrations<a class="headerlink" href="#appliquer-les-migrations" title="Lien vers cette rubrique">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>migrate
+python<span class="w"> </span>manage.py<span class="w"> </span>collectstatic
+</pre></div>
+</div>
+</section>
+<section id="mettre-a-jour-les-contenttypes">
+<h2>4. Mettre à jour les ContentTypes<a class="headerlink" href="#mettre-a-jour-les-contenttypes" title="Lien vers cette rubrique">¶</a></h2>
+<p>Lancez la commande fournie pour réaligner les ContentTypes de l’ancien projet Sites Faciles vers <code class="docutils literal notranslate"><span class="pre">wagtail_dsfr</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>migrate_contenttype<span class="w"> </span>--dry-run
+python<span class="w"> </span>manage.py<span class="w"> </span>migrate_contenttype
+</pre></div>
+</div>
+<p>La commande se trouve dans <code class="docutils literal notranslate"><span class="pre">wagtail_dsfr/management/commands/migrate_contenttype.py</span></code> et gère :</p>
+<ul class="simple">
+<li><p>Le basculement des <code class="docutils literal notranslate"><span class="pre">ContentType</span></code> <code class="docutils literal notranslate"><span class="pre">blog</span></code>, <code class="docutils literal notranslate"><span class="pre">events</span></code>, <code class="docutils literal notranslate"><span class="pre">forms</span></code>, <code class="docutils literal notranslate"><span class="pre">content_manager</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code> vers leurs équivalents <code class="docutils literal notranslate"><span class="pre">wagtail_dsfr_*</span></code></p></li>
+<li><p>La mise à jour des pages existantes pour pointer vers les nouveaux types</p></li>
+</ul>
+</section>
+<section id="verifier">
+<h2>5. Vérifier<a class="headerlink" href="#verifier" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>Parcourez vos pages principales et l’admin Wagtail pour valider le rendu DSFR.</p></li>
+<li><p>Inspirez-vous du projet <code class="docutils literal notranslate"><span class="pre">demo/</span></code> pour les gabarits (header, footer, menus). Toute personnalisation Wagtail/Django non spécifique à <code class="docutils literal notranslate"><span class="pre">wagtail_dsfr</span></code> reste documentée sur <a class="reference external" href="https://docs.wagtail.org/">https://docs.wagtail.org/</a> et <a class="reference external" href="https://docs.djangoproject.com/">https://docs.djangoproject.com/</a>.</p></li>
+</ul>
+</section>
+</section>
 
 </main>
-                        
+                        <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
+    <a class="float-left" href="reference/settings.html" title="Previous">
+        <span aria-hidden="true">←&nbsp;</span>Référence des paramètres
+    </a>
+    <a class="float-right" href="changelog.html" title="Next">
+        Changelog <span aria-hidden="true">&nbsp;→</span>
+    </a>
+</nav>
                     </div>
+                    
+                    <nav class="col-12 col-lg-3 pb-4">
+                        <div class="sticky-top toc page-toc" aria-labelledby="page-toc-heading">
+                            <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
+                            <ul>
+<li><a class="reference internal" href="#">Migration d’un site Wagtail existant</a><ul>
+<li><a class="reference internal" href="#sauvegarder">1. Sauvegarder</a></li>
+<li><a class="reference internal" href="#installer-wagtail-dsfr">2. Installer wagtail-dsfr</a></li>
+<li><a class="reference internal" href="#appliquer-les-migrations">3. Appliquer les migrations</a></li>
+<li><a class="reference internal" href="#mettre-a-jour-les-contenttypes">4. Mettre à jour les ContentTypes</a></li>
+<li><a class="reference internal" href="#verifier">5. Vérifier</a></li>
+</ul>
+</li>
+</ul>
+
+                        </div>
+                    </nav>
                     
                 </div>
             </div>
