@@ -153,7 +153,7 @@ class Command(BaseCommand):
 
                 query = f"""
                     UPDATE django_migrations
-                    SET app = '{wagtail_dsfr}_' || app
+                    SET app = 'wagtail_dsfr_' || app
                     WHERE app IN ({apps_in_clause});
                 """
                 cursor.execute(query)

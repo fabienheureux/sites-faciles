@@ -153,7 +153,7 @@ class Command(BaseCommand):
 
                 query = f"""
                     UPDATE django_migrations
-                    SET app = '{{package_name}}_' || app
+                    SET app = '{package_name}_' || app
                     WHERE app IN ({apps_in_clause});
                 """
                 cursor.execute(query)
