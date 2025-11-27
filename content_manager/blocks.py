@@ -14,7 +14,7 @@ from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.telepath import register
 from wagtailmarkdown.blocks import MarkdownBlock
 
-from content_manager.constants import (
+from wagtail_dsfr.content_manager.constants import (
     ALIGN_HORIZONTAL_CHOICES,
     ALIGN_HORIZONTAL_CHOICES_EXTENDED,
     ALIGN_VERTICAL_CHOICES,
@@ -35,7 +35,7 @@ from content_manager.constants import (
     MEDIA_WIDTH_CHOICES,
     TEXT_SIZE_CHOICES,
 )
-from content_manager.widgets import DsfrIconPickerWidget
+from wagtail_dsfr.content_manager.widgets import DsfrIconPickerWidget
 
 Image = get_image_model()
 
@@ -47,7 +47,7 @@ class PictogramBlock(ImageBlock):
     # A subclass of ImageBlock with the height fixed to 80px.
     class Meta:
         icon = "image"
-        template = "content_manager/widgets/pictogram.html"
+        template = "wagtail_dsfr_content_manager/widgets/pictogram.html"
 
 
 class AdvancedTypedTableBlock(TypedTableBlock):
@@ -57,7 +57,7 @@ class AdvancedTypedTableBlock(TypedTableBlock):
 
     class Meta:
         icon = "table"
-        template = "content_manager/blocks/typed_table_block.html"
+        template = "wagtail_dsfr_content_manager/blocks/typed_table_block.html"
         help_text = _('The "row heading" column type only works on the first column of the table.')
 
 
@@ -186,7 +186,7 @@ class LinksVerticalListBlock(blocks.StreamBlock):
 
     class Meta:
         icon = "list-ul"
-        template = "content_manager/blocks/links_vertical_list.html"
+        template = "wagtail_dsfr_content_manager/blocks/links_vertical_list.html"
 
 
 class ButtonBlock(LinkWithoutLabelBlock):
@@ -210,7 +210,7 @@ class ButtonsHorizontalListBlock(blocks.StreamBlock):
 
     class Meta:
         icon = "list-ul"
-        template = "content_manager/blocks/buttons_horizontal_list.html"
+        template = "wagtail_dsfr_content_manager/blocks/buttons_horizontal_list.html"
 
 
 class ButtonsVerticalListBlock(blocks.StreamBlock):
@@ -218,7 +218,7 @@ class ButtonsVerticalListBlock(blocks.StreamBlock):
 
     class Meta:
         icon = "list-ul"
-        template = "content_manager/blocks/buttons_vertical_list.html"
+        template = "wagtail_dsfr_content_manager/blocks/buttons_vertical_list.html"
 
 
 class ButtonsListBlock(blocks.StructBlock):
@@ -233,7 +233,7 @@ class ButtonsListBlock(blocks.StructBlock):
 
     class Meta:
         icon = "list-ul"
-        template = "content_manager/blocks/buttons_list.html"
+        template = "wagtail_dsfr_content_manager/blocks/buttons_list.html"
 
 
 class SingleLinkBlock(LinkBlock):
@@ -254,7 +254,7 @@ class SingleLinkBlock(LinkBlock):
     class Meta:
         value_class = LinkStructValue
         icon = "link"
-        template = "content_manager/blocks/link.html"
+        template = "wagtail_dsfr_content_manager/blocks/link.html"
 
 
 ## Badges and Tags
@@ -271,7 +271,7 @@ class BadgeBlock(blocks.StructBlock):
     hide_icon = blocks.BooleanBlock(label=_("Hide badge icon"), required=False)
 
     class Meta:
-        template = "content_manager/blocks/badge.html"
+        template = "wagtail_dsfr_content_manager/blocks/badge.html"
 
 
 class BadgesListBlock(blocks.StreamBlock):
@@ -279,7 +279,7 @@ class BadgesListBlock(blocks.StreamBlock):
 
     class Meta:
         icon = "list-ul"
-        template = "content_manager/blocks/badges_list.html"
+        template = "wagtail_dsfr_content_manager/blocks/badges_list.html"
 
 
 class TagBlock(blocks.StructBlock):
@@ -295,7 +295,7 @@ class TagBlock(blocks.StructBlock):
     link = LinkWithoutLabelBlock(required=False)
 
     class Meta:
-        template = "content_manager/blocks/tag.html"
+        template = "wagtail_dsfr_content_manager/blocks/tag.html"
 
 
 class TagListBlock(blocks.StreamBlock):
@@ -303,7 +303,7 @@ class TagListBlock(blocks.StreamBlock):
 
     class Meta:
         icon = "list-ul"
-        template = "content_manager/blocks/tags_list.html"
+        template = "wagtail_dsfr_content_manager/blocks/tags_list.html"
 
 
 ## Cards and tiles
@@ -435,7 +435,7 @@ class CardBlock(blocks.StructBlock):
 
     class Meta:
         icon = "tablet-alt"
-        template = "content_manager/blocks/card.html"
+        template = "wagtail_dsfr_content_manager/blocks/card.html"
         value_class = CardstructValue
 
 
@@ -457,14 +457,14 @@ class HorizontalCardBlock(CardBlock):
 
     class Meta:
         icon = "tablet-alt"
-        template = "content_manager/blocks/card_horizontal.html"
+        template = "wagtail_dsfr_content_manager/blocks/card_horizontal.html"
         value_class = CardstructValue
 
 
 class VerticalCardBlock(CardBlock):
     class Meta:
         icon = "tablet-alt"
-        template = "content_manager/blocks/card_vertical.html"
+        template = "wagtail_dsfr_content_manager/blocks/card_vertical.html"
         value_class = CardstructValue
 
 
@@ -507,7 +507,7 @@ class TileBlock(blocks.StructBlock):
 
     class Meta:
         icon = "tablet-alt"
-        template = "content_manager/blocks/tile.html"
+        template = "wagtail_dsfr_content_manager/blocks/tile.html"
         value_class = CardstructValue
 
 
@@ -522,7 +522,7 @@ class AccordionsBlock(blocks.StreamBlock):
     accordion = AccordionBlock(label=_("Accordion"), min_num=1, max_num=15)
 
     class Meta:
-        template = "content_manager/blocks/accordions.html"
+        template = "wagtail_dsfr_content_manager/blocks/accordions.html"
 
 
 class AlertBlock(blocks.StructBlock):
@@ -538,7 +538,7 @@ class AlertBlock(blocks.StructBlock):
 
     class Meta:
         icon = "info-circle"
-        template = "content_manager/blocks/alert.html"
+        template = "wagtail_dsfr_content_manager/blocks/alert.html"
 
 
 class CalloutBlock(blocks.StructBlock):
@@ -561,7 +561,7 @@ class CalloutBlock(blocks.StructBlock):
 
     class Meta:
         icon = "info-circle"
-        template = "content_manager/blocks/callout.html"
+        template = "wagtail_dsfr_content_manager/blocks/callout.html"
 
 
 class HighlightBlock(blocks.StructBlock):
@@ -579,7 +579,7 @@ class HighlightBlock(blocks.StructBlock):
 
     class Meta:
         icon = "info-circle"
-        template = "content_manager/blocks/highlight.html"
+        template = "wagtail_dsfr_content_manager/blocks/highlight.html"
 
 
 class IframeBlock(blocks.StructBlock):
@@ -600,7 +600,7 @@ class IframeBlock(blocks.StructBlock):
 
     class Meta:
         icon = "globe"
-        template = "content_manager/blocks/iframe.html"
+        template = "wagtail_dsfr_content_manager/blocks/iframe.html"
 
 
 class ImageAndTextBlock(blocks.StructBlock):
@@ -658,7 +658,7 @@ class ImageAndTextBlock(blocks.StructBlock):
 
     class Meta:
         icon = "image"
-        template = "content_manager/blocks/image_and_text.html"
+        template = "wagtail_dsfr_content_manager/blocks/image_and_text.html"
 
 
 class CenteredImageStructValue(StructValue):
@@ -705,7 +705,7 @@ class CenteredImageBlock(blocks.StructBlock):
 
     class Meta:
         icon = "image"
-        template = "content_manager/blocks/image.html"
+        template = "wagtail_dsfr_content_manager/blocks/image.html"
         value_class = CenteredImageStructValue
 
 
@@ -722,7 +722,7 @@ class QuoteBlock(blocks.StructBlock):
 
     class Meta:
         icon = "openquote"
-        template = "content_manager/blocks/quote.html"
+        template = "wagtail_dsfr_content_manager/blocks/quote.html"
 
 
 class SeparatorBlock(blocks.StructBlock):
@@ -746,7 +746,7 @@ class StepperBlock(blocks.StructBlock):
     steps = StepsListBlock(label=_("Steps"))
 
     class Meta:
-        template = "content_manager/blocks/stepper.html"
+        template = "wagtail_dsfr_content_manager/blocks/stepper.html"
 
 
 class TextAndCTA(blocks.StructBlock):
@@ -785,7 +785,7 @@ class TextAndCTA(blocks.StructBlock):
 
     class Meta:
         icon = "link"
-        template = "content_manager/blocks/text_and_cta.html"
+        template = "wagtail_dsfr_content_manager/blocks/text_and_cta.html"
 
 
 class TranscriptionBlock(blocks.StructBlock):
@@ -794,7 +794,7 @@ class TranscriptionBlock(blocks.StructBlock):
 
     class Meta:
         icon = "media"
-        template = "content_manager/blocks/transcription.html"
+        template = "wagtail_dsfr_content_manager/blocks/transcription.html"
 
 
 class VideoBlock(blocks.StructBlock):
@@ -825,7 +825,7 @@ class VideoBlock(blocks.StructBlock):
 
     class Meta:
         icon = "media"
-        template = "content_manager/blocks/video.html"
+        template = "wagtail_dsfr_content_manager/blocks/video.html"
 
 
 class VerticalContactCardStructValue(blocks.StructValue):
@@ -882,7 +882,7 @@ class VerticalContactCardStructValue(blocks.StructValue):
 
 class VerticalContactCardBlock(blocks.StructBlock):
     contact = SnippetChooserBlock(
-        "blog.Person",
+        "wagtail_dsfr_blog.Person",
         label=_("Person"),
         help_text=_("Optional, all values can be manually specified or overriden below"),
         required=False,
@@ -908,7 +908,7 @@ class VerticalContactCardBlock(blocks.StructBlock):
     class Meta:
         icon = "user"
         value_class = VerticalContactCardStructValue
-        template = ("content_manager/blocks/contact_card_vertical.html",)
+        template = ("wagtail_dsfr_content_manager/blocks/contact_card_vertical.html",)
 
 
 ## Other apps-related blocks
@@ -994,15 +994,15 @@ class BlogRecentEntriesBlock(blocks.StructBlock):
         default="h2",
         help_text=_("Adapt to the page layout. Defaults to heading 2."),
     )
-    blog = blocks.PageChooserBlock(label=_("Blog"), page_type="blog.BlogIndexPage")
+    blog = BlogIndexChooserBlock(label=_("Blog"))
     entries_count = blocks.IntegerBlock(
         label=_("Number of entries"), required=False, min_value=1, max_value=8, default=3
     )
-    category_filter = SnippetChooserBlock("blog.Category", label=_("Filter by category"), required=False)
-    tag_filter = SnippetChooserBlock("content_manager.Tag", label=_("Filter by tag"), required=False)
-    author_filter = SnippetChooserBlock("blog.Person", label=_("Filter by author"), required=False)
+    category_filter = SnippetChooserBlock("wagtail_dsfr_blog.Category", label=_("Filter by category"), required=False)
+    tag_filter = SnippetChooserBlock("wagtail_dsfr_content_manager.Tag", label=_("Filter by tag"), required=False)
+    author_filter = SnippetChooserBlock("wagtail_dsfr_blog.Person", label=_("Filter by author"), required=False)
     source_filter = SnippetChooserBlock(
-        "blog.Organization",
+        "wagtail_dsfr_blog.Organization",
         label=_("Filter by source"),
         help_text=_("The source is the organization of the post author"),
         required=False,
@@ -1011,7 +1011,7 @@ class BlogRecentEntriesBlock(blocks.StructBlock):
 
     class Meta:
         icon = "placeholder"
-        template = ("content_manager/blocks/blog_recent_entries.html",)
+        template = ("wagtail_dsfr_content_manager/blocks/blog_recent_entries.html",)
         value_class = RecentEntriesStructValue
 
 
@@ -1024,15 +1024,15 @@ class EventsRecentEntriesBlock(blocks.StructBlock):
         default="h2",
         help_text=_("Adapt to the page layout. Defaults to heading 2."),
     )
-    index_page = blocks.PageChooserBlock(label=_("Event calendar"), page_type="events.EventsIndexPage")
+    index_page = EventsIndexChooserBlock(label=_("Event calendar"))
     entries_count = blocks.IntegerBlock(
         label=_("Number of entries"), required=False, min_value=1, max_value=8, default=3
     )
-    category_filter = SnippetChooserBlock("blog.Category", label=_("Filter by category"), required=False)
-    tag_filter = SnippetChooserBlock("content_manager.Tag", label=_("Filter by tag"), required=False)
-    author_filter = SnippetChooserBlock("blog.Person", label=_("Filter by author"), required=False)
+    category_filter = SnippetChooserBlock("wagtail_dsfr_blog.Category", label=_("Filter by category"), required=False)
+    tag_filter = SnippetChooserBlock("wagtail_dsfr_content_manager.Tag", label=_("Filter by tag"), required=False)
+    author_filter = SnippetChooserBlock("wagtail_dsfr_blog.Person", label=_("Filter by author"), required=False)
     source_filter = SnippetChooserBlock(
-        "blog.Organization",
+        "wagtail_dsfr_blog.Organization",
         label=_("Filter by source"),
         help_text=_("The source is the organization of the post author"),
         required=False,
@@ -1041,7 +1041,7 @@ class EventsRecentEntriesBlock(blocks.StructBlock):
 
     class Meta:
         icon = "placeholder"
-        template = ("content_manager/blocks/events_recent_entries.html",)
+        template = ("wagtail_dsfr_content_manager/blocks/events_recent_entries.html",)
         value_class = RecentEntriesStructValue
 
 
@@ -1118,7 +1118,7 @@ class ItemGridBlock(blocks.StructBlock):
 
     class Meta:
         icon = "grip"
-        template = "content_manager/blocks/item_grid.html"
+        template = "wagtail_dsfr_content_manager/blocks/item_grid.html"
         value_class = GridPositionStructValue
 
 
@@ -1131,7 +1131,7 @@ class TabsBlock(blocks.StreamBlock):
     tabs = TabBlock(label=_("Tab"), min_num=1, max_num=15)
 
     class Meta:
-        template = "content_manager/blocks/tabs.html"
+        template = "wagtail_dsfr_content_manager/blocks/tabs.html"
 
 
 class AdjustableColumnBlock(blocks.StructBlock):
@@ -1226,7 +1226,7 @@ class MultiColumnsWithTitleBlock(blocks.StructBlock):
 
     class Meta:
         icon = "dots-horizontal"
-        template = "content_manager/blocks/multicolumns.html"
+        template = "wagtail_dsfr_content_manager/blocks/multicolumns.html"
         value_class = MultiColumnsStructValue
 
 
@@ -1266,7 +1266,7 @@ class FullWidthBackgroundBlock(blocks.StructBlock):
 
     class Meta:
         icon = "minus"
-        template = "content_manager/blocks/full_width_background.html"
+        template = "wagtail_dsfr_content_manager/blocks/full_width_background.html"
         value_class = BlockMarginStructValue
 
 
@@ -1275,7 +1275,7 @@ class PageTreeBlock(blocks.StructBlock):
 
     class Meta:
         icon = "minus"
-        template = "content_manager/blocks/pagetree.html"
+        template = "wagtail_dsfr_content_manager/blocks/pagetree.html"
 
 
 class SideMenuBlock(blocks.StreamBlock):
@@ -1317,7 +1317,7 @@ class FullWidthBackgroundWithSidemenuBlock(blocks.StructBlock):
 
     class Meta:
         icon = "minus"
-        template = "content_manager/blocks/full_width_background_with_sidemenu.html"
+        template = "wagtail_dsfr_content_manager/blocks/full_width_background_with_sidemenu.html"
         value_class = BlockMarginStructValue
 
 
@@ -1369,7 +1369,7 @@ STREAMFIELD_COMMON_BLOCKS = [
         blocks.StaticBlock(
             label=_("Subpages list"),
             admin_text=_("A simple, alphabetical list of the subpages of the current page."),
-            template="content_manager/blocks/subpages_list.html",
+            template="wagtail_dsfr_content_manager/blocks/subpages_list.html",
             group=_("Website structure"),
         ),
     ),
@@ -1631,7 +1631,7 @@ class HeroImageAndTextBlock(blocks.StructBlock):
 
     class Meta:
         icon = "minus"
-        template = "content_manager/heros/hero_image_text.html"
+        template = "wagtail_dsfr_content_manager/heros/hero_image_text.html"
 
 
 class HeroWideImageAndTextBlock(blocks.StructBlock):
@@ -1663,7 +1663,7 @@ class HeroWideImageAndTextBlock(blocks.StructBlock):
 
     class Meta:
         icon = "minus"
-        template = "content_manager/heros/hero_wide_image_text.html"
+        template = "wagtail_dsfr_content_manager/heros/hero_wide_image_text.html"
 
 
 class HeroBackgroundImageBlock(blocks.StructBlock):
@@ -1709,7 +1709,7 @@ class HeroBackgroundImageBlock(blocks.StructBlock):
 
     class Meta:
         icon = "minus"
-        template = "content_manager/heros/hero_background_image_text.html"
+        template = "wagtail_dsfr_content_manager/heros/hero_background_image_text.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1790,7 +1790,7 @@ class OldHero(blocks.StructBlock):
             "Ce bloc récupère les données des anciennes en-têtes mais n'est pas configurable. "
             "Veuillez choisir un autre modèle d'en-tête."
         )
-        template = "content_manager/heros/old_hero.html"
+        template = "wagtail_dsfr_content_manager/heros/old_hero.html"
 
 
 class OldHeroAdapter(StructBlockAdapter):
