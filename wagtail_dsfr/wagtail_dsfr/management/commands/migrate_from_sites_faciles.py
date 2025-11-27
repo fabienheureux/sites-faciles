@@ -6,7 +6,7 @@ This command:
 2. Updates django_migrations table to reflect the new app names
 
 Usage:
-    python manage.py rename_to_wagtail_dsfr
+    python manage.py migrate_from_sites_faciles
 """
 
 from django.core.management.base import BaseCommand
@@ -15,6 +15,9 @@ from django.db import connection
 
 class Command(BaseCommand):
     help = "Rename tables and migrations to use wagtail_dsfr_ prefix"
+
+    # Apps to migrate (from search-and-replace.yml)
+    APPS_TO_MIGRATE = ["blog", "events", "forms", "content_manager", "config", "proconnect", "dashboard"]
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -38,18 +41,20 @@ class Command(BaseCommand):
         with connection.cursor() as cursor:
             # Step 1: Get list of tables to rename
             self.stdout.write("\n1. Finding tables to rename...")
-            cursor.execute("""
+
+            # Build the WHERE clause dynamically from APPS_TO_MIGRATE
+            like_clauses = " OR ".join(
+                [f"table_name LIKE '{app}_%'" for app in self.APPS_TO_MIGRATE]
+            )
+
+            query = f"""
                 SELECT table_name
                 FROM information_schema.tables
                 WHERE table_schema = 'public'
-                  AND (
-                    table_name LIKE 'content_manager_%'
-                    OR table_name LIKE 'blog_%'
-                    OR table_name LIKE 'events_%'
-                    OR table_name LIKE 'forms_%'
-                  )
+                  AND ({like_clauses})
                 ORDER BY table_name;
-            """)
+            """
+            cursor.execute(query)
 
             tables_to_rename = cursor.fetchall()
 
@@ -57,11 +62,15 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING("No tables found to rename."))
                 return
 
-            self.stdout.write(self.style.SUCCESS(f"Found {len(tables_to_rename)} tables to rename:"))
+            self.stdout.write(
+                self.style.SUCCESS(f"Found {len(tables_to_rename)} tables to rename:")
+            )
             table_renames = []
             for (table_name,) in tables_to_rename:
                 if table_name.startswith("content_manager_"):
-                    new_name = table_name.replace("content_manager_", "wagtail_dsfr_content_manager_")
+                    new_name = table_name.replace(
+                        "content_manager_", "wagtail_dsfr_content_manager_"
+                    )
                 else:
                     new_name = "wagtail_dsfr_" + table_name
                 table_renames.append((table_name, new_name))
@@ -69,15 +78,20 @@ class Command(BaseCommand):
 
             # Step 2: Preview migration updates
             self.stdout.write("\n2. Previewing migration updates...")
-            cursor.execute("""
+
+            # Build the IN clause dynamically from APPS_TO_MIGRATE
+            apps_in_clause = ", ".join([f"'{app}'" for app in self.APPS_TO_MIGRATE])
+
+            query = f"""
                 SELECT
                     app,
                     COUNT(*) as migration_count
                 FROM django_migrations
-                WHERE app IN ('blog', 'forms', 'content_manager', 'events')
+                WHERE app IN ({apps_in_clause})
                 GROUP BY app
                 ORDER BY app;
-            """)
+            """
+            cursor.execute(query)
 
             migrations_to_update = cursor.fetchall()
 
@@ -85,7 +99,11 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING("No migrations found to update."))
                 migration_updates = []
             else:
-                self.stdout.write(self.style.SUCCESS(f"Found migrations in {len(migrations_to_update)} apps:"))
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"Found migrations in {len(migrations_to_update)} apps:"
+                    )
+                )
                 migration_updates = []
                 for app, count in migrations_to_update:
                     new_app = "wagtail_dsfr_" + app
@@ -112,24 +130,37 @@ class Command(BaseCommand):
             renamed_count = 0
             for table_name, new_name in table_renames:
                 try:
-                    cursor.execute(f'ALTER TABLE "{table_name}" RENAME TO "{new_name}";')
-                    self.stdout.write(self.style.SUCCESS(f"  ✓ Renamed: {table_name} → {new_name}"))
+                    cursor.execute(
+                        f'ALTER TABLE "{table_name}" RENAME TO "{new_name}";'
+                    )
+                    self.stdout.write(
+                        self.style.SUCCESS(f"  ✓ Renamed: {table_name} → {new_name}")
+                    )
                     renamed_count += 1
                 except Exception as e:
-                    self.stdout.write(self.style.ERROR(f"  ✗ Error renaming {table_name}: {e}"))
+                    self.stdout.write(
+                        self.style.ERROR(f"  ✗ Error renaming {table_name}: {e}")
+                    )
 
             self.stdout.write(self.style.SUCCESS(f"\nRenamed {renamed_count} tables."))
 
             # Step 5: Update django_migrations
             if migration_updates:
                 self.stdout.write("\n5. Updating django_migrations table...")
-                cursor.execute("""
+
+                # Build the IN clause dynamically from APPS_TO_MIGRATE
+                apps_in_clause = ", ".join([f"'{app}'" for app in self.APPS_TO_MIGRATE])
+
+                query = f"""
                     UPDATE django_migrations
-                    SET app = 'wagtail_dsfr_' || app
-                    WHERE app IN ('blog', 'forms', 'content_manager', 'events');
-                """)
+                    SET app = '{wagtail_dsfr}_' || app
+                    WHERE app IN ({apps_in_clause});
+                """
+                cursor.execute(query)
                 updated_rows = cursor.rowcount
-                self.stdout.write(self.style.SUCCESS(f"  ✓ Updated {updated_rows} migration records"))
+                self.stdout.write(
+                    self.style.SUCCESS(f"  ✓ Updated {updated_rows} migration records")
+                )
 
                 # Step 6: Verify changes
                 self.stdout.write("\n6. Verifying changes...")
@@ -147,8 +178,12 @@ class Command(BaseCommand):
                     self.stdout.write(f"  - {app}: {count} migration(s)")
 
             self.stdout.write("\n" + "=" * 60)
-            self.stdout.write(self.style.SUCCESS("✓ All operations completed successfully!"))
+            self.stdout.write(
+                self.style.SUCCESS("✓ All operations completed successfully!")
+            )
             self.stdout.write("\n" + self.style.WARNING("IMPORTANT NEXT STEPS:"))
             self.stdout.write("1. Update your Django model Meta.db_table attributes")
-            self.stdout.write("2. Verify INSTALLED_APPS in settings.py matches new app names")
+            self.stdout.write(
+                "2. Verify INSTALLED_APPS in settings.py matches new app names"
+            )
             self.stdout.write("3. Test your application thoroughly")

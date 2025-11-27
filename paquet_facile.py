@@ -400,7 +400,11 @@ def _cleanup_package_dir(package_dir: Path) -> None:
 
 
 def _process_templates(
-    package_dir: Path, package_root: Path, package_name: str, tag: str
+    package_dir: Path,
+    package_root: Path,
+    package_name: str,
+    tag: str,
+    config: dict[str, Any],
 ) -> None:
     """Process all template files and create package structure.
 
@@ -416,6 +420,10 @@ def _process_templates(
     # Extract version from tag (remove leading 'v' if present)
     version = tag.lstrip("v")
 
+    # Get apps list from config and format it as a Python list
+    apps: list[str] = config.get("apps", [])
+    apps_list = "[" + ", ".join([f'"{app}"' for app in apps]) + "]"
+
     # Define all available placeholders
     placeholders = {
         "{package_name}": package_name,
@@ -424,6 +432,7 @@ def _process_templates(
         "{package_name_kebab}": package_name_kebab,
         "{package_name_upper}": package_name_upper,
         "{version}": version,
+        "{apps_list}": apps_list,
     }
 
     templates_dir = Path("templates")
@@ -600,7 +609,7 @@ def run_sync(
     shutil.move(str(temp_dir), str(package_dir))
 
     # Process all templates to create package files
-    _process_templates(package_dir, package_root, package_name, tag)
+    _process_templates(package_dir, package_root, package_name, tag, config)
 
     # Create git branch, commit changes, and push (must be done LAST)
     _create_and_push_git_branch(package_dir, tag)
