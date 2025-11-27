@@ -25,17 +25,10 @@
 ## Version 2.1.0
 
 ### Nouvelles fonctionnalités
-- ✨ Système de modèles swappables (pattern AUTH_USER_MODEL)
-- ✨ Fonctions helpers pour obtenir les modèles configurés
-- ✨ Blocs chooser personnalisés (`BlogIndexChooserBlock`, `EventsIndexChooserBlock`)
 - ✨ Documentation complète en français avec Sphinx
 
 ### Suppressions
 - 🗑️ Suppression du système de registre `@register_common_block` (non fonctionnel)
-
-### Améliorations
-- ⚡ Meilleure flexibilité pour la personnalisation des modèles
-- ⚡ Pas de conflits de migration avec les personnalisations
 
 ### Documentation
 - 📚 Documentation Sphinx avec thème Wagtail

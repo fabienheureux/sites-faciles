@@ -402,180 +402,96 @@ def _cleanup_package_dir(package_dir: Path) -> None:
 def _process_templates(
     package_dir: Path, package_root: Path, package_name: str, tag: str
 ) -> None:
-    """Process all template files and create package structure."""
+    """Process all template files and create package structure.
+
+    This function walks through the templates directory and replicates its structure
+    in the target package, processing all template files by replacing placeholders.
+    """
     # Transform placeholders for templates
     package_name_title = package_name.replace("_", " ").title()
     package_name_kebab = package_name.replace("_", "-")
     class_name = "".join(word.capitalize() for word in package_name.split("_"))
+    package_name_upper = package_name.upper()
 
     # Extract version from tag (remove leading 'v' if present)
     version = tag.lstrip("v")
 
-    # Create main apps.py from template
-    apps_template = Path("templates") / "apps.template.py"
-    if apps_template.exists():
-        logging.info("📝 Creating main apps.py from template")
-        template_content = apps_template.read_text(encoding="utf-8")
+    # Define all available placeholders
+    placeholders = {
+        "{package_name}": package_name,
+        "{PackageName}": class_name,
+        "{package_verbose_name}": package_name_title,
+        "{package_name_kebab}": package_name_kebab,
+        "{package_name_upper}": package_name_upper,
+        "{version}": version,
+    }
 
-        apps_content = template_content.replace("{PackageName}", class_name)
-        apps_content = apps_content.replace("{package_name}", package_name)
-        apps_content = apps_content.replace(
-            "{package_verbose_name}", package_name_title
-        )
+    templates_dir = Path("templates")
+    if not templates_dir.exists():
+        logging.warning("⚠️  Templates directory not found: %s", templates_dir)
+        return
 
-        apps_file = package_dir / "apps.py"
-        apps_file.write_text(apps_content, encoding="utf-8")
-    else:
-        logging.warning("⚠️  Template file not found: %s", apps_template)
+    logging.info("📝 Processing template files from %s", templates_dir)
 
-    # Create pyproject.toml from template
-    pyproject_template = Path("templates") / "pyproject.template.toml"
-    if pyproject_template.exists():
-        logging.info("📝 Creating pyproject.toml from template")
-        template_content = pyproject_template.read_text(encoding="utf-8")
+    # Walk through all files in templates directory
+    for template_file in templates_dir.rglob("*"):
+        # Skip directories
+        if template_file.is_dir():
+            continue
 
-        pyproject_content = template_content.replace("{package_name}", package_name)
-        pyproject_content = pyproject_content.replace(
-            "{package_name_kebab}", package_name_kebab
-        )
-        pyproject_content = pyproject_content.replace("{version}", version)
+        # Skip files that don't have .template. in their name
+        if ".template." not in template_file.name:
+            logging.debug("⏭️  Skipping non-template file: %s", template_file)
+            continue
 
-        pyproject_file = package_root / "pyproject.toml"
-        pyproject_file.write_text(pyproject_content, encoding="utf-8")
-    else:
-        logging.warning("⚠️  Template file not found: %s", pyproject_template)
+        # Calculate relative path from templates directory
+        relative_path = template_file.relative_to(templates_dir)
 
-    # Create __init__.py from template
-    init_template = Path("templates") / "__init__.template.py"
-    if init_template.exists():
-        logging.info("📝 Creating __init__.py from template")
-        template_content = init_template.read_text(encoding="utf-8")
+        # Determine the output filename (remove .template. from the name)
+        output_filename = template_file.name.replace(".template.", ".")
 
-        init_content = template_content.replace("{PackageName}", class_name)
-        init_content = init_content.replace("{package_name}", package_name)
+        # Determine the base directory for output based on file location
+        # Files at root level go to package_root, others go to package_dir
+        relative_dir = relative_path.parent
 
-        init_file = package_dir / "__init__.py"
-        init_file.write_text(init_content, encoding="utf-8")
-    else:
-        logging.warning("⚠️  Template file not found: %s", init_template)
+        if str(relative_dir) == ".":
+            # Root level template files
+            if output_filename in ["pyproject.toml", "README.md", "publish.yml"]:
+                # These go to package_root
+                output_dir = package_root
+            else:
+                # Other root level files go to package_dir
+                output_dir = package_dir
+        else:
+            # Nested template files go to package_dir with their directory structure
+            output_dir = package_dir / relative_dir
 
-    # Create README.md in package root
-    readme_template = Path("templates") / "README.template.md"
-    if readme_template.exists():
-        logging.info("📝 Creating README.md from template")
-        template_content = readme_template.read_text(encoding="utf-8")
+        # Create output directory if it doesn't exist
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-        readme_content = template_content.replace("{package_name}", package_name)
-        readme_content = readme_content.replace(
-            "{package_verbose_name}", package_name_title
-        )
+        # Define output file path
+        output_file = output_dir / output_filename
 
-        readme_file = package_root / "README.md"
-        readme_file.write_text(readme_content, encoding="utf-8")
-    else:
-        logging.warning("⚠️  Template file not found: %s", readme_template)
-
-    # Create management command structure from templates
-    management_template_dir = Path("templates") / "management"
-    if management_template_dir.exists():
-        logging.info("📝 Creating management commands from templates")
-
-        # Create management/commands directory
-        management_dir = package_dir / "management"
-        commands_dir = management_dir / "commands"
-        commands_dir.mkdir(parents=True, exist_ok=True)
-
-        # Process __init__.py files
-        for init_file in ["__init__.template.py", "commands/__init__.template.py"]:
-            init_template = management_template_dir / init_file
-            if init_template.exists():
-                template_content = init_template.read_text(encoding="utf-8")
-                init_content = template_content.replace("{package_name}", package_name)
-
-                # Determine output path (remove .template. from filename)
-                output_path = management_dir / init_file.replace(".template.", ".")
-                output_path.parent.mkdir(parents=True, exist_ok=True)
-                output_path.write_text(init_content, encoding="utf-8")
-
-        # Process management command templates
-        commands_template_dir = management_template_dir / "commands"
-        if commands_template_dir.exists():
-            for template_file in commands_template_dir.glob("*.template.py"):
-                template_content = template_file.read_text(encoding="utf-8")
-                command_content = template_content.replace(
-                    "{package_name}", package_name
-                )
-
-                # Write to commands directory (remove .template. from filename)
-                output_file = commands_dir / template_file.name.replace(
-                    ".template.", "."
-                )
-                output_file.write_text(command_content, encoding="utf-8")
-                logging.debug("  Created command: %s", output_file.name)
-    else:
-        logging.debug("⏭️  No management command templates found")
-
-    # Create content_manager structure from templates
-    content_manager_template_dir = Path("templates") / "content_manager"
-    if content_manager_template_dir.exists():
-        logging.info("📝 Creating content_manager files from templates")
-
-        content_manager_dir = package_dir / "content_manager"
-        content_manager_dir.mkdir(parents=True, exist_ok=True)
-
-        # Process apps.py template if it exists
-        apps_template = content_manager_template_dir / "apps.template.py"
-        if apps_template.exists():
-            template_content = apps_template.read_text(encoding="utf-8")
-            apps_content = template_content.replace("{package_name}", package_name)
-
-            output_file = content_manager_dir / "apps.py"
-            output_file.write_text(apps_content, encoding="utf-8")
-            logging.debug("  Created apps.py")
-    else:
-        logging.debug("⏭️  No content_manager templates found")
-
-    # Create utils structure from templates
-    utils_template_dir = Path("templates") / "utils"
-    if utils_template_dir.exists():
-        logging.info("📝 Creating utils files from templates")
-
-        utils_dir = package_dir / "utils"
-        utils_dir.mkdir(parents=True, exist_ok=True)
-
-        # Process all Python template files in utils
-        for template_file in utils_template_dir.glob("*.template.py"):
+        # Read template content
+        try:
             template_content = template_file.read_text(encoding="utf-8")
-            utils_content = template_content.replace("{package_name}", package_name)
-            utils_content = utils_content.replace(
-                "{package_name_upper}", package_name.upper()
-            )
+        except Exception as exc:
+            logging.error("❌ Failed to read template %s: %s", template_file, exc)
+            continue
 
-            # Write to utils directory (remove .template. from filename)
-            output_file = utils_dir / template_file.name.replace(".template.", ".")
-            output_file.write_text(utils_content, encoding="utf-8")
-            logging.debug("  Created utils file: %s", output_file.name)
-    else:
-        logging.debug("⏭️  No utils templates found")
+        # Replace all placeholders
+        processed_content = template_content
+        for placeholder, value in placeholders.items():
+            processed_content = processed_content.replace(placeholder, value)
 
-    # Create content_manager/blocks/choosers.py from template
-    choosers_template = (
-        Path("templates") / "content_manager" / "blocks" / "choosers.template.py"
-    )
-    if choosers_template.exists():
-        logging.info("📝 Creating choosers.py from template")
+        # Write processed content to output file
+        try:
+            output_file.write_text(processed_content, encoding="utf-8")
+            logging.debug("  Created: %s", output_file.relative_to(package_root))
+        except Exception as exc:
+            logging.error("❌ Failed to write %s: %s", output_file, exc)
 
-        blocks_dir = package_dir / "content_manager" / "blocks"
-        blocks_dir.mkdir(parents=True, exist_ok=True)
-
-        template_content = choosers_template.read_text(encoding="utf-8")
-        choosers_content = template_content.replace("{package_name}", package_name)
-
-        output_file = blocks_dir / "choosers.py"
-        output_file.write_text(choosers_content, encoding="utf-8")
-        logging.debug("  Created choosers.py")
-    else:
-        logging.debug("⏭️  No choosers template found")
+    logging.info("✅ Template processing completed")
 
 
 def _create_and_push_git_branch(package_dir: Path, tag: str) -> None:
