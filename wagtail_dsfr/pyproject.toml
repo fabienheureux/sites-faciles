@@ -1,6 +1,6 @@
 [project]
 name = "wagtail-dsfr"
-version = "2.3.0rc7"
+version = "2.3.0rc8"
 description = "Gestionnaire de contenu permettant de créer et gérer un site internet basé sur le Système de design de l'État, accessible et responsive"
 readme = "README.md"
 requires-python = "<4.0,>=3.11"
