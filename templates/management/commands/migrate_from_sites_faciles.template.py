@@ -162,20 +162,56 @@ class Command(BaseCommand):
                     self.style.SUCCESS(f"  ✓ Updated {updated_rows} migration records")
                 )
 
-                # Step 6: Verify changes
-                self.stdout.write("\n6. Verifying changes...")
-                cursor.execute("""
-                    SELECT app, COUNT(*) as count
-                    FROM django_migrations
-                    WHERE app LIKE '{package_name}_%'
-                    GROUP BY app
-                    ORDER BY app;
-                """)
+            # Step 6: Update django_content_type
+            self.stdout.write("\n6. Updating django_content_type table...")
 
-                results = cursor.fetchall()
+            apps_in_clause = ", ".join([f"'{app}'" for app in self.APPS_TO_MIGRATE])
+
+            query = f"""
+                UPDATE django_content_type
+                SET app_label = '{package_name}_' || app_label
+                WHERE app_label IN ({apps_in_clause});
+            """
+            cursor.execute(query)
+            updated_content_types = cursor.rowcount
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"  ✓ Updated {updated_content_types} content type records"
+                )
+            )
+
+            # Step 7: Verify changes
+            self.stdout.write("\n7. Verifying changes...")
+
+            # Verify migrations
+            cursor.execute("""
+                SELECT app, COUNT(*) as count
+                FROM django_migrations
+                WHERE app LIKE '{package_name}_%'
+                GROUP BY app
+                ORDER BY app;
+            """)
+
+            results = cursor.fetchall()
+            if results:
                 self.stdout.write("Migration records after update:")
                 for app, count in results:
                     self.stdout.write(f"  - {app}: {count} migration(s)")
+
+            # Verify content types
+            cursor.execute("""
+                SELECT app_label, COUNT(*) as count
+                FROM django_content_type
+                WHERE app_label LIKE '{package_name}_%'
+                GROUP BY app_label
+                ORDER BY app_label;
+            """)
+
+            ct_results = cursor.fetchall()
+            if ct_results:
+                self.stdout.write("\nContent type records after update:")
+                for app_label, count in ct_results:
+                    self.stdout.write(f"  - {app_label}: {count} model(s)")
 
             self.stdout.write("\n" + "=" * 60)
             self.stdout.write(
