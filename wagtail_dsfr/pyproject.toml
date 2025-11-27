@@ -1,6 +1,6 @@
 [project]
 name = "wagtail-dsfr"
-version = "2.3.0rc5"
+version = "2.3.0rc6"
 description = "Gestionnaire de contenu permettant de créer et gérer un site internet basé sur le Système de design de l'État, accessible et responsive"
 readme = "README.md"
 requires-python = "<4.0,>=3.11"
@@ -59,6 +59,13 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["wagtail_dsfr*"]
+
+[tool.setuptools.package-data]
+wagtail_dsfr = [
+    "*/templates/**/*",
+    "*/static/**/*",
+    "*/page_templates/**/*",
+]
 
 [tool.black]
 line-length = 119
